@@ -694,3 +694,70 @@ footer {
     padding: 30px;
   }
 }
+/* =========================================
+   SUR HALI - ÜRÜN GÖRSEL SİSTEMİ
+   ========================================= */
+
+.product-card {
+  overflow: hidden;
+  padding: 0 0 28px;
+}
+
+.product-card .product-image {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background: #f1ece6;
+  margin-bottom: 24px;
+}
+
+.product-card .product-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.04);
+}
+
+.product-card .icon,
+.product-card h3,
+.product-card p,
+.product-card a {
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+.product-card .icon {
+  margin-bottom: 8px;
+}
+
+.product-card h3 {
+  margin-top: 8px;
+}
+
+.product-card p {
+  margin-bottom: 20px;
+}
+
+
+/* Mobil görünüm */
+
+@media (max-width: 800px) {
+
+  .product-card .product-image {
+    height: 240px;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .product-card .product-image {
+    height: 260px;
+  }
+
+}
