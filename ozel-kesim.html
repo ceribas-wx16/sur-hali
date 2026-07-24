@@ -11,7 +11,7 @@
 
 <meta
 name="description"
-content="Sur Halı İznik özel kesim koleksiyonu. Yaşam alanlarınıza özel ölçü ve tasarımlarla hazırlanan halı seçeneklerini inceleyin."
+content="Sur Halı İznik özel kesim koleksiyonu. Farklı ölçü, desen ve tasarım seçenekleriyle hazırlanan özel kesim halı modellerimizi inceleyin."
 >
 
 <style>
@@ -23,86 +23,74 @@ content="Sur Halı İznik özel kesim koleksiyonu. Yaşam alanlarınıza özel �
 body{
     margin:0;
     font-family:Arial, Helvetica, sans-serif;
-    background:#f8f6f1;
-    color:#292724;
-    line-height:1.7;
+    background:#f7f3ee;
+    color:#40342d;
 }
 
 
-/* =========================
-   HEADER
-========================= */
+/* ÜST BAŞLIK */
 
 header{
-    background:
-    linear-gradient(
-        135deg,
-        #b56d55 0%,
-        #a8624d 50%,
-        #925542 100%
-    );
-
+    width:100%;
+    background:#6d3f2f;
     color:white;
     text-align:center;
     padding:45px 20px;
 }
 
 header h1{
-    margin:0;
-    font-family:Georgia, "Times New Roman", serif;
-    font-weight:500;
+    width:100%;
+    margin:0 auto;
+    font-family:Georgia, serif;
     font-size:38px;
-    line-height:1.3;
+    text-align:center;
 }
 
 header p{
-    margin:12px 0 0;
-    color:#f8eee8;
+    width:100%;
+    margin:12px auto 0;
+    color:#f4e8df;
     font-size:17px;
+    text-align:center;
 }
 
 
-/* =========================
-   ANA CONTAINER
-========================= */
+/* ANA ALAN */
 
 .container{
-    width:min(1160px,92%);
+    width:92%;
+    max-width:1200px;
     margin:0 auto;
-    padding:60px 0;
+    padding:50px 0;
 }
 
 
-/* =========================
-   TANITIM
-========================= */
+/* TANITIM */
 
 .intro{
+    width:100%;
+    max-width:750px;
+    margin:0 auto 45px;
     text-align:center;
-    max-width:780px;
-    margin:0 auto 50px;
 }
 
 .intro h2{
-    font-family:Georgia, "Times New Roman", serif;
-    font-weight:500;
-    font-size:34px;
-    line-height:1.2;
-    margin:0 0 18px;
-    color:#292724;
+    font-family:Georgia, serif;
+    font-size:32px;
+    margin:0 0 15px;
+    text-align:center;
 }
 
 .intro p{
-    color:#716b64;
+    color:#75675f;
+    line-height:1.7;
     font-size:16px;
-    line-height:1.8;
     margin:0;
+    text-align:center;
 }
 
 
-/* =========================
-   GALERİ
-========================= */
+/* GALERİ */
 
 .gallery{
     display:grid;
@@ -111,139 +99,103 @@ header p{
 }
 
 
-/* =========================
-   KART
-========================= */
+/* KART */
 
 .card{
-    background:#ffffff;
-    border:1px solid #e3ddd4;
-    border-radius:14px;
+    background:white;
+    border-radius:10px;
     overflow:hidden;
-    box-shadow:0 12px 35px rgba(50,42,34,.08);
-    transition:all .3s ease;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 18px 45px rgba(50,42,34,.13);
+    box-shadow:0 6px 20px rgba(60,40,25,.10);
 }
 
 
-/* =========================
-   RESİM
-========================= */
+/* RESİM */
 
 .card img{
     width:100%;
-    height:380px;
+    height:360px;
     object-fit:cover;
     display:block;
-    transition:transform .5s ease;
-}
-
-.card:hover img{
-    transform:scale(1.03);
 }
 
 
-/* =========================
-   KART İÇERİĞİ
-========================= */
+/* KART İÇERİĞİ */
 
 .card-content{
-    padding:26px 28px 30px;
+    padding:22px;
     text-align:center;
 }
 
 .card h3{
-    font-family:Georgia, "Times New Roman", serif;
-    font-weight:500;
-    font-size:24px;
-    margin:0 0 12px;
-    color:#292724;
+    font-family:Georgia, serif;
+    font-size:22px;
+    margin:0 0 10px;
+    color:#40342d;
 }
 
 .card p{
-    color:#716b64;
+    color:#75675f;
+    line-height:1.6;
     margin:0;
-    line-height:1.7;
 }
 
 
-/* =========================
-   ANA SAYFAYA DÖN
-========================= */
+/* ANA SAYFAYA DÖN */
 
 .back{
+    width:100%;
+    display:block;
     text-align:center;
-    margin-top:55px;
+    margin-top:50px;
 }
 
 .back a{
     display:inline-block;
-    border:1px solid #b56d55;
-    color:#925542;
-    background:transparent;
+    border:1px solid #6d3f2f;
+    color:#6d3f2f;
     padding:12px 28px;
     text-decoration:none;
-    border-radius:999px;
+    border-radius:5px;
     font-weight:bold;
-    transition:all .25s ease;
+    text-align:center;
 }
 
 .back a:hover{
-    background:#b56d55;
+    background:#6d3f2f;
     color:white;
-    transform:translateY(-2px);
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* ALT BİLGİ */
 
 footer{
+    width:100%;
     text-align:center;
-    border-top:1px solid #e3ddd4;
+    border-top:1px solid #e8ddd3;
     padding:25px;
-    color:#938a82;
+    color:#8a7d75;
     font-size:13px;
 }
 
 
-/* =========================
-   MOBİL
-========================= */
+/* MOBİL */
 
 @media(max-width:600px){
-
-    header{
-        padding:38px 20px;
-    }
 
     header h1{
         font-size:30px;
     }
 
     .container{
-        padding:40px 0;
-    }
-
-    .intro h2{
-        font-size:29px;
-    }
-
-    .intro p{
-        font-size:15px;
+        padding:35px 0;
     }
 
     .card img{
-        height:320px;
+        height:300px;
     }
 
-    .card-content{
-        padding:24px;
+    .intro h2{
+        font-size:27px;
     }
 
 }
@@ -256,9 +208,7 @@ footer{
 <body>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- ÜST BAŞLIK -->
 
 <header>
 
@@ -269,16 +219,12 @@ footer{
 </header>
 
 
-<!-- =========================
-     ANA İÇERİK
-========================= -->
+<!-- ANA İÇERİK -->
 
 <div class="container">
 
 
-<!-- =========================
-     TANITIM
-========================= -->
+<!-- TANITIM -->
 
 <div class="intro">
 
@@ -288,28 +234,23 @@ footer{
 Yaşam alanlarınıza özel bir görünüm kazandırmak için farklı ölçü,
 desen ve tasarım seçenekleriyle hazırlanan özel kesim koleksiyonumuzu
 inceleyebilirsiniz. Mekânınıza ve kullanım alanınıza uygun çözümler
-hakkında detaylı bilgi almak için Sur Halı İznik mağazamıza
-bekleriz.
+hakkında detaylı bilgi almak için Sur Halı İznik mağazamıza bekleriz.
 </p>
 
 </div>
 
 
-<!-- =========================
-     GALERİ
-========================= -->
+<!-- GALERİ -->
 
 <div class="gallery">
 
 
-<!-- =========================
-     1. GÖRSEL — KAPAK
-========================= -->
+<!-- ÖZEL KESİM 1 — KAPAK RESMİ -->
 
 <div class="card">
 
 <img
-src="resimler/ozel-kesim/ozel%20koleksiyon-1.png"
+src="https://raw.githubusercontent.com/ceribas-wx16/sur-hali/main/resimler/ozel-kesim/ozel%20koleksiyon-1.png"
 alt="Sur Halı İznik Özel Kesim Koleksiyonu"
 >
 
@@ -327,14 +268,12 @@ halı seçeneklerini inceleyebilirsiniz.
 </div>
 
 
-<!-- =========================
-     2. GÖRSEL
-========================= -->
+<!-- ÖZEL KESİM 2 -->
 
 <div class="card">
 
 <img
-src="resimler/ozel-kesim/ozel%20koleksiyon-2.png"
+src="https://raw.githubusercontent.com/ceribas-wx16/sur-hali/main/resimler/ozel-kesim/ozel%20koleksiyon-2.png"
 alt="Sur Halı İznik özel kesim halı modeli"
 >
 
@@ -355,9 +294,7 @@ seçeneklerini yakından inceleyebilirsiniz.
 </div>
 
 
-<!-- =========================
-     ANA SAYFAYA DÖN
-========================= -->
+<!-- ANA SAYFAYA DÖN -->
 
 <div class="back">
 
@@ -371,9 +308,7 @@ seçeneklerini yakından inceleyebilirsiniz.
 </div>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- ALT BİLGİ -->
 
 <footer>
 
