@@ -3,16 +3,24 @@
    Sıcak, doğal, modern ve uzun ömürlü marka görünümü
    ========================================================= */
 
+
+/* =========================================================
+   RENKLER VE GENEL DEĞİŞKENLER
+   ========================================================= */
+
 :root {
   --ivory: #f8f6f1;
   --paper: #ffffff;
   --sand: #e9e1d5;
   --sand-light: #f1ece4;
+
   --terracotta: #b56d55;
   --terracotta-dark: #925542;
+
   --charcoal: #292724;
   --muted: #716b64;
   --line: #e3ddd4;
+
   --dark: #35312d;
   --white: #ffffff;
 
@@ -27,9 +35,10 @@
   --shadow-card: 0 18px 45px rgba(50, 42, 34, 0.09);
 }
 
-/* =========================
+
+/* =========================================================
    GENEL
-   ========================= */
+   ========================================================= */
 
 * {
   box-sizing: border-box;
@@ -62,37 +71,50 @@ a {
   margin: 0 auto;
 }
 
-/* =========================
+
+/* =========================================================
    HEADER
-   ========================= */
+   ========================================================= */
 
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
+
   background: rgba(248, 246, 241, 0.94);
+
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+
   border-bottom: 1px solid rgba(227, 221, 212, 0.8);
 }
 
 .nav {
   min-height: 82px;
+
   display: flex;
   align-items: center;
+
   gap: 32px;
 }
 
-/* Logo */
+
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo {
   color: var(--charcoal);
+
   text-decoration: none;
+
   font-family: var(--serif);
   font-weight: 700;
   font-size: 25px;
+
   letter-spacing: 1px;
   line-height: 1;
+
   white-space: nowrap;
 }
 
@@ -102,38 +124,56 @@ a {
 
 .logo small {
   display: block;
+
   font-family: var(--sans);
+
   font-size: 8px;
   font-weight: 600;
+
   letter-spacing: 3px;
+
   margin-top: 8px;
+
   color: var(--muted);
 }
 
-/* Menü */
+
+/* =========================================================
+   MENÜ
+   ========================================================= */
 
 .nav nav {
   display: flex;
+
   gap: 28px;
+
   margin-left: auto;
 }
 
 .nav nav a {
   position: relative;
+
   color: var(--charcoal);
+
   text-decoration: none;
+
   font-size: 14px;
   font-weight: 500;
 }
 
 .nav nav a::after {
   content: "";
+
   position: absolute;
+
   left: 0;
   bottom: -7px;
+
   width: 0;
   height: 1px;
+
   background: var(--terracotta);
+
   transition: width 0.25s ease;
 }
 
@@ -145,107 +185,163 @@ a {
   width: 100%;
 }
 
-/* =========================
+
+/* =========================================================
    BUTONLAR
-   ========================= */
+   ========================================================= */
 
 .btn {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
   gap: 8px;
+
   background: var(--terracotta);
   color: var(--white);
+
   text-decoration: none;
+
   padding: 13px 23px;
+
   border-radius: 999px;
+
   font-size: 14px;
   font-weight: 700;
+
   border: 1px solid var(--terracotta);
+
   box-shadow: 0 8px 20px rgba(181, 109, 85, 0.16);
+
   cursor: pointer;
 }
 
 .btn:hover {
   background: var(--terracotta-dark);
+
   border-color: var(--terracotta-dark);
+
   transform: translateY(-2px);
+
   box-shadow: 0 12px 25px rgba(181, 109, 85, 0.22);
 }
 
 .btn-small {
   padding: 10px 17px;
+
   font-size: 13px;
 }
 
 .btn-outline {
   background: transparent;
+
   color: var(--terracotta-dark);
+
   border: 1px solid var(--terracotta);
+
   box-shadow: none;
 }
 
 .btn-outline:hover {
   background: var(--terracotta);
+
   color: var(--white);
 }
 
 .light {
   color: var(--white);
+
   border-color: rgba(255, 255, 255, 0.7);
 }
 
 .light:hover {
   background: var(--white);
+
   color: var(--dark);
 }
 
-/* =========================
-   HERO
-   ========================= */
+
+/* =========================================================
+   HERO — ANA SAYFA ÜST ALAN
+   ========================================================= */
 
 .hero {
   position: relative;
+
   padding: 105px 0 95px;
+
   background:
-    radial-gradient(circle at 80% 20%, rgba(233, 225, 213, 0.6), transparent 35%),
-    linear-gradient(135deg, #f8f6f1 0%, #f3eee6 100%);
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(233, 225, 213, 0.6),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #f8f6f1 0%,
+      #f3eee6 100%
+    );
+
   overflow: hidden;
 }
 
 .hero::before {
   content: "";
+
   position: absolute;
+
   width: 420px;
   height: 420px;
+
   border: 1px solid rgba(181, 109, 85, 0.13);
+
   border-radius: 50%;
+
   right: -170px;
   top: -180px;
 }
 
 .hero-grid {
   display: grid;
+
   grid-template-columns: 1.05fr 0.95fr;
+
   gap: 75px;
+
   align-items: center;
 }
 
+
+/* =========================================================
+   HERO YAZILARI
+   ========================================================= */
+
 .eyebrow {
   color: var(--terracotta-dark);
+
   font-size: 11px;
+
   font-weight: 800;
+
   letter-spacing: 2.5px;
+
   margin: 0 0 16px;
 }
 
 .hero h1 {
   font-family: var(--serif);
+
   font-weight: 500;
+
   font-size: clamp(44px, 6vw, 76px);
+
   line-height: 1.05;
+
   letter-spacing: -1.5px;
+
   margin: 0 0 25px;
+
   color: var(--charcoal);
 }
 
@@ -255,43 +351,114 @@ a {
 
 .lead {
   font-size: 18px;
+
   max-width: 650px;
+
   color: var(--muted);
+
   line-height: 1.8;
 }
 
 .actions {
   display: flex;
+
   gap: 12px;
+
   flex-wrap: wrap;
+
   margin: 30px 0;
 }
 
 .trust {
   display: flex;
+
   gap: 22px;
+
   flex-wrap: wrap;
+
   color: var(--muted);
+
   font-size: 13px;
 }
 
-/* =========================
+
+/* =========================================================
    HERO GÖRSEL ALANI
-   ========================= */
+   ========================================================= */
 
 .hero-card {
   min-height: 500px;
+
   border-radius: var(--radius-lg);
+
   overflow: hidden;
+
   position: relative;
+
   background: var(--sand);
+
   box-shadow: var(--shadow-card);
+
   border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
+
+/* =========================================================
+   ANA SAYFA GÖRSELİ
+   ========================================================= */
+
+.hero-card img {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transform: scale(1.02);
+}
+
+
+/* =========================================================
+   GÖRSEL ÜZERİNDE SOLUK GEÇİŞ
+   ========================================================= */
+
+.hero-card::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(248, 246, 241, 0.98) 0%,
+      rgba(248, 246, 241, 0.88) 7%,
+      rgba(248, 246, 241, 0.58) 16%,
+      rgba(248, 246, 241, 0.25) 28%,
+      rgba(248, 246, 241, 0.05) 42%,
+      rgba(248, 246, 241, 0) 58%
+    );
+}
+
+
+/* =========================================================
+   ESKİ DESEN ALANI
+   Eğer hero-card içinde .pattern kullanılıyorsa
+   ========================================================= */
+
 .pattern {
   position: absolute;
+
   inset: 0;
+
   background:
     repeating-linear-gradient(
       45deg,
@@ -303,31 +470,50 @@ a {
       rgba(100, 70, 50, 0.12) 0 2px,
       transparent 2px 30px
     );
+
   transform: scale(1.25);
 }
 
+
+/* =========================================================
+   HERO GÖRSEL ALT YAZISI
+   ========================================================= */
+
 .card-copy {
   position: absolute;
+
   bottom: 25px;
+
   left: 25px;
   right: 25px;
+
   background: rgba(255, 255, 255, 0.92);
+
   backdrop-filter: blur(8px);
+
   padding: 17px 20px;
+
   border-radius: var(--radius-sm);
+
   color: var(--charcoal);
+
   box-shadow: var(--shadow-soft);
+
+  z-index: 2;
 }
 
 .card-copy strong {
   font-family: var(--serif);
+
   font-size: 19px;
+
   letter-spacing: 1px;
 }
 
-/* =========================
-   SECTIONS
-   ========================= */
+
+/* =========================================================
+   GENEL BÖLÜMLER
+   ========================================================= */
 
 .section {
   padding: 100px 0;
@@ -335,65 +521,95 @@ a {
 
 .section-head {
   display: flex;
+
   justify-content: space-between;
+
   gap: 50px;
+
   align-items: end;
+
   margin-bottom: 45px;
 }
 
 .section-head h2,
 h2 {
   font-family: var(--serif);
+
   font-weight: 500;
+
   font-size: clamp(34px, 4vw, 48px);
+
   line-height: 1.15;
+
   letter-spacing: -0.5px;
+
   margin: 0;
+
   color: var(--charcoal);
 }
 
 .section-head > p {
   max-width: 430px;
+
   color: var(--muted);
+
   margin: 0;
 }
 
-/* =========================
+
+/* =========================================================
    KATEGORİ KARTLARI
-   ========================= */
+   ========================================================= */
 
 .cards {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 22px;
 }
 
 .card {
   position: relative;
+
   background: var(--paper);
+
   border: 1px solid var(--line);
+
   padding: 32px;
+
   border-radius: var(--radius-md);
+
   transition: all 0.3s ease;
+
   overflow: hidden;
 }
 
 .card::before {
   content: "";
+
   position: absolute;
+
   top: 0;
   left: 0;
+
   width: 100%;
   height: 3px;
+
   background: var(--terracotta);
+
   transform: scaleX(0);
+
   transform-origin: left;
+
   transition: transform 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-6px);
+
   box-shadow: var(--shadow-card);
+
   border-color: rgba(181, 109, 85, 0.25);
 }
 
@@ -403,29 +619,41 @@ h2 {
 
 .icon {
   color: var(--terracotta-dark);
+
   font-weight: 800;
+
   font-size: 11px;
+
   letter-spacing: 2px;
 }
 
 .card h3 {
   font-family: var(--serif);
+
   font-weight: 500;
+
   font-size: 25px;
+
   line-height: 1.25;
+
   margin: 12px 0;
+
   color: var(--charcoal);
 }
 
 .card p {
   color: var(--muted);
+
   min-height: 78px;
+
   margin-bottom: 20px;
 }
 
 .card a {
   color: var(--terracotta-dark);
+
   font-weight: 700;
+
   text-decoration: none;
 }
 
@@ -433,9 +661,120 @@ h2 {
   color: var(--charcoal);
 }
 
-/* =========================
+
+/* =========================================================
+   ÜRÜN KARTLARI
+   ========================================================= */
+
+.product-card {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 0;
+
+  background: var(--paper);
+
+  border: 1px solid var(--line);
+
+  border-radius: var(--radius-md);
+
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: var(--shadow-card);
+
+  border-color: rgba(181, 109, 85, 0.25);
+}
+
+.product-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 3px;
+
+  background: var(--terracotta);
+
+  transform: scaleX(0);
+
+  transform-origin: left;
+
+  transition: transform 0.3s ease;
+
+  z-index: 2;
+}
+
+.product-card:hover::before {
+  transform: scaleX(1);
+}
+
+
+/* =========================================================
+   ÜRÜN GÖRSELİ
+   ========================================================= */
+
+.product-image {
+  width: 100%;
+
+  height: 280px;
+
+  overflow: hidden;
+
+  background: #f1ece6;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   ÜRÜN İÇERİĞİ
+   ========================================================= */
+
+.product-content {
+  padding: 26px 28px 30px;
+
+  text-align: left;
+}
+
+.product-content .icon {
+  margin-bottom: 8px;
+}
+
+.product-content h3 {
+  margin-top: 8px;
+}
+
+.product-content p {
+  min-height: 76px;
+
+  margin-bottom: 20px;
+}
+
+
+/* =========================================================
    HAKKIMIZDA
-   ========================= */
+   ========================================================= */
 
 .about {
   background: var(--sand-light);
@@ -443,8 +782,11 @@ h2 {
 
 .about-grid {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 80px;
+
   align-items: center;
 }
 
@@ -454,23 +796,33 @@ h2 {
 
 .quote {
   background: var(--dark);
+
   color: var(--white);
+
   padding: 55px;
+
   border-radius: var(--radius-lg);
+
   box-shadow: var(--shadow-card);
 }
 
 .quote span {
   font-family: var(--serif);
+
   font-size: 75px;
+
   line-height: 0.4;
+
   opacity: 0.65;
 }
 
 .quote p {
   color: var(--white);
+
   font-family: var(--serif);
+
   font-size: 29px;
+
   line-height: 1.4;
 }
 
@@ -478,20 +830,26 @@ h2 {
   color: rgba(255, 255, 255, 0.65);
 }
 
-/* =========================
+
+/* =========================================================
    İLETİŞİM
-   ========================= */
+   ========================================================= */
 
 .location {
   padding: 100px 0;
+
   background: var(--dark);
+
   color: var(--white);
 }
 
 .location-grid {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 70px;
+
   align-items: stretch;
 }
 
@@ -509,29 +867,40 @@ h2 {
 
 .map-placeholder {
   border: 1px solid rgba(255, 255, 255, 0.2);
+
   min-height: 300px;
+
   padding: 40px;
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   border-radius: var(--radius-md);
+
   background: rgba(255, 255, 255, 0.03);
 }
 
 .map-placeholder h3 {
   font-family: var(--serif);
+
   font-size: 30px;
+
   margin-top: 0;
 }
 
 .map-placeholder a {
   margin-top: 12px;
+
   font-weight: 700;
 }
 
-/* =========================
+
+/* =========================================================
    FOOTER
-   ========================= */
+   ========================================================= */
 
 footer {
   background: var(--ivory);
@@ -539,18 +908,23 @@ footer {
 
 .footer-grid {
   display: grid;
+
   grid-template-columns: 1fr 1fr 1fr;
+
   gap: 35px;
+
   padding: 50px 0;
 }
 
 .footer-grid strong {
   font-family: var(--serif);
+
   font-size: 20px;
 }
 
 .footer-grid a {
   color: var(--terracotta-dark);
+
   text-decoration: none;
 }
 
@@ -560,28 +934,38 @@ footer {
 
 .copyright {
   text-align: center;
+
   border-top: 1px solid var(--line);
+
   padding: 20px;
+
   color: #938a82;
+
   font-size: 12px;
 }
 
-/* =========================
-   MOBİL
-   ========================= */
+
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (max-width: 900px) {
 
   .nav {
     min-height: auto;
+
     padding: 15px 0;
+
     flex-wrap: wrap;
   }
 
   .nav nav {
     order: 3;
+
     width: 100%;
+
     justify-content: center;
+
     gap: 22px;
   }
 
@@ -591,6 +975,7 @@ footer {
 
   .hero-grid {
     grid-template-columns: 1fr;
+
     gap: 45px;
   }
 
@@ -601,6 +986,7 @@ footer {
   .about-grid,
   .location-grid {
     grid-template-columns: 1fr;
+
     gap: 45px;
   }
 
@@ -618,9 +1004,20 @@ footer {
 
   .footer-grid {
     grid-template-columns: 1fr;
+
     gap: 20px;
   }
+
+  .product-image {
+    height: 240px;
+  }
+
 }
+
+
+/* =========================================================
+   MOBİL
+   ========================================================= */
 
 @media (max-width: 560px) {
 
@@ -642,6 +1039,7 @@ footer {
 
   .nav nav {
     justify-content: space-between;
+
     gap: 8px;
   }
 
@@ -655,6 +1053,7 @@ footer {
 
   .hero h1 {
     font-size: 44px;
+
     letter-spacing: -1px;
   }
 
@@ -664,6 +1063,22 @@ footer {
 
   .hero-card {
     min-height: 300px;
+  }
+
+  /*
+     Mobilde görsel geçişi
+     Üstten alta doğru yumuşak geçiş
+  */
+
+  .hero-card::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(248, 246, 241, 0.88) 0%,
+        rgba(248, 246, 241, 0.35) 18%,
+        rgba(248, 246, 241, 0.05) 38%,
+        rgba(248, 246, 241, 0) 60%
+      );
   }
 
   .section {
@@ -676,6 +1091,14 @@ footer {
 
   .card {
     padding: 28px;
+  }
+
+  .product-image {
+    height: 260px;
+  }
+
+  .product-content {
+    padding: 24px;
   }
 
   .quote {
@@ -692,140 +1115,6 @@ footer {
 
   .map-placeholder {
     padding: 30px;
-  }
-}
-/* =========================================
-   SUR HALI - ÜRÜN GÖRSEL SİSTEMİ
-   ========================================= */
-
-.product-card {
-  overflow: hidden;
-  padding: 0 0 28px;
-}
-
-.product-card .product-image {
-  width: 100%;
-  height: 260px;
-  overflow: hidden;
-  background: #f1ece6;
-  margin-bottom: 24px;
-}
-
-.product-card .product-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.product-card:hover .product-image img {
-  transform: scale(1.04);
-}
-
-.product-card .icon,
-.product-card h3,
-.product-card p,
-.product-card a {
-  margin-left: 28px;
-  margin-right: 28px;
-}
-
-.product-card .icon {
-  margin-bottom: 8px;
-}
-
-.product-card h3 {
-  margin-top: 8px;
-}
-
-.product-card p {
-  margin-bottom: 20px;
-}
-
-
-/* Mobil görünüm */
-
-@media (max-width: 800px) {
-
-  .product-card .product-image {
-    height: 240px;
-  }
-
-}
-
-@media (max-width: 520px) {
-
-  .product-card .product-image {
-    height: 260px;
-  }
-
-}
-/* =========================================
-   SUR HALI - ÜRÜN KARTLARI
-   ========================================= */
-
-.product-card {
-  overflow: hidden;
-  padding: 0;
-  background: #ffffff;
-  border: 1px solid #eadfd5;
-}
-
-.product-image {
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
-  background: #f1ece6;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.product-card:hover .product-image img {
-  transform: scale(1.04);
-}
-
-.product-content {
-  padding: 26px 28px 30px;
-}
-
-.product-content .icon {
-  margin-bottom: 8px;
-}
-
-.product-content h3 {
-  margin-top: 8px;
-}
-
-.product-content p {
-  min-height: 76px;
-  margin-bottom: 20px;
-}
-
-
-/* Tablet */
-
-@media (max-width: 800px) {
-
-  .product-image {
-    height: 240px;
-  }
-
-}
-
-
-/* Telefon */
-
-@media (max-width: 520px) {
-
-  .product-image {
-    height: 260px;
   }
 
 }
