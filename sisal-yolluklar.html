@@ -10,13 +10,16 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>
-    Sur Halı İznik | Sisal Yolluklar
-  </title>
+  <title>Sur Halı İznik | Sisal Yolluklar</title>
 
   <meta
     name="description"
     content="Sur Halı İznik sisal yolluk koleksiyonu. 80 cm, 1 m, 1,20 m ve 1,60 m genişlik seçeneklerimizi inceleyin."
+  >
+
+  <meta
+    name="keywords"
+    content="Sur Halı İznik, sisal yolluk, sisal halı, sisal yolluk modelleri, İznik yolluk, Bursa yolluk"
   >
 
   <style>
@@ -25,20 +28,25 @@
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background: #f7f3ee;
       color: #40342d;
+      line-height: 1.7;
     }
 
+
+    /* ÜST BAŞLIK */
+
     header {
-      width: 100%;
       background: #6d3f2f;
-      color: white;
+      color: #fff;
       text-align: center;
       padding: 45px 20px;
     }
+
 
     header h1 {
       margin: 0;
@@ -47,37 +55,48 @@
       font-weight: 500;
     }
 
+
     header p {
       margin: 12px 0 0;
       color: #f4e8df;
       font-size: 17px;
     }
 
+
+    /* ANA ALAN */
+
     .container {
-      width: 92%;
-      max-width: 1200px;
+      width: min(1200px, 92%);
       margin: 0 auto;
-      padding: 50px 0;
+      padding: 55px 0;
     }
 
+
+    /* TANITIM */
+
     .intro {
-      max-width: 750px;
-      margin: 0 auto 45px;
+      max-width: 780px;
+      margin: 0 auto 55px;
       text-align: center;
     }
 
+
     .intro h2 {
+      margin: 0 0 18px;
       font-family: Georgia, serif;
-      font-size: 32px;
-      margin: 0 0 15px;
+      font-size: 34px;
+      font-weight: 500;
     }
 
+
     .intro p {
-      color: #75675f;
-      line-height: 1.7;
-      font-size: 16px;
       margin: 0;
+      color: #75675f;
+      line-height: 1.8;
     }
+
+
+    /* GALERİ */
 
     .gallery {
       display: grid;
@@ -88,12 +107,28 @@
       gap: 25px;
     }
 
+
+    /* ÜRÜN KARTI */
+
     .card {
-      background: white;
-      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #e8ddd3;
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 6px 20px rgba(60, 40, 25, .10);
+      box-shadow:
+        0 8px 25px rgba(60, 40, 25, .10);
+      transition: .3s;
     }
+
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 14px 35px rgba(60, 40, 25, .15);
+    }
+
+
+    /* ÜRÜN RESMİ */
 
     .card img {
       width: 100%;
@@ -102,53 +137,70 @@
       display: block;
     }
 
+
+    /* KART YAZISI */
+
     .card-content {
-      padding: 22px;
+      padding: 24px;
       text-align: center;
     }
 
+
     .card h3 {
+      margin: 0 0 12px;
       font-family: Georgia, serif;
-      font-size: 22px;
-      margin: 0 0 10px;
+      font-size: 23px;
+      font-weight: 500;
       color: #40342d;
     }
 
+
     .card p {
-      color: #75675f;
-      line-height: 1.6;
       margin: 0;
+      color: #75675f;
+      line-height: 1.7;
     }
 
+
+    /* ANA SAYFAYA DÖN */
+
     .back {
-      width: 100%;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 55px;
     }
+
 
     .back a {
       display: inline-block;
-      border: 1px solid #6d3f2f;
-      color: #6d3f2f;
       padding: 12px 28px;
+      border: 1px solid #6d3f2f;
+      border-radius: 999px;
       text-decoration: none;
-      border-radius: 5px;
+      color: #6d3f2f;
       font-weight: bold;
+      transition: .25s;
     }
+
 
     .back a:hover {
       background: #6d3f2f;
-      color: white;
+      color: #fff;
     }
 
+
+    /* ALT BİLGİ */
+
     footer {
-      width: 100%;
-      text-align: center;
-      border-top: 1px solid #e8ddd3;
+      margin-top: 60px;
       padding: 25px;
-      color: #8a7d75;
+      border-top: 1px solid #e8ddd3;
+      text-align: center;
       font-size: 13px;
+      color: #8a7d75;
     }
+
+
+    /* MOBİL */
 
     @media (max-width: 600px) {
 
@@ -156,16 +208,19 @@
         font-size: 30px;
       }
 
+
       .container {
-        padding: 35px 0;
+        padding: 40px 0;
       }
 
-      .card img {
-        height: 300px;
-      }
 
       .intro h2 {
-        font-size: 27px;
+        font-size: 29px;
+      }
+
+
+      .card img {
+        height: 320px;
       }
 
     }
@@ -177,6 +232,10 @@
 
 <body>
 
+
+<!-- =====================================================
+     ÜST BAŞLIK
+====================================================== -->
 
 <header>
 
@@ -191,8 +250,14 @@
 </header>
 
 
+<!-- =====================================================
+     ANA ALAN
+====================================================== -->
+
 <div class="container">
 
+
+  <!-- TANITIM -->
 
   <div class="intro">
 
@@ -213,6 +278,12 @@
   </div>
 
 
+  <!-- ===================================================
+       GALERİ
+       SADECE ÜRÜN RESİMLERİ
+       SİSAL-KAPAK BURADA YOK
+  ==================================================== -->
+
   <div class="gallery">
 
 
@@ -222,7 +293,7 @@
 
       <img
         src="resimler/sisal-yolluklar/sisal-yolluk-1.png"
-        alt="Sur Halı İznik Sisal Yolluk Modeli"
+        alt="Sur Halı İznik Sisal Yolluk Modeli 1"
       >
 
       <div class="card-content">
@@ -295,6 +366,10 @@
   </div>
 
 
+  <!-- ===================================================
+       ANA SAYFAYA DÖN
+  ==================================================== -->
+
   <div class="back">
 
     <a href="index.html">
@@ -306,6 +381,10 @@
 
 </div>
 
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
 
 <footer>
 
