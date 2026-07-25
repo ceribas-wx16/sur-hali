@@ -32,8 +32,6 @@
       line-height: 1.7;
     }
 
-    /* ÜST BAŞLIK */
-
     header {
       width: 100%;
       background: #6d3f2f;
@@ -43,21 +41,17 @@
     }
 
     header h1 {
-      width: 100%;
-      margin: 0 auto;
+      margin: 0;
       font-family: Georgia, serif;
       font-size: 38px;
       font-weight: 500;
     }
 
     header p {
-      width: 100%;
-      margin: 12px auto 0;
+      margin: 12px 0 0;
       color: #f4e8df;
       font-size: 17px;
     }
-
-    /* ANA ALAN */
 
     .container {
       width: 92%;
@@ -66,10 +60,7 @@
       padding: 50px 0;
     }
 
-    /* TANITIM */
-
     .intro {
-      width: 100%;
       max-width: 750px;
       margin: 0 auto 45px;
       text-align: center;
@@ -86,10 +77,8 @@
       margin: 0;
       color: #75675f;
       font-size: 16px;
-      line-height: 1.7;
+      line-height: 1.8;
     }
-
-    /* GALERİ */
 
     .gallery {
       display: grid;
@@ -97,16 +86,18 @@
       gap: 25px;
     }
 
-    /* KART */
-
     .card {
       background: #ffffff;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 6px 20px rgba(60, 40, 25, 0.10);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    /* ÜRÜN RESMİ */
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(60, 40, 25, 0.15);
+    }
 
     .card img {
       width: 100%;
@@ -114,8 +105,6 @@
       object-fit: cover;
       display: block;
     }
-
-    /* KART İÇERİĞİ */
 
     .card-content {
       padding: 22px;
@@ -136,8 +125,6 @@
       line-height: 1.6;
     }
 
-    /* ANA SAYFAYA DÖN */
-
     .back {
       width: 100%;
       margin-top: 50px;
@@ -152,7 +139,7 @@
       color: #6d3f2f;
       text-decoration: none;
       font-weight: bold;
-      transition: 0.25s;
+      transition: 0.25s ease;
     }
 
     .back a:hover {
@@ -160,18 +147,14 @@
       color: #ffffff;
     }
 
-    /* ALT BİLGİ */
-
     footer {
       width: 100%;
       padding: 25px;
       border-top: 1px solid #e8ddd3;
-      text-align: center;
       color: #8a7d75;
       font-size: 13px;
+      text-align: center;
     }
-
-    /* MOBİL */
 
     @media (max-width: 600px) {
 
@@ -236,11 +219,7 @@
     </section>
 
 
-    <!-- ÜRÜN GALERİSİ
-         NOT:
-         sisal-kapak görseli burada kullanılmamaktadır.
-         Bu görsel yalnızca ana sayfadaki kapak görselidir.
-    -->
+    <!-- SİSAL YOLLUK ÜRÜNLERİ -->
 
     <section class="gallery">
 
@@ -251,7 +230,7 @@
 
         <img
           src="resimler/sisal-yolluklar/sisal-yolluk-1.png"
-          alt="Sur Halı İznik Sisal Yolluk Modeli"
+          alt="Sur Halı İznik Sisal Yolluk Modeli 1"
         >
 
         <div class="card-content">
@@ -298,12 +277,12 @@
 
         <img
           src="resimler/sisal-yolluklar/sisal-yolluk-3.jpg"
-          alt="Sur Halı İznik Sisal Yolluk Detay"
+          alt="Sur Halı İznik Sisal Yolluk Detayı"
         >
 
         <div class="card-content">
 
-          <h3>Sisal Yolluk Detay</h3>
+          <h3>Sisal Yolluk Detayı</h3>
 
           <p>
             Ürünün doğal dokusunu ve renk geçişlerini
