@@ -1,22 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 
 <head>
 
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>
-    Sisal Yolluklar | Sur Halı İznik
-  </title>
+  <title>Sur Halı İznik | Sisal Yolluklar</title>
 
   <meta
     name="description"
-    content="Sur Halı İznik sisal yolluk koleksiyonunu keşfedin. Doğal görünümlü, modern yaşam alanlarına uyum sağlayan sisal yolluk modellerini inceleyin."
+    content="Sur Halı İznik sisal yolluk koleksiyonu. Doğal görünümlü, modern ve şık sisal yolluk modellerimizi inceleyin."
   >
 
   <meta
@@ -24,20 +18,203 @@
     content="Sur Halı İznik, sisal yolluk, sisal halı, İznik sisal yolluk, Bursa sisal yolluk"
   >
 
-  <meta
-    name="robots"
-    content="index, follow"
-  >
+  <meta name="robots" content="index, follow">
 
-  <meta
-    name="theme-color"
-    content="#6d3f2f"
-  >
+  <meta name="theme-color" content="#6d3f2f">
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f8f6f1;
+      color: #292724;
+      line-height: 1.7;
+    }
+
+
+    header {
+      background:
+        linear-gradient(
+          135deg,
+          #b56d55 0%,
+          #a8624d 50%,
+          #925542 100%
+        );
+
+      color: #fff;
+      text-align: center;
+      padding: 45px 20px;
+    }
+
+
+    header h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-weight: 500;
+      font-size: 38px;
+    }
+
+
+    header p {
+      margin-top: 12px;
+      font-size: 17px;
+      color: #f8eee8;
+    }
+
+
+    .container {
+      width: min(1160px, 92%);
+      margin: auto;
+      padding: 60px 0;
+    }
+
+
+    .intro {
+      max-width: 780px;
+      margin: 0 auto 55px;
+      text-align: center;
+    }
+
+
+    .intro h2 {
+      font-family: Georgia, serif;
+      font-size: 34px;
+      font-weight: 500;
+      margin-bottom: 18px;
+    }
+
+
+    .intro p {
+      color: #716b64;
+      line-height: 1.8;
+    }
+
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+
+    .card {
+      background: #fff;
+      border: 1px solid #e3ddd4;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 12px 35px rgba(50, 42, 34, .08);
+      transition: .30s;
+    }
+
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 45px rgba(50, 42, 34, .13);
+    }
+
+
+    .card img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: .5s;
+    }
+
+
+    .card:hover img {
+      transform: scale(1.03);
+    }
+
+
+    .card-content {
+      padding: 26px;
+      text-align: center;
+    }
+
+
+    .card h3 {
+      margin: 0 0 12px;
+      font-family: Georgia, serif;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+
+    .card p {
+      margin: 0;
+      color: #716b64;
+    }
+
+
+    .back {
+      text-align: center;
+      margin-top: 55px;
+    }
+
+
+    .back a {
+      display: inline-block;
+      padding: 12px 28px;
+      border: 1px solid #b56d55;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #925542;
+      font-weight: bold;
+      transition: .25s;
+    }
+
+
+    .back a:hover {
+      background: #b56d55;
+      color: #fff;
+    }
+
+
+    footer {
+      margin-top: 60px;
+      padding: 25px;
+      border-top: 1px solid #e3ddd4;
+      text-align: center;
+      font-size: 13px;
+      color: #938a82;
+    }
+
+
+    @media (max-width: 700px) {
+
+      header h1 {
+        font-size: 30px;
+      }
+
+      .container {
+        padding: 40px 0;
+      }
+
+      .intro h2 {
+        font-size: 29px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 380px;
+      }
+
+    }
+
+  </style>
 
 </head>
 
@@ -45,587 +222,77 @@
 <body>
 
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
+<header>
 
-<header class="site-header">
+  <h1>Sisal Yolluk Koleksiyonumuz</h1>
 
-  <div class="container nav">
-
-
-    <a
-      class="logo"
-      href="index.html"
-    >
-
-      SUR <span>HALI</span>
-
-      <small>
-        İZNİK • BURSA
-      </small>
-
-    </a>
-
-
-
-    <nav>
-
-      <a href="index.html">
-        Ana Sayfa
-      </a>
-
-      <a href="index.html#urunler">
-        Ürünler
-      </a>
-
-      <a href="index.html#kesfet">
-        Halı Bul
-      </a>
-
-      <a href="index.html#hakkimizda">
-        Hakkımızda
-      </a>
-
-      <a href="index.html#iletisim">
-        İletişim
-      </a>
-
-    </nav>
-
-
-
-    <a
-      class="btn btn-small"
-      href="https://wa.me/905396369095"
-      target="_blank"
-      rel="noopener"
-    >
-
-      WhatsApp
-
-    </a>
-
-
-  </div>
+  <p>Sur Halı İznik • Bursa</p>
 
 </header>
 
 
-
-<!-- =========================================================
-     ANA İÇERİK
-========================================================= -->
-
-<main>
+<div class="container">
 
 
-<!-- =========================================================
-     SAYFA BAŞLIĞI
-========================================================= -->
+  <div class="intro">
 
-<section class="section">
+    <h2>Doğal ve Şık Sisal Yolluk Seçenekleri</h2>
 
-  <div class="container">
-
-
-    <p class="eyebrow">
-      SUR HALI İZNİK
+    <p>
+      Yaşam alanlarınıza doğal ve modern bir görünüm kazandıran
+      sisal yolluk modellerimizi inceleyebilirsiniz.
+      Farklı desen, renk ve ölçü seçenekleri hakkında bilgi almak
+      için bizimle iletişime geçebilirsiniz.
     </p>
 
-
-    <h1>
-      Sisal Yolluklar
-    </h1>
-
-
-    <p class="lead">
-
-      Doğal görünümlü, modern ve şık yaşam alanlarına
-      uyum sağlayan sisal yolluk seçeneklerimizi keşfedin.
-
-      Ölçü, fiyat ve stok bilgisi için
-      WhatsApp üzerinden bizimle iletişime geçebilirsiniz.
-
-    </p>
-
-
-    <div class="actions">
-
-
-      <a
-        class="btn"
-        href="index.html#urunler"
-      >
-
-        ← Ürünlere Dön
-
-      </a>
-
-
-      <a
-        class="btn btn-outline"
-        href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20sisal%20yolluklar%20hakkında%20bilgi%20almak%20istiyorum."
-        target="_blank"
-        rel="noopener"
-      >
-
-        Sisal Yolluk Sor
-
-      </a>
-
-
-    </div>
-
-
   </div>
 
-</section>
 
+  <div class="gallery">
 
 
-<!-- =========================================================
-     SİSAL YOLLUK KOLEKSİYONU
-========================================================= -->
+    <!-- SİSAL YOLLUK MODELİ 1 -->
 
-<section class="section">
+    <div class="card">
 
-  <div class="container">
-
-
-    <div class="section-head">
-
-      <div>
-
-        <p class="eyebrow">
-          SİSAL YOLLUK KOLEKSİYONU
-        </p>
-
-
-        <h2>
-          Doğal ve modern bir görünüm
-        </h2>
-
-      </div>
-
-
-      <p>
-
-        Farklı kullanım alanlarına uygun sisal yolluk
-        seçeneklerimizi inceleyebilirsiniz.
-
-      </p>
-
-    </div>
-
-
-
-    <div class="cards">
-
-
-      <!-- =====================================================
-           SİSAL YOLLUK 01
-      ====================================================== -->
-
-      <article class="card product-card">
-
-
-        <div class="product-image">
-
-
-          <img
-            src="resimler/sisal-yolluklar/sisal-yolluk-1.png"
-            alt="Sur Halı İznik Sisal Yolluk Modeli 1"
-            loading="lazy"
-          >
-
-
-        </div>
-
-
-        <div class="product-content">
-
-
-          <div class="icon">
-            01
-          </div>
-
-
-          <h3>
-            Sisal Yolluk Modeli 1
-          </h3>
-
-
-          <p>
-
-            Doğal görünümlü sisal yolluk seçeneklerinden
-            birini inceleyebilirsiniz.
-
-          </p>
-
-
-          <a
-            href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20Sisal%20Yolluk%20Modeli%201%20hakkında%20bilgi%20almak%20istiyorum."
-            target="_blank"
-            rel="noopener"
-          >
-
-            Bilgi Al →
-
-          </a>
-
-
-        </div>
-
-
-      </article>
-
-
-
-      <!-- =====================================================
-           SİSAL YOLLUK 02
-      ====================================================== -->
-
-      <article class="card product-card">
-
-
-        <div class="product-image">
-
-
-          <img
-            src="resimler/sisal-yolluklar/sisal-yolluk-2.png"
-            alt="Sur Halı İznik Sisal Yolluk Modeli 2"
-            loading="lazy"
-          >
-
-
-        </div>
-
-
-        <div class="product-content">
-
-
-          <div class="icon">
-            02
-          </div>
-
-
-          <h3>
-            Sisal Yolluk Modeli 2
-          </h3>
-
-
-          <p>
-
-            Yaşam alanlarına doğal ve modern bir görünüm
-            kazandıran sisal yolluk seçeneklerinden biri.
-
-          </p>
-
-
-          <a
-            href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20Sisal%20Yolluk%20Modeli%202%20hakkında%20bilgi%20almak%20istiyorum."
-            target="_blank"
-            rel="noopener"
-          >
-
-            Bilgi Al →
-
-          </a>
-
-
-        </div>
-
-
-      </article>
-
-
-
-      <!-- =====================================================
-           SİSAL YOLLUK 03
-      ====================================================== -->
-
-      <article class="card product-card">
-
-
-        <div class="product-image">
-
-
-          <img
-            src="resimler/sisal-yolluklar/sisal-yolluk-3.jpg"
-            alt="Sur Halı İznik Sisal Yolluk Modeli 3"
-            loading="lazy"
-          >
-
-
-        </div>
-
-
-        <div class="product-content">
-
-
-          <div class="icon">
-            03
-          </div>
-
-
-          <h3>
-            Sisal Yolluk Modeli 3
-          </h3>
-
-
-          <p>
-
-            Farklı dekorasyon tarzlarına uyum sağlayabilecek
-            doğal görünümlü sisal yolluk seçeneği.
-
-          </p>
-
-
-          <a
-            href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20Sisal%20Yolluk%20Modeli%203%20hakkında%20bilgi%20almak%20istiyorum."
-            target="_blank"
-            rel="noopener"
-          >
-
-            Bilgi Al →
-
-          </a>
-
-
-        </div>
-
-
-      </article>
-
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     SİSAL YOLLUK HAKKINDA
-========================================================= -->
-
-<section class="section discover">
-
-
-  <div class="container discover-grid">
-
-
-    <div>
-
-
-      <p class="eyebrow">
-        SİSAL YOLLUKLAR
-      </p>
-
-
-      <h2>
-        Yaşam alanınıza doğal bir dokunuş
-      </h2>
-
-
-      <p>
-
-        Sisal yolluklar, doğal görünümleri sayesinde
-        farklı dekorasyon tarzlarına uyum sağlayabilir.
-
-        Koridor, antre ve geçiş alanlarında
-        şık bir görünüm oluşturmak isteyenler için
-        alternatif seçenekler sunar.
-
-      </p>
-
-
-      <a
-        class="btn"
-        href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20sisal%20yolluk%20ölçü%20ve%20fiyat%20bilgisi%20almak%20istiyorum."
-        target="_blank"
-        rel="noopener"
+      <img
+        src="resimler/sisal-yolluklar/sisal-yolluk-2.png"
+        alt="Sur Halı İznik sisal yolluk modeli"
       >
 
-        Ölçü ve Fiyat Sor
+      <div class="card-content">
 
-      </a>
-
-
-    </div>
-
-
-
-    <div class="discover-box">
-
-
-      <div class="discover-step">
-
-
-        <span>
-          01
-        </span>
-
-
-        <strong>
-          Modelinizi seçin
-        </strong>
-
+        <h3>Sisal Yolluk Modeli</h3>
 
         <p>
-          Koleksiyondaki modelleri inceleyin.
+          Doğal görünümü ve modern tasarımıyla farklı
+          yaşam alanlarına uyum sağlayan sisal yolluk seçenekleri.
         </p>
 
-
       </div>
-
-
-
-      <div class="discover-step">
-
-
-        <span>
-          02
-        </span>
-
-
-        <strong>
-          Ölçünüzü belirleyin
-        </strong>
-
-
-        <p>
-          İhtiyacınız olan ölçüyü bizimle paylaşın.
-        </p>
-
-
-      </div>
-
-
-
-      <div class="discover-step">
-
-
-        <span>
-          03
-        </span>
-
-
-        <strong>
-          WhatsApp'tan bilgi alın
-        </strong>
-
-
-        <p>
-          Güncel fiyat ve stok bilgilerini öğrenin.
-        </p>
-
-
-      </div>
-
 
     </div>
 
 
-  </div>
+    <!-- SİSAL YOLLUK MODELİ 2 -->
 
+    <div class="card">
 
-</section>
-
-
-
-<!-- =========================================================
-     İLETİŞİM
-========================================================= -->
-
-<section
-  class="location"
-  id="iletisim"
->
-
-
-  <div class="container location-grid">
-
-
-    <div>
-
-
-      <p class="eyebrow">
-        BİZE ULAŞIN
-      </p>
-
-
-      <h2>
-        Sisal yolluklar hakkında bilgi alın.
-      </h2>
-
-
-      <p>
-
-        Ölçü, fiyat ve stok bilgisi için
-        bizimle WhatsApp üzerinden iletişime geçebilirsiniz.
-
-      </p>
-
-
-      <div class="actions">
-
-
-        <a
-          class="btn"
-          href="https://wa.me/905396369095?text=Merhaba%20Sur%20Halı%2C%20sisal%20yolluklar%20hakkında%20bilgi%20almak%20istiyorum."
-          target="_blank"
-          rel="noopener"
-        >
-
-          WhatsApp'tan Ulaşın
-
-        </a>
-
-
-        <a
-          class="btn btn-outline light"
-          href="index.html"
-        >
-
-          Ana Sayfaya Dön
-
-        </a>
-
-
-      </div>
-
-
-    </div>
-
-
-
-    <div class="map-placeholder">
-
-
-      <h3>
-        Sur Halı İznik
-      </h3>
-
-
-      <p>
-        İznik / Bursa
-      </p>
-
-
-      <a
-        href="https://www.google.com/maps/search/?api=1&query=Sur+Halı+İznik+Bursa"
-        target="_blank"
-        rel="noopener"
+      <img
+        src="resimler/sisal-yolluklar/sisal-yolluk-3.png"
+        alt="Sur Halı İznik sisal yolluk modeli"
       >
 
-        Google Maps'te Yol Tarifi Al →
+      <div class="card-content">
 
-      </a>
+        <h3>Sisal Yolluk Modeli</h3>
 
+        <p>
+          Koridor, antre ve geçiş alanları için
+          doğal görünümlü ve şık sisal yolluk alternatifleri.
+        </p>
+
+      </div>
 
     </div>
 
@@ -633,96 +300,21 @@
   </div>
 
 
-</section>
+  <div class="back">
+
+    <a href="index.html">
+      ← Ana Sayfaya Dön
+    </a>
+
+  </div>
 
 
-</main>
+</div>
 
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
 
 <footer>
 
-
-  <div class="container footer-grid">
-
-
-    <div>
-
-
-      <strong>
-        SUR HALI
-      </strong>
-
-
-      <p>
-        İznik • Bursa
-      </p>
-
-
-    </div>
-
-
-
-    <div>
-
-
-      <a href="tel:+905396369095">
-
-        0539 636 90 95
-
-      </a>
-
-
-      <br>
-
-
-      <a
-        href="https://www.instagram.com/surhaliiznik/"
-        target="_blank"
-        rel="noopener"
-      >
-
-        Instagram: @surhaliiznik
-
-      </a>
-
-
-    </div>
-
-
-
-    <div>
-
-
-      <a
-        href="https://wa.me/905396369095"
-        target="_blank"
-        rel="noopener"
-      >
-
-        WhatsApp'tan iletişime geç
-
-      </a>
-
-
-    </div>
-
-
-  </div>
-
-
-
-  <div class="copyright">
-
-    © 2026 Sur Halı İznik.
-    Tüm hakları saklıdır.
-
-  </div>
-
+  © 2026 Sur Halı İznik • Tüm hakları saklıdır.
 
 </footer>
 
