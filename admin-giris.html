@@ -139,199 +139,216 @@
 
 <body>
 
-    <div class="login-container">
+<div class="login-container">
 
-        <div class="login-box">
+    <div class="login-box">
 
-            <div class="logo">
-                <h1>Sur Halı İznik</h1>
-                <p>Yönetici Paneli Girişi</p>
+        <div class="logo">
+            <h1>Sur Halı İznik</h1>
+            <p>Yönetici Paneli Girişi</p>
+        </div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">E-posta</label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Yönetici e-posta adresiniz"
+                    required
+                >
             </div>
 
-            <form id="loginForm">
+            <div class="form-group">
+                <label for="password">Şifre</label>
 
-                <div class="form-group">
-                    <label for="email">E-posta</label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Yönetici e-posta adresiniz"
-                        required
-                    >
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Şifre</label>
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Şifreniz"
-                        required
-                    >
-                </div>
-
-                <button
-                    type="submit"
-                    class="login-button"
-                    id="loginButton"
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Şifreniz"
+                    required
                 >
-                    Giriş Yap
-                </button>
+            </div>
 
-                <div
-                    id="message"
-                    class="message"
-                ></div>
-
-            </form>
-
-            <a
-                href="index.html"
-                class="back-link"
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
             >
-                ← Ana siteye dön
-            </a>
+                Giriş Yap
+            </button>
 
-        </div>
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+        </form>
+
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            ← Ana siteye dön
+        </a>
 
     </div>
 
-
-    <!-- SUPABASE KÜTÜPHANESİ -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</div>
 
 
-    <script>
+<!-- SUPABASE KÜTÜPHANESİ -->
 
-        // ==========================================
-        // SUPABASE BAĞLANTI BİLGİLERİ
-        // ==========================================
-
-        const SUPABASE_URL =
-            "https://nnvbxtjpfpfwegewtnkc.supabase.co";
-
-        const SUPABASE_PUBLISHABLE_KEY =
-            "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
-        // ==========================================
-        // SUPABASE İSTEMCİSİNİ OLUŞTUR
-        // ==========================================
+<script>
 
-        const { createClient } = supabase;
+    // ==========================================
+    // SUPABASE PROJE BİLGİLERİ
+    // ==========================================
 
-        const supabaseClient = createClient(
+    const SUPABASE_URL =
+        "https://nnvbxtjpfpfwegewtnkc.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
+
+
+    // ==========================================
+    // SUPABASE BAĞLANTISI
+    // ==========================================
+
+    const supabaseClient =
+        window.supabase.createClient(
             SUPABASE_URL,
             SUPABASE_PUBLISHABLE_KEY
         );
 
 
-        // ==========================================
-        // GİRİŞ FORMUNU DİNLE
-        // ==========================================
+    // ==========================================
+    // FORM ELEMANLARI
+    // ==========================================
 
-        document
-            .getElementById("loginForm")
-            .addEventListener("submit", async function(event) {
+    const loginForm =
+        document.getElementById("loginForm");
 
-                // Sayfanın yenilenmesini engelle
-                event.preventDefault();
+    const emailInput =
+        document.getElementById("email");
 
+    const passwordInput =
+        document.getElementById("password");
 
-                // ==========================================
-                // FORM BİLGİLERİNİ AL
-                // ==========================================
+    const loginButton =
+        document.getElementById("loginButton");
 
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim();
-
-                const password =
-                    document
-                        .getElementById("password")
-                        .value;
+    const message =
+        document.getElementById("message");
 
 
-                // ==========================================
-                // MESAJ VE BUTON
-                // ==========================================
+    // ==========================================
+    // GİRİŞ FORMU
+    // ==========================================
 
-                const message =
-                    document.getElementById("message");
+    loginForm.addEventListener(
+        "submit",
+        async function(event) {
 
-                const button =
-                    document.getElementById("loginButton");
-
-
-                // Önceki mesajı temizle
-
-                message.className = "message";
-                message.textContent = "";
+            event.preventDefault();
 
 
-                // Butonu devre dışı bırak
+            // Form bilgilerini al
 
-                button.disabled = true;
-                button.textContent = "Giriş yapılıyor...";
+            const email =
+                emailInput.value.trim();
 
-
-                // ==========================================
-                // SUPABASE AUTH GİRİŞ İŞLEMİ
-                // ==========================================
-
-                try {
-
-                    const { data, error } =
-                        await supabaseClient.auth.signInWithPassword({
-
-                            email: email,
-
-                            password: password
-
-                        });
+            const password =
+                passwordInput.value;
 
 
-                    // ==========================================
-                    // HATA VARSA
-                    // ==========================================
+            // Eski mesajı temizle
 
-                    if (error) {
+            message.className = "message";
 
-                        console.error(
-                            "Supabase giriş hatası:",
-                            error
-                        );
-
-                        throw error;
-
-                    }
+            message.textContent = "";
 
 
-                    // ==========================================
-                    // GİRİŞ BAŞARILI
-                    // ==========================================
+            // Butonu kilitle
 
-                    console.log(
-                        "Supabase giriş başarılı:",
-                        data
+            loginButton.disabled = true;
+
+            loginButton.textContent =
+                "Giriş yapılıyor...";
+
+
+            try {
+
+                // ==================================
+                // SUPABASE AUTH GİRİŞ
+                // ==================================
+
+                const result =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                const data =
+                    result.data;
+
+                const error =
+                    result.error;
+
+
+                // ==================================
+                // SUPABASE HATASI
+                // ==================================
+
+                if (error) {
+
+                    console.error(
+                        "Supabase hata:",
+                        error
                     );
 
+                    message.className =
+                        "message error";
 
                     message.textContent =
-                        "Giriş başarılı! Yönetim paneline yönlendiriliyorsunuz...";
+                        "Giriş hatası: " +
+                        error.message;
+
+                    loginButton.disabled =
+                        false;
+
+                    loginButton.textContent =
+                        "Giriş Yap";
+
+                    return;
+
+                }
+
+
+                // ==================================
+                // GİRİŞ BAŞARILI
+                // ==================================
+
+                if (data && data.session) {
 
                     message.className =
                         "message success";
 
+                    message.textContent =
+                        "Giriş başarılı! Yönetim paneli açılıyor...";
 
-                    // ==========================================
-                    // ADMIN PANELİNE YÖNLENDİR
-                    // ==========================================
+
+                    // Admin paneline yönlendir
 
                     setTimeout(function() {
 
@@ -340,45 +357,53 @@
 
                     }, 1000);
 
-
-                }
-
-
-                // ==========================================
-                // HATA YAKALAMA
-                // ==========================================
-
-                catch (error) {
-
-                    console.error(
-                        "Giriş hatası:",
-                        error
-                    );
-
-
-                    // Gerçek Supabase hata mesajını göster
-
-                    message.textContent =
-                        "Supabase Hatası: " +
-                        error.message;
-
+                } else {
 
                     message.className =
                         "message error";
 
+                    message.textContent =
+                        "Giriş yapılamadı. Oturum oluşturulamadı.";
 
-                    // Butonu tekrar aktif et
+                    loginButton.disabled =
+                        false;
 
-                    button.disabled = false;
-
-                    button.textContent =
+                    loginButton.textContent =
                         "Giriş Yap";
 
                 }
 
-            });
 
-    </script>
+            } catch (error) {
+
+                // ==================================
+                // BEKLENMEYEN HATA
+                // ==================================
+
+                console.error(
+                    "Beklenmeyen hata:",
+                    error
+                );
+
+                message.className =
+                    "message error";
+
+                message.textContent =
+                    "Sistem hatası: " +
+                    error.message;
+
+                loginButton.disabled =
+                    false;
+
+                loginButton.textContent =
+                    "Giriş Yap";
+
+            }
+
+        }
+    );
+
+</script>
 
 </body>
 </html>
