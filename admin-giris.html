@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sur Halı İznik - Yönetici Girişi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            background: #f5f1eb;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: #ffffff;
+            padding: 40px 35px;
+            border-radius: 16px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.10);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #4a3728;
+            margin-bottom: 8px;
+        }
+
+        .logo p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a3728;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #8b6f47;
+            box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.10);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #4a3728;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background: #6b4f35;
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: #fce8e8;
+            color: #a33a3a;
+        }
+
+        .success {
+            display: block;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #777;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #4a3728;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-box">
+
+        <div class="logo">
+            <h1>Sur Halı İznik</h1>
+            <p>Yönetici Paneli Girişi</p>
+        </div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="email">E-posta</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Yönetici e-posta adresiniz"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Şifreniz"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="login-button" id="loginButton">
+                Giriş Yap
+            </button>
+
+            <div id="message" class="message"></div>
+
+        </form>
+
+        <a href="index.html" class="back-link">
+            ← Ana siteye dön
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const message = document.getElementById("message");
+        const button = document.getElementById("loginButton");
+
+        message.className = "message";
+        message.textContent = "";
+
+        button.disabled = true;
+        button.textContent = "Giriş yapılıyor...";
+
+        /*
+        Burada şimdilik sadece giriş ekranını oluşturduk.
+
+        Bir sonraki aşamada Supabase Auth bağlantısını
+        buraya ekleyeceğiz.
+
+        Böylece:
+
+        E-posta + Şifre
+              ↓
+        Supabase Auth
+              ↓
+        Admin kontrolü
+              ↓
+        Admin Paneli
+        */
+
+        setTimeout(function() {
+
+            message.textContent = "Supabase giriş sistemi bir sonraki adımda bağlanacak.";
+            message.className = "message success";
+
+            button.disabled = false;
+            button.textContent = "Giriş Yap";
+
+        }, 800);
+
+    });
+
+</script>
+
+</body>
+</html>
