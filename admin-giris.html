@@ -110,13 +110,13 @@
             word-break: break-word;
         }
 
-        .error {
+        .message.error {
             display: block;
             background: #fce8e8;
             color: #a33a3a;
         }
 
-        .success {
+        .message.success {
             display: block;
             background: #e8f5e9;
             color: #2e7d32;
@@ -157,6 +157,7 @@
                     type="email"
                     id="email"
                     placeholder="Yönetici e-posta adresiniz"
+                    autocomplete="email"
                     required
                 >
             </div>
@@ -168,6 +169,7 @@
                     type="password"
                     id="password"
                     placeholder="Şifreniz"
+                    autocomplete="current-password"
                     required
                 >
             </div>
@@ -180,17 +182,11 @@
                 Giriş Yap
             </button>
 
-            <div
-                id="message"
-                class="message"
-            ></div>
+            <div id="message" class="message"></div>
 
         </form>
 
-        <a
-            href="index.html"
-            class="back-link"
-        >
+        <a href="index.html" class="back-link">
             ← Ana siteye dön
         </a>
 
@@ -206,31 +202,43 @@
 
 <script>
 
-    // ==========================================
-    // SUPABASE PROJE BİLGİLERİ
-    // ==========================================
+    /*
+    =====================================================
+    SUPABASE PROJE BİLGİLERİ
+    =====================================================
+    */
 
     const SUPABASE_URL =
         "https://miiefpvhlumoxqujjpsn.supabase.co";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
+
+    /*
+    Bu anahtar Supabase > Settings > API Keys
+    bölümündeki Legacy anon key'dir.
+    */
+
+    const SUPABASE_ANON_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1paWVmcHZobHVtb3hxdWpqcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzQ1MDYsImV4cCI6MjEwMDc1MDUwNn0.TKk1Kw-dk39v-Omi0jLhLKZT2Bldfl8-kQfW_h22CdY";
 
 
-    // ==========================================
-    // SUPABASE BAĞLANTISINI OLUŞTUR
-    // ==========================================
+    /*
+    =====================================================
+    SUPABASE BAĞLANTISI
+    =====================================================
+    */
 
     const supabaseClient =
         window.supabase.createClient(
             SUPABASE_URL,
-            SUPABASE_PUBLISHABLE_KEY
+            SUPABASE_ANON_KEY
         );
 
 
-    // ==========================================
-    // FORM ELEMANLARI
-    // ==========================================
+    /*
+    =====================================================
+    FORM ELEMANLARI
+    =====================================================
+    */
 
     const loginForm =
         document.getElementById("loginForm");
@@ -248,18 +256,17 @@
         document.getElementById("message");
 
 
-    // ==========================================
-    // GİRİŞ FORMU
-    // ==========================================
+    /*
+    =====================================================
+    GİRİŞ İŞLEMİ
+    =====================================================
+    */
 
     loginForm.addEventListener(
         "submit",
         async function(event) {
 
             event.preventDefault();
-
-
-            // Form bilgilerini al
 
             const email =
                 emailInput.value.trim();
@@ -268,7 +275,9 @@
                 passwordInput.value;
 
 
-            // Eski mesajı temizle
+            /*
+            Mesajı temizle
+            */
 
             message.className =
                 "message";
@@ -277,7 +286,9 @@
                 "";
 
 
-            // Butonu kilitle
+            /*
+            Butonu kilitle
+            */
 
             loginButton.disabled =
                 true;
@@ -288,26 +299,26 @@
 
             try {
 
-                // ==================================
-                // SUPABASE AUTH İLE GİRİŞ
-                // ==================================
+                /*
+                Supabase Auth giriş işlemi
+                */
 
                 const {
                     data,
                     error
                 } =
-                    await supabaseClient.auth.signInWithPassword({
+                await supabaseClient.auth.signInWithPassword({
 
-                        email: email,
+                    email: email,
 
-                        password: password
+                    password: password
 
-                    });
+                });
 
 
-                // ==================================
-                // GİRİŞ HATASI
-                // ==================================
+                /*
+                Hata varsa göster
+                */
 
                 if (error) {
 
@@ -333,14 +344,11 @@
                 }
 
 
-                // ==================================
-                // GİRİŞ BAŞARILI
-                // ==================================
+                /*
+                Başarılı giriş
+                */
 
-                if (
-                    data &&
-                    data.session
-                ) {
+                if (data && data.session) {
 
                     message.className =
                         "message success";
@@ -349,16 +357,19 @@
                         "Giriş başarılı! Yönetim paneli açılıyor...";
 
 
-                    // ==================================
-                    // ADMIN PANELİNE YÖNLENDİR
-                    // ==================================
+                    /*
+                    Admin paneline yönlendir
+                    */
 
-                    setTimeout(function() {
+                    setTimeout(
+                        function() {
 
-                        window.location.href =
-                            "admin-panel.html";
+                            window.location.href =
+                                "admin-panel.html";
 
-                    }, 1000);
+                        },
+                        1000
+                    );
 
                 } else {
 
@@ -376,15 +387,10 @@
 
                 }
 
-
             } catch (error) {
 
-                // ==================================
-                // BEKLENMEYEN HATA
-                // ==================================
-
                 console.error(
-                    "Beklenmeyen sistem hatası:",
+                    "Beklenmeyen hata:",
                     error
                 );
 
