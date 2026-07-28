@@ -211,14 +211,14 @@
     // ==========================================
 
     const SUPABASE_URL =
-        "https://nnvbxtjpfpfwegewtnkc.supabase.co";
+        "https://miiefpvhlumoxqujjpsn.supabase.co";
 
     const SUPABASE_PUBLISHABLE_KEY =
         "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
 
 
     // ==========================================
-    // SUPABASE BAĞLANTISI
+    // SUPABASE BAĞLANTISINI OLUŞTUR
     // ==========================================
 
     const supabaseClient =
@@ -270,14 +270,17 @@
 
             // Eski mesajı temizle
 
-            message.className = "message";
+            message.className =
+                "message";
 
-            message.textContent = "";
+            message.textContent =
+                "";
 
 
             // Butonu kilitle
 
-            loginButton.disabled = true;
+            loginButton.disabled =
+                true;
 
             loginButton.textContent =
                 "Giriş yapılıyor...";
@@ -286,10 +289,13 @@
             try {
 
                 // ==================================
-                // SUPABASE AUTH GİRİŞ
+                // SUPABASE AUTH İLE GİRİŞ
                 // ==================================
 
-                const result =
+                const {
+                    data,
+                    error
+                } =
                     await supabaseClient.auth.signInWithPassword({
 
                         email: email,
@@ -299,21 +305,14 @@
                     });
 
 
-                const data =
-                    result.data;
-
-                const error =
-                    result.error;
-
-
                 // ==================================
-                // SUPABASE HATASI
+                // GİRİŞ HATASI
                 // ==================================
 
                 if (error) {
 
                     console.error(
-                        "Supabase hata:",
+                        "Supabase giriş hatası:",
                         error
                     );
 
@@ -331,7 +330,6 @@
                         "Giriş Yap";
 
                     return;
-
                 }
 
 
@@ -339,7 +337,10 @@
                 // GİRİŞ BAŞARILI
                 // ==================================
 
-                if (data && data.session) {
+                if (
+                    data &&
+                    data.session
+                ) {
 
                     message.className =
                         "message success";
@@ -348,7 +349,9 @@
                         "Giriş başarılı! Yönetim paneli açılıyor...";
 
 
-                    // Admin paneline yönlendir
+                    // ==================================
+                    // ADMIN PANELİNE YÖNLENDİR
+                    // ==================================
 
                     setTimeout(function() {
 
@@ -381,7 +384,7 @@
                 // ==================================
 
                 console.error(
-                    "Beklenmeyen hata:",
+                    "Beklenmeyen sistem hatası:",
                     error
                 );
 
