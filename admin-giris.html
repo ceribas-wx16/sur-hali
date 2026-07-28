@@ -151,6 +151,7 @@
 
             <div class="form-group">
                 <label for="email">E-posta</label>
+
                 <input
                     type="email"
                     id="email"
@@ -161,6 +162,7 @@
 
             <div class="form-group">
                 <label for="password">Şifre</label>
+
                 <input
                     type="password"
                     id="password"
@@ -169,15 +171,25 @@
                 >
             </div>
 
-            <button type="submit" class="login-button" id="loginButton">
+            <button
+                type="submit"
+                class="login-button"
+                id="loginButton"
+            >
                 Giriş Yap
             </button>
 
-            <div id="message" class="message"></div>
+            <div
+                id="message"
+                class="message"
+            ></div>
 
         </form>
 
-        <a href="index.html" class="back-link">
+        <a
+            href="index.html"
+            class="back-link"
+        >
             ← Ana siteye dön
         </a>
 
@@ -185,16 +197,29 @@
 
 </div>
 
+
+<!-- SUPABASE KÜTÜPHANESİ -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-    // Supabase bağlantı bilgileri
-    const SUPABASE_URL = "https://nnvbxtjpfpfwegewtnkc.supabase.co";
+    // ==========================================
+    // SUPABASE BAĞLANTI BİLGİLERİ
+    // ==========================================
 
-    const SUPABASE_PUBLISHABLE_KEY = "BURAYA_PUBLISHABLE_KEY_GELECEK";
+    const SUPABASE_URL =
+        "https://nnvbxtjpfpfwegewtnkc.supabase.co";
 
-    // Supabase istemcisini oluştur
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
+
+
+    // ==========================================
+    // SUPABASE BAĞLANTISINI OLUŞTUR
+    // ==========================================
+
     const { createClient } = supabase;
 
     const supabaseClient = createClient(
@@ -203,65 +228,131 @@
     );
 
 
-    // Giriş formunu dinle
-    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    // ==========================================
+    // GİRİŞ FORMU
+    // ==========================================
 
-        event.preventDefault();
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function(event) {
 
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-
-        const message = document.getElementById("message");
-        const button = document.getElementById("loginButton");
-
-        // Önceki mesajı temizle
-        message.className = "message";
-        message.textContent = "";
-
-        // Butonu kilitle
-        button.disabled = true;
-        button.textContent = "Giriş yapılıyor...";
+            event.preventDefault();
 
 
-        try {
+            // Form bilgilerini al
 
-            // Supabase Auth ile giriş yap
-            const { data, error } = await supabaseClient.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
 
 
-            // Giriş hatası varsa
-            if (error) {
-                throw error;
+            // Mesaj ve buton
+
+            const message =
+                document.getElementById("message");
+
+            const button =
+                document.getElementById("loginButton");
+
+
+            // Eski mesajı temizle
+
+            message.className = "message";
+            message.textContent = "";
+
+
+            // Butonu devre dışı bırak
+
+            button.disabled = true;
+            button.textContent = "Giriş yapılıyor...";
+
+
+            try {
+
+
+                // ==========================================
+                // SUPABASE AUTH İLE GİRİŞ YAP
+                // ==========================================
+
+                const { data, error } =
+                    await supabaseClient.auth.signInWithPassword({
+
+                        email: email,
+
+                        password: password
+
+                    });
+
+
+                // Hata varsa
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                // ==========================================
+                // GİRİŞ BAŞARILI
+                // ==========================================
+
+                message.textContent =
+                    "Giriş başarılı! Yönetim paneline yönlendiriliyorsunuz...";
+
+                message.className =
+                    "message success";
+
+
+                // ==========================================
+                // ADMIN PANELİNE GİT
+                // ==========================================
+
+                setTimeout(function() {
+
+                    window.location.href =
+                        "admin-panel.html";
+
+                }, 1000);
+
+
+            } catch (error) {
+
+
+                // ==========================================
+                // GİRİŞ BAŞARISIZ
+                // ==========================================
+
+                console.error(
+                    "Giriş hatası:",
+                    error
+                );
+
+
+                message.textContent =
+                    "E-posta veya şifre hatalı. Lütfen tekrar deneyin.";
+
+                message.className =
+                    "message error";
+
+
+                // Butonu tekrar aktif et
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Giriş Yap";
+
             }
 
-
-            // Başarılı giriş
-            message.textContent = "Giriş başarılı! Yönetim paneline yönlendiriliyorsunuz...";
-            message.className = "message success";
-
-
-            // 1 saniye sonra admin paneline git
-            setTimeout(function() {
-                window.location.href = "admin-panel.html";
-            }, 1000);
-
-
-        } catch (error) {
-
-            console.error("Giriş hatası:", error);
-
-            message.textContent = "E-posta veya şifre hatalı. Lütfen tekrar deneyin.";
-            message.className = "message error";
-
-            button.disabled = false;
-            button.textContent = "Giriş Yap";
-
-        }
-
-    });
+        });
 
 </script>
 
