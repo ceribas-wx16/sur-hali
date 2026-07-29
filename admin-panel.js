@@ -41,7 +41,6 @@ async function kontrolEt(){
 
 function menuKontrol(){
 
-
     const buttons =
     document.querySelectorAll(".menu-item");
 
@@ -66,9 +65,7 @@ function menuKontrol(){
 
 
                 buttons.forEach(btn=>{
-
                     btn.classList.remove("active");
-
                 });
 
 
@@ -78,11 +75,7 @@ function menuKontrol(){
 
 
                 pages.forEach(page=>{
-
-                    page.classList.remove(
-                        "active-page"
-                    );
-
+                    page.classList.remove("active-page");
                 });
 
 
@@ -108,8 +101,8 @@ function menuKontrol(){
 
     });
 
-
 }
+
 
 
 
@@ -119,7 +112,6 @@ function menuKontrol(){
 // ÇIKIŞ
 
 function cikisKontrol(){
-
 
     const button =
     document.getElementById(
@@ -146,8 +138,8 @@ function cikisKontrol(){
 
     };
 
-
 }
+
 
 
 
@@ -207,22 +199,52 @@ async function resimleriGetir(){
 
 
 
-        gallery.innerHTML += `
+        const div =
+        document.createElement(
+            "div"
+        );
 
-        <div class="image-card">
+
+        div.className =
+        "image-card";
+
+
+
+        div.innerHTML = `
 
             <img src="${url.publicUrl}">
 
             <p>${file.name}</p>
 
-            <button 
-            onclick="resimSil('${file.name}')">
+            <button class="delete-image">
                 Sil
             </button>
 
-        </div>
-
         `;
+
+
+
+        const deleteButton =
+        div.querySelector(
+            ".delete-image"
+        );
+
+
+
+        deleteButton.onclick =
+        ()=>{
+
+            resimSil(
+                file.name
+            );
+
+        };
+
+
+
+        gallery.appendChild(
+            div
+        );
 
 
     });
@@ -263,7 +285,6 @@ async function resimSil(fileName){
     );
 
 
-
     if(!onay){
 
         return;
@@ -293,6 +314,7 @@ async function resimSil(fileName){
 
 
         console.log(error);
+
 
         return;
 
@@ -354,9 +376,11 @@ function resimYuklemeHazirla(){
 
         if(!file){
 
+
             alert(
                 "Lütfen önce resim seçin."
             );
+
 
             return;
 
@@ -370,6 +394,7 @@ function resimYuklemeHazirla(){
         "-"
         +
         file.name;
+
 
 
 
@@ -405,13 +430,14 @@ function resimYuklemeHazirla(){
         );
 
 
+
         input.value = "";
+
 
 
         resimleriGetir();
 
 
     };
-
 
 }
