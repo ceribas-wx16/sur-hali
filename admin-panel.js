@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+
 // OTURUM KONTROLÜ
 
 async function kontrolEt(){
@@ -28,7 +30,10 @@ async function kontrolEt(){
 
 
 
-// MENÜ
+
+
+
+// MENÜ KONTROLÜ
 
 function menuKontrol(){
 
@@ -38,6 +43,7 @@ function menuKontrol(){
 
     const pages =
     document.querySelectorAll(".page");
+
 
 
     buttons.forEach(button => {
@@ -51,6 +57,7 @@ function menuKontrol(){
             }
 
 
+
             buttons.forEach(btn => {
 
                 btn.classList.remove("active");
@@ -58,7 +65,9 @@ function menuKontrol(){
             });
 
 
+
             this.classList.add("active");
+
 
 
 
@@ -70,10 +79,12 @@ function menuKontrol(){
 
 
 
+
             const target =
             document.getElementById(
                 this.dataset.page
             );
+
 
 
             if(target){
@@ -83,6 +94,7 @@ function menuKontrol(){
             }
 
 
+
         });
 
 
@@ -90,6 +102,9 @@ function menuKontrol(){
 
 
 }
+
+
+
 
 
 
@@ -105,9 +120,14 @@ function cikisKontrol(){
     );
 
 
+
     if(!button){
+
         return;
+
     }
+
+
 
 
     button.addEventListener(
@@ -132,7 +152,10 @@ function cikisKontrol(){
 
 
 
-// RESİM
+
+
+
+// RESİM YÜKLEME
 
 function resimYuklemeHazirla(){
 
@@ -143,19 +166,141 @@ function resimYuklemeHazirla(){
     );
 
 
+    const input =
+    document.getElementById(
+        "imageInput"
+    );
+
+
+    const gallery =
+    document.getElementById(
+        "imageGallery"
+    );
+
+
+
     if(!button){
+
         return;
+
     }
+
+
 
 
     button.addEventListener(
         "click",
-        ()=>{
+        async()=>{
+
+
+            const file =
+            input.files[0];
+
+
+
+            if(!file){
+
+
+                alert(
+                    "Lütfen önce resim seçin."
+                );
+
+
+                return;
+
+
+            }
+
+
+
+
+
+            const fileName =
+            Date.now()
+            +
+            "-"
+            +
+            file.name;
+
+
+
+
+
+
+
+            const { error } =
+            await supabase
+            .storage
+            .from("halilar")
+            .upload(
+                fileName,
+                file
+            );
+
+
+
+
+
+
+            if(error){
+
+
+                console.log(error);
+
+
+                alert(
+                    "Yükleme hatası: "
+                    +
+                    error.message
+                );
+
+
+                return;
+
+
+            }
+
+
+
+
+
+
+
+
+            const { data } =
+            supabase
+            .storage
+            .from("halilar")
+            .getPublicUrl(
+                fileName
+            );
+
+
+
+
+
+
+
+            gallery.innerHTML += `
+
+                <div class="image-card">
+
+                    <img src="${data.publicUrl}">
+
+                    <p>${fileName}</p>
+
+                </div>
+
+            `;
+
+
+
 
 
             alert(
-                "Resim yükleme modülü hazır."
+                "Resim başarıyla yüklendi."
             );
+
 
 
         }
