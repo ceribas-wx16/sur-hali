@@ -1,0 +1,215 @@
+document.addEventListener("DOMContentLoaded", async () => {
+
+    await kontrolEt();
+
+    menuKontrol();
+
+    cikisKontrol();
+
+    resimYuklemeHazirla();
+
+});
+
+
+// =============================
+// SUPABASE OTURUM KONTROLÜ
+// =============================
+
+async function kontrolEt(){
+
+    const {
+        data: { session }
+    } = await supabase.auth.getSession();
+
+
+    if(!session){
+
+        window.location.href = "admin-giris.html";
+
+        return;
+
+    }
+
+}
+
+
+// =============================
+// MENÜ GEÇİŞLERİ
+// =============================
+
+function menuKontrol(){
+
+    const buttons = document.querySelectorAll(".menu-item");
+
+    const pages = document.querySelectorAll(".page");
+
+
+    buttons.forEach(button => {
+
+
+        button.addEventListener("click",()=>{
+
+
+            if(button.id === "logoutButton"){
+                return;
+            }
+
+
+            buttons.forEach(btn=>{
+                btn.classList.remove("active");
+            });
+
+
+            button.classList.add("active");
+
+
+            pages.forEach(page=>{
+
+                page.classList.remove("active-page");
+
+            });
+
+
+            const target =
+            document.getElementById(
+                button.dataset.page
+            );
+
+
+            if(target){
+
+                target.classList.add("active-page");
+
+            }
+
+
+        });
+
+
+    });
+
+}
+
+
+// =============================
+// ÇIKIŞ
+// =============================
+
+function cikisKontrol(){
+
+    const logoutButton =
+    document.getElementById("logoutButton");
+
+
+    if(!logoutButton){
+        return;
+    }
+
+
+    logoutButton.addEventListener(
+        "click",
+        async ()=>{
+
+
+            await supabase.auth.signOut();
+
+
+            window.location.href =
+            "admin-giris.html";
+
+
+        }
+    );
+
+}
+
+
+// =============================
+// RESİM YÜKLEME
+// =============================
+
+function resimYuklemeHazirla(){
+
+
+    const uploadButton =
+    document.getElementById(
+        "uploadImageButton"
+    );
+
+
+    const imageInput =
+    document.getElementById(
+        "imageInput"
+    );
+
+
+    if(!uploadButton || !imageInput){
+
+        return;
+
+    }
+
+
+    uploadButton.addEventListener(
+        "click",
+        async ()=>{
+
+
+            const file =
+            imageInput.files[0];
+
+
+            if(!file){
+
+                alert(
+                    "Lütfen resim seçin."
+                );
+
+                return;
+
+            }
+
+
+            const fileName =
+            Date.now()
+            + "-"
+            + file.name;
+
+
+            const {
+                data,
+                error
+            } =
+            await supabase.storage
+            .from("halilar")
+            .upload(
+                fileName,
+                file
+            );
+
+
+            if(error){
+
+                alert(
+                    "Yükleme hatası: "
+                    + error.message
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Resim başarıyla yüklendi."
+            );
+
+
+            imageInput.value="";
+
+
+        }
+    );
+
+
+}
