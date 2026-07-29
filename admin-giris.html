@@ -195,7 +195,9 @@
 </div>
 
 
-<!-- SUPABASE KÜTÜPHANESİ -->
+<!-- =====================================================
+     SUPABASE KÜTÜPHANESİ
+===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -206,31 +208,52 @@
     =====================================================
     SUPABASE PROJE BİLGİLERİ
     =====================================================
+
+    AKTİF PROJE:
+    sur-hali
+
+    PROJECT ID:
+    nnvbxtjpfpfwegewtnkc
+
+    ÖNEMLİ:
+    URL VE API KEY AYNI SUPABASE PROJESİNE AİT OLMALIDIR.
+    =====================================================
     */
+
 
     const SUPABASE_URL =
-        "https://miiefpvhlumoxqujjpsn.supabase.co";
-
-
-    /*
-    Bu anahtar Supabase > Settings > API Keys
-    bölümündeki Legacy anon key'dir.
-    */
-
-    const SUPABASE_ANON_KEY =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1paWVmcHZobHVtb3hxdWpqcHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUxNzQ1MDYsImV4cCI6MjEwMDc1MDUwNn0.TKk1Kw-dk39v-Omi0jLhLKZT2Bldfl8-kQfW_h22CdY";
+        "https://nnvbxtjpfpfwegewtnkc.supabase.co";
 
 
     /*
     =====================================================
-    SUPABASE BAĞLANTISI
+    SUPABASE PUBLISHABLE KEY
+    =====================================================
+
+    Bu anahtar:
+    Supabase
+    Settings
+    API Keys
+    Publishable key
+
+    bölümündeki anahtardır.
+    =====================================================
+    */
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_E9VrVoS_YRzurbWrAF5-3A_aMJX1pBh";
+
+
+    /*
+    =====================================================
+    SUPABASE CLIENT OLUŞTUR
     =====================================================
     */
 
     const supabaseClient =
         window.supabase.createClient(
             SUPABASE_URL,
-            SUPABASE_ANON_KEY
+            SUPABASE_PUBLISHABLE_KEY
         );
 
 
@@ -268,6 +291,11 @@
 
             event.preventDefault();
 
+
+            /*
+            Kullanıcı bilgilerini al
+            */
+
             const email =
                 emailInput.value.trim();
 
@@ -276,7 +304,7 @@
 
 
             /*
-            Mesajı temizle
+            Önceki mesajı temizle
             */
 
             message.className =
@@ -287,7 +315,7 @@
 
 
             /*
-            Butonu kilitle
+            Butonu geçici olarak kilitle
             */
 
             loginButton.disabled =
@@ -300,7 +328,9 @@
             try {
 
                 /*
-                Supabase Auth giriş işlemi
+                =================================================
+                SUPABASE AUTH İLE GİRİŞ
+                =================================================
                 */
 
                 const {
@@ -317,7 +347,9 @@
 
 
                 /*
-                Hata varsa göster
+                =================================================
+                SUPABASE HATASI
+                =================================================
                 */
 
                 if (error) {
@@ -345,10 +377,15 @@
 
 
                 /*
-                Başarılı giriş
+                =================================================
+                BAŞARILI GİRİŞ
+                =================================================
                 */
 
-                if (data && data.session) {
+                if (
+                    data &&
+                    data.session
+                ) {
 
                     message.className =
                         "message success";
@@ -358,7 +395,9 @@
 
 
                     /*
-                    Admin paneline yönlendir
+                    =================================================
+                    ADMIN PANELİNE YÖNLENDİR
+                    =================================================
                     */
 
                     setTimeout(
@@ -372,6 +411,10 @@
                     );
 
                 } else {
+
+                    /*
+                    Oturum oluşmadıysa
+                    */
 
                     message.className =
                         "message error";
@@ -388,6 +431,12 @@
                 }
 
             } catch (error) {
+
+                /*
+                =================================================
+                BEKLENMEYEN SİSTEM HATASI
+                =================================================
+                */
 
                 console.error(
                     "Beklenmeyen hata:",
