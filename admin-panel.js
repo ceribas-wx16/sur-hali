@@ -37,21 +37,17 @@ async function kontrolEt(){
 
 
 
-// MENÜ KONTROLÜ
+// MENÜ
 
 function menuKontrol(){
 
 
     const buttons =
-    document.querySelectorAll(
-        ".menu-item"
-    );
+    document.querySelectorAll(".menu-item");
 
 
     const pages =
-    document.querySelectorAll(
-        ".page"
-    );
+    document.querySelectorAll(".page");
 
 
 
@@ -71,18 +67,13 @@ function menuKontrol(){
 
                 buttons.forEach(btn=>{
 
-                    btn.classList.remove(
-                        "active"
-                    );
+                    btn.classList.remove("active");
 
                 });
 
 
 
-                button.classList.add(
-                    "active"
-                );
-
+                button.classList.add("active");
 
 
 
@@ -96,13 +87,10 @@ function menuKontrol(){
 
 
 
-
-
                 const target =
                 document.getElementById(
                     button.dataset.page
                 );
-
 
 
                 if(target){
@@ -114,7 +102,6 @@ function menuKontrol(){
                 }
 
 
-
             }
         );
 
@@ -123,8 +110,6 @@ function menuKontrol(){
 
 
 }
-
-
 
 
 
@@ -143,9 +128,7 @@ function cikisKontrol(){
 
 
     if(!button){
-
         return;
-
     }
 
 
@@ -172,8 +155,7 @@ function cikisKontrol(){
 
 
 
-
-// STORAGE RESİMLERİNİ GETİR
+// RESİMLERİ GETİR
 
 async function resimleriGetir(){
 
@@ -185,9 +167,7 @@ async function resimleriGetir(){
 
 
     if(!gallery){
-
         return;
-
     }
 
 
@@ -214,7 +194,6 @@ async function resimleriGetir(){
 
 
 
-
     data.forEach(file=>{
 
 
@@ -236,14 +215,17 @@ async function resimleriGetir(){
 
             <p>${file.name}</p>
 
+            <button 
+            onclick="resimSil('${file.name}')">
+                Sil
+            </button>
+
         </div>
 
         `;
 
 
     });
-
-
 
 
 
@@ -263,6 +245,70 @@ async function resimleriGetir(){
 
 }
 
+
+
+
+
+
+
+
+// RESİM SİLME
+
+async function resimSil(fileName){
+
+
+    const onay =
+    confirm(
+        "Bu resmi silmek istediğinize emin misiniz?"
+    );
+
+
+
+    if(!onay){
+
+        return;
+
+    }
+
+
+
+    const { error } =
+    await supabase
+    .storage
+    .from("halilar")
+    .remove([
+        fileName
+    ]);
+
+
+
+    if(error){
+
+
+        alert(
+            "Silme hatası: "
+            +
+            error.message
+        );
+
+
+        console.log(error);
+
+        return;
+
+    }
+
+
+
+    alert(
+        "Resim silindi."
+    );
+
+
+    resimleriGetir();
+
+
+}
 
 
 
@@ -297,10 +343,8 @@ function resimYuklemeHazirla(){
 
 
 
-
     button.onclick =
     async()=>{
-
 
 
         const file =
@@ -310,16 +354,13 @@ function resimYuklemeHazirla(){
 
         if(!file){
 
-
             alert(
                 "Lütfen önce resim seçin."
             );
 
-
             return;
 
         }
-
 
 
 
@@ -329,8 +370,6 @@ function resimYuklemeHazirla(){
         "-"
         +
         file.name;
-
-
 
 
 
@@ -345,11 +384,7 @@ function resimYuklemeHazirla(){
 
 
 
-
         if(error){
-
-
-            console.log(error);
 
 
             alert(
@@ -365,20 +400,15 @@ function resimYuklemeHazirla(){
 
 
 
-
-
         alert(
             "Resim başarıyla yüklendi."
         );
 
 
-
         input.value = "";
 
 
-
         resimleriGetir();
-
 
 
     };
