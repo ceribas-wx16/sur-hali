@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", async () => {
-
-    await kontrolEt();
+document.addEventListener("DOMContentLoaded", () => {
 
     menuKontrol();
 
     cikisKontrol();
 
     resimYuklemeHazirla();
+
+    kontrolEt();
 
 });
 
@@ -15,14 +15,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function kontrolEt(){
 
-    const {
-        data:{session}
-    } = await supabase.auth.getSession();
+    const { data } = await supabase.auth.getSession();
 
 
-    if(!session){
+    if(!data.session){
 
-        window.location.href="admin-giris.html";
+        window.location.href = "admin-giris.html";
 
     }
 
@@ -30,7 +28,7 @@ async function kontrolEt(){
 
 
 
-// MENÜLER
+// MENÜ
 
 function menuKontrol(){
 
@@ -42,33 +40,39 @@ function menuKontrol(){
     document.querySelectorAll(".page");
 
 
-    buttons.forEach(button=>{
+    buttons.forEach(button => {
 
 
-        button.addEventListener("click",()=>{
+        button.addEventListener("click", function(){
 
 
-            if(button.id==="logoutButton"){
+            if(this.id === "logoutButton"){
                 return;
             }
 
 
-            buttons.forEach(btn=>{
+            buttons.forEach(btn => {
+
                 btn.classList.remove("active");
+
             });
 
 
-            button.classList.add("active");
+            this.classList.add("active");
 
 
-            pages.forEach(page=>{
+
+            pages.forEach(page => {
+
                 page.classList.remove("active-page");
+
             });
+
 
 
             const target =
             document.getElementById(
-                button.dataset.page
+                this.dataset.page
             );
 
 
@@ -84,13 +88,16 @@ function menuKontrol(){
 
     });
 
+
 }
+
 
 
 
 // ÇIKIŞ
 
 function cikisKontrol(){
+
 
     const button =
     document.getElementById(
@@ -103,26 +110,32 @@ function cikisKontrol(){
     }
 
 
-    button.onclick = async()=>{
+    button.addEventListener(
+        "click",
+        async()=>{
 
 
-        await supabase.auth.signOut();
+            await supabase.auth.signOut();
 
 
-        window.location.href =
-        "admin-giris.html";
+            window.location.href =
+            "admin-giris.html";
 
 
-    };
+        }
+    );
 
 
 }
 
 
 
+
+
 // RESİM
 
 function resimYuklemeHazirla(){
+
 
     const button =
     document.getElementById(
@@ -135,12 +148,18 @@ function resimYuklemeHazirla(){
     }
 
 
-    button.onclick=()=>{
+    button.addEventListener(
+        "click",
+        ()=>{
 
-        alert(
-            "Resim sistemi hazırlanıyor."
-        );
 
-    };
+            alert(
+                "Resim yükleme modülü hazır."
+            );
+
+
+        }
+    );
+
 
 }
