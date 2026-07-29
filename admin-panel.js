@@ -12,25 +12,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
 // =============================
-// SUPABASE OTURUM KONTROLÜ
+// OTURUM KONTROLÜ
 // =============================
 
 async function kontrolEt(){
 
     const {
-        data: { session }
-    } = await supabase.auth.getSession();
+        data: { session },
+        error
+    } = await supabaseClient.auth.getSession();
+
+
+    if(error){
+
+        console.log(error);
+
+        return;
+
+    }
 
 
     if(!session){
 
         window.location.href = "admin-giris.html";
 
-        return;
-
     }
 
 }
+
 
 
 // =============================
@@ -39,9 +48,12 @@ async function kontrolEt(){
 
 function menuKontrol(){
 
-    const buttons = document.querySelectorAll(".menu-item");
+    const buttons =
+    document.querySelectorAll(".menu-item");
 
-    const pages = document.querySelectorAll(".page");
+
+    const pages =
+    document.querySelectorAll(".page");
 
 
     buttons.forEach(button => {
@@ -55,15 +67,17 @@ function menuKontrol(){
             }
 
 
-            buttons.forEach(btn=>{
+            buttons.forEach(btn => {
+
                 btn.classList.remove("active");
+
             });
 
 
             button.classList.add("active");
 
 
-            pages.forEach(page=>{
+            pages.forEach(page => {
 
                 page.classList.remove("active-page");
 
@@ -88,7 +102,9 @@ function menuKontrol(){
 
     });
 
+
 }
+
 
 
 // =============================
@@ -98,20 +114,24 @@ function menuKontrol(){
 function cikisKontrol(){
 
     const logoutButton =
-    document.getElementById("logoutButton");
+    document.getElementById(
+        "logoutButton"
+    );
 
 
     if(!logoutButton){
+
         return;
+
     }
 
 
     logoutButton.addEventListener(
         "click",
-        async ()=>{
+        async()=>{
 
 
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
 
 
             window.location.href =
@@ -122,6 +142,7 @@ function cikisKontrol(){
     );
 
 }
+
 
 
 // =============================
@@ -143,16 +164,27 @@ function resimYuklemeHazirla(){
     );
 
 
-    if(!uploadButton || !imageInput){
+    const gallery =
+    document.getElementById(
+        "imageGallery"
+    );
+
+
+    if(
+        !uploadButton ||
+        !imageInput ||
+        !gallery
+    ){
 
         return;
 
     }
 
 
+
     uploadButton.addEventListener(
         "click",
-        async ()=>{
+        async()=>{
 
 
             const file =
@@ -170,17 +202,22 @@ function resimYuklemeHazirla(){
             }
 
 
+
             const fileName =
             Date.now()
-            + "-"
-            + file.name;
+            +
+            "-"
+            +
+            file.name;
+
 
 
             const {
                 data,
                 error
             } =
-            await supabase.storage
+            await supabaseClient
+            .storage
             .from("halilar")
             .upload(
                 fileName,
@@ -188,11 +225,15 @@ function resimYuklemeHazirla(){
             );
 
 
+
             if(error){
+
+                console.log(error);
 
                 alert(
                     "Yükleme hatası: "
-                    + error.message
+                    +
+                    error.message
                 );
 
                 return;
@@ -200,12 +241,49 @@ function resimYuklemeHazirla(){
             }
 
 
-            alert(
-                "Resim başarıyla yüklendi."
+
+
+            const {
+                data:urlData
+            } =
+            supabaseClient
+            .storage
+            .from("halilar")
+            .getPublicUrl(
+                fileName
             );
 
 
-            imageInput.value="";
+
+            const imageUrl =
+            urlData.publicUrl;
+
+
+
+            gallery.innerHTML += `
+
+                <div class="image-card">
+
+                    <img 
+                    src="${imageUrl}"
+                    alt="Sur Halı">
+
+                    <p>
+                    ${fileName}
+                    </p>
+
+                </div>
+
+            `;
+
+
+
+            imageInput.value = "";
+
+
+            alert(
+                "Resim başarıyla yüklendi."
+            );
 
 
         }
