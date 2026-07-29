@@ -11,30 +11,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-// =============================
 // OTURUM KONTROLÜ
-// =============================
 
 async function kontrolEt(){
 
     const {
-        data: { session },
-        error
-    } = await supabaseClient.auth.getSession();
-
-
-    if(error){
-
-        console.log(error);
-
-        return;
-
-    }
+        data:{session}
+    } = await supabase.auth.getSession();
 
 
     if(!session){
 
-        window.location.href = "admin-giris.html";
+        window.location.href="admin-giris.html";
 
     }
 
@@ -42,9 +30,7 @@ async function kontrolEt(){
 
 
 
-// =============================
-// MENÜ GEÇİŞLERİ
-// =============================
+// MENÜLER
 
 function menuKontrol(){
 
@@ -56,31 +42,27 @@ function menuKontrol(){
     document.querySelectorAll(".page");
 
 
-    buttons.forEach(button => {
+    buttons.forEach(button=>{
 
 
         button.addEventListener("click",()=>{
 
 
-            if(button.id === "logoutButton"){
+            if(button.id==="logoutButton"){
                 return;
             }
 
 
-            buttons.forEach(btn => {
-
+            buttons.forEach(btn=>{
                 btn.classList.remove("active");
-
             });
 
 
             button.classList.add("active");
 
 
-            pages.forEach(page => {
-
+            pages.forEach(page=>{
                 page.classList.remove("active-page");
-
             });
 
 
@@ -102,192 +84,63 @@ function menuKontrol(){
 
     });
 
-
 }
 
 
 
-// =============================
 // ÇIKIŞ
-// =============================
 
 function cikisKontrol(){
 
-    const logoutButton =
+    const button =
     document.getElementById(
         "logoutButton"
     );
 
 
-    if(!logoutButton){
-
+    if(!button){
         return;
-
     }
 
 
-    logoutButton.addEventListener(
-        "click",
-        async()=>{
+    button.onclick = async()=>{
 
 
-            await supabaseClient.auth.signOut();
+        await supabase.auth.signOut();
 
 
-            window.location.href =
-            "admin-giris.html";
+        window.location.href =
+        "admin-giris.html";
 
 
-        }
-    );
+    };
+
 
 }
 
 
 
-// =============================
-// RESİM YÜKLEME
-// =============================
+// RESİM
 
 function resimYuklemeHazirla(){
 
-
-    const uploadButton =
+    const button =
     document.getElementById(
         "uploadImageButton"
     );
 
 
-    const imageInput =
-    document.getElementById(
-        "imageInput"
-    );
-
-
-    const gallery =
-    document.getElementById(
-        "imageGallery"
-    );
-
-
-    if(
-        !uploadButton ||
-        !imageInput ||
-        !gallery
-    ){
-
+    if(!button){
         return;
-
     }
 
 
+    button.onclick=()=>{
 
-    uploadButton.addEventListener(
-        "click",
-        async()=>{
+        alert(
+            "Resim sistemi hazırlanıyor."
+        );
 
-
-            const file =
-            imageInput.files[0];
-
-
-            if(!file){
-
-                alert(
-                    "Lütfen resim seçin."
-                );
-
-                return;
-
-            }
-
-
-
-            const fileName =
-            Date.now()
-            +
-            "-"
-            +
-            file.name;
-
-
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient
-            .storage
-            .from("halilar")
-            .upload(
-                fileName,
-                file
-            );
-
-
-
-            if(error){
-
-                console.log(error);
-
-                alert(
-                    "Yükleme hatası: "
-                    +
-                    error.message
-                );
-
-                return;
-
-            }
-
-
-
-
-            const {
-                data:urlData
-            } =
-            supabaseClient
-            .storage
-            .from("halilar")
-            .getPublicUrl(
-                fileName
-            );
-
-
-
-            const imageUrl =
-            urlData.publicUrl;
-
-
-
-            gallery.innerHTML += `
-
-                <div class="image-card">
-
-                    <img 
-                    src="${imageUrl}"
-                    alt="Sur Halı">
-
-                    <p>
-                    ${fileName}
-                    </p>
-
-                </div>
-
-            `;
-
-
-
-            imageInput.value = "";
-
-
-            alert(
-                "Resim başarıyla yüklendi."
-            );
-
-
-        }
-    );
-
+    };
 
 }
