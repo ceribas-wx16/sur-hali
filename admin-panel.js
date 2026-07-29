@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resimYuklemeHazirla();
 
+    resimleriGetir();
+
     kontrolEt();
 
 });
@@ -17,12 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function kontrolEt(){
 
-    const { data } = await supabase.auth.getSession();
+    const { data } =
+    await supabase.auth.getSession();
 
 
     if(!data.session){
 
-        window.location.href = "admin-giris.html";
+        window.location.href =
+        "admin-giris.html";
 
     }
 
@@ -37,71 +41,89 @@ async function kontrolEt(){
 
 function menuKontrol(){
 
+
     const buttons =
-    document.querySelectorAll(".menu-item");
+    document.querySelectorAll(
+        ".menu-item"
+    );
 
 
     const pages =
-    document.querySelectorAll(".page");
+    document.querySelectorAll(
+        ".page"
+    );
 
 
 
-    buttons.forEach(button => {
+    buttons.forEach(button=>{
 
 
-        button.addEventListener("click", function(){
+        button.addEventListener(
+            "click",
+            ()=>{
 
 
-            if(this.id === "logoutButton"){
-                return;
+                if(button.id === "logoutButton"){
+                    return;
+                }
+
+
+
+                buttons.forEach(btn=>{
+
+                    btn.classList.remove(
+                        "active"
+                    );
+
+                });
+
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+
+
+                pages.forEach(page=>{
+
+                    page.classList.remove(
+                        "active-page"
+                    );
+
+                });
+
+
+
+
+
+                const target =
+                document.getElementById(
+                    button.dataset.page
+                );
+
+
+
+                if(target){
+
+                    target.classList.add(
+                        "active-page"
+                    );
+
+                }
+
+
+
             }
-
-
-
-            buttons.forEach(btn => {
-
-                btn.classList.remove("active");
-
-            });
-
-
-
-            this.classList.add("active");
-
-
-
-
-            pages.forEach(page => {
-
-                page.classList.remove("active-page");
-
-            });
-
-
-
-
-            const target =
-            document.getElementById(
-                this.dataset.page
-            );
-
-
-
-            if(target){
-
-                target.classList.add("active-page");
-
-            }
-
-
-
-        });
+        );
 
 
     });
 
 
 }
+
 
 
 
@@ -120,7 +142,6 @@ function cikisKontrol(){
     );
 
 
-
     if(!button){
 
         return;
@@ -129,24 +150,119 @@ function cikisKontrol(){
 
 
 
-
-    button.addEventListener(
-        "click",
-        async()=>{
+    button.onclick =
+    async()=>{
 
 
-            await supabase.auth.signOut();
+        await supabase.auth.signOut();
 
 
-            window.location.href =
-            "admin-giris.html";
+        window.location.href =
+        "admin-giris.html";
 
 
-        }
-    );
+    };
 
 
 }
+
+
+
+
+
+
+
+
+// STORAGE RESİMLERİNİ GETİR
+
+async function resimleriGetir(){
+
+
+    const gallery =
+    document.getElementById(
+        "imageGallery"
+    );
+
+
+    if(!gallery){
+
+        return;
+
+    }
+
+
+
+    const { data, error } =
+    await supabase
+    .storage
+    .from("halilar")
+    .list();
+
+
+
+    if(error){
+
+        console.log(error);
+
+        return;
+
+    }
+
+
+
+    gallery.innerHTML = "";
+
+
+
+
+    data.forEach(file=>{
+
+
+        const { data:url } =
+        supabase
+        .storage
+        .from("halilar")
+        .getPublicUrl(
+            file.name
+        );
+
+
+
+        gallery.innerHTML += `
+
+        <div class="image-card">
+
+            <img src="${url.publicUrl}">
+
+            <p>${file.name}</p>
+
+        </div>
+
+        `;
+
+
+    });
+
+
+
+
+
+    const totalImages =
+    document.getElementById(
+        "totalImages"
+    );
+
+
+    if(totalImages){
+
+        totalImages.innerText =
+        data.length;
+
+    }
+
+
+}
+
 
 
 
@@ -172,12 +288,6 @@ function resimYuklemeHazirla(){
     );
 
 
-    const gallery =
-    document.getElementById(
-        "imageGallery"
-    );
-
-
 
     if(!button){
 
@@ -188,123 +298,90 @@ function resimYuklemeHazirla(){
 
 
 
-    button.addEventListener(
-        "click",
-        async()=>{
-
-
-            const file =
-            input.files[0];
+    button.onclick =
+    async()=>{
 
 
 
-            if(!file){
-
-
-                alert(
-                    "Lütfen önce resim seçin."
-                );
-
-
-                return;
-
-
-            }
+        const file =
+        input.files[0];
 
 
 
-
-
-            const fileName =
-            Date.now()
-            +
-            "-"
-            +
-            file.name;
-
-
-
-
-
-
-
-            const { error } =
-            await supabase
-            .storage
-            .from("halilar")
-            .upload(
-                fileName,
-                file
-            );
-
-
-
-
-
-
-            if(error){
-
-
-                console.log(error);
-
-
-                alert(
-                    "Yükleme hatası: "
-                    +
-                    error.message
-                );
-
-
-                return;
-
-
-            }
-
-
-
-
-
-
-
-
-            const { data } =
-            supabase
-            .storage
-            .from("halilar")
-            .getPublicUrl(
-                fileName
-            );
-
-
-
-
-
-
-
-            gallery.innerHTML += `
-
-                <div class="image-card">
-
-                    <img src="${data.publicUrl}">
-
-                    <p>${fileName}</p>
-
-                </div>
-
-            `;
-
-
-
+        if(!file){
 
 
             alert(
-                "Resim başarıyla yüklendi."
+                "Lütfen önce resim seçin."
             );
 
 
+            return;
 
         }
-    );
+
+
+
+
+        const fileName =
+        Date.now()
+        +
+        "-"
+        +
+        file.name;
+
+
+
+
+
+        const { error } =
+        await supabase
+        .storage
+        .from("halilar")
+        .upload(
+            fileName,
+            file
+        );
+
+
+
+
+        if(error){
+
+
+            console.log(error);
+
+
+            alert(
+                "Yükleme hatası: "
+                +
+                error.message
+            );
+
+
+            return;
+
+        }
+
+
+
+
+
+        alert(
+            "Resim başarıyla yüklendi."
+        );
+
+
+
+        input.value = "";
+
+
+
+        resimleriGetir();
+
+
+
+    };
 
 
 }
