@@ -1,22 +1,37 @@
 /* ========================= */
+/* RESİM GALERİSİ */
+/* ========================= */
+
+.image-gallery{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+
+    gap:25px;
+
+    margin-top:25px;
+
+}
+
+
+/* ========================= */
 /* RESİM KARTI */
 /* ========================= */
 
 .image-card{
 
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-
-    background:#ffffff;
-
-    padding:15px;
+    background:#fff;
 
     border-radius:14px;
 
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    padding:15px;
 
-    transition:.25s ease;
+    text-align:center;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+    transition:.25s;
 
 }
 
@@ -24,9 +39,10 @@
 
     transform:translateY(-4px);
 
-    box-shadow:0 12px 25px rgba(0,0,0,.15);
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
 
 }
+
 
 /* ========================= */
 /* RESİM */
@@ -35,17 +51,15 @@
 .image-card img{
 
     width:100%;
-    max-width:230px;
 
-    height:180px;
+    height:220px;
 
     object-fit:cover;
 
     border-radius:10px;
 
-    border:1px solid #e5e5e5;
-
 }
+
 
 /* ========================= */
 /* DOSYA ADI */
@@ -53,19 +67,18 @@
 
 .image-card p{
 
-    margin:12px 0;
-
-    text-align:center;
-
-    font-size:14px;
+    margin:15px 0;
 
     color:#666;
 
+    font-size:14px;
+
+    min-height:38px;
+
     word-break:break-word;
 
-    min-height:40px;
-
 }
+
 
 /* ========================= */
 /* SİL BUTONU */
@@ -73,27 +86,21 @@
 
 .delete-image{
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:8px;
+    display:block;
 
     width:180px;
 
-    height:48px;
+    margin:15px auto 0;
 
-    margin-top:8px;
-
-    background:#d32f2f;
-
-    color:#ffffff;
+    padding:12px 20px;
 
     border:none;
 
     border-radius:10px;
+
+    background:#d32f2f;
+
+    color:#fff;
 
     font-size:16px;
 
@@ -101,7 +108,7 @@
 
     cursor:pointer;
 
-    transition:all .25s ease;
+    transition:.25s;
 
 }
 
@@ -110,11 +117,5 @@
     background:#b71c1c;
 
     transform:scale(1.05);
-
-}
-
-.delete-image:active{
-
-    transform:scale(.97);
 
 }
