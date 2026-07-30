@@ -12,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     urunleriGetir();
 
+    urunKaydetHazirla();
+
     kontrolEt();
 
 });
-
 
 
 
