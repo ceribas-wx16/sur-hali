@@ -527,9 +527,9 @@ async function urunleriGetir(){
 
             <td>
 
-                ${product.active
-                ? "Aktif"
-                : "Pasif"}
+               ${product.is_active
+? "Aktif"
+: "Pasif"}
 
             </td>
 
@@ -664,7 +664,7 @@ function urunKaydetHazirla(){
 
             image_url:imageUrl,
 
-            active:true
+            is_active:true
 
         });
 
