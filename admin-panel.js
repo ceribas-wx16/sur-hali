@@ -8,6 +8,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resimleriGetir();
 
+    modalHazirla();
+
+    urunleriGetir();
+
     kontrolEt();
 
 });
@@ -439,5 +443,127 @@ function resimYuklemeHazirla(){
 
 
     };
+
+}
+// =========================
+// MODAL
+// =========================
+
+function modalHazirla(){
+
+    const modal =
+    document.getElementById("productModal");
+
+    const openButton =
+    document.getElementById("newProductButton");
+
+    const closeButton =
+    document.getElementById("closeModal");
+
+    if(!modal) return;
+
+    openButton.onclick = ()=>{
+
+        modal.style.display="flex";
+
+    };
+
+    closeButton.onclick = ()=>{
+
+        modal.style.display="none";
+
+    };
+
+    window.onclick=(e)=>{
+
+        if(e.target===modal){
+
+            modal.style.display="none";
+
+        }
+
+    };
+
+}
+// =========================
+// ÜRÜNLERİ GETİR
+// =========================
+
+async function urunleriGetir(){
+
+    const tbody =
+    document.getElementById(
+        "productTableBody"
+    );
+
+    if(!tbody) return;
+
+    tbody.innerHTML="";
+
+    const { data, error } =
+    await supabase
+    .from("products")
+    .select("*")
+    .order("created_at",{ascending:false});
+
+    if(error){
+
+        console.log(error);
+
+        return;
+
+    }
+
+    data.forEach(product=>{
+
+        tbody.innerHTML+=`
+
+        <tr>
+
+            <td>${product.name}</td>
+
+            <td>${product.category}</td>
+
+            <td>
+
+                ${product.active
+                ? "Aktif"
+                : "Pasif"}
+
+            </td>
+
+            <td>
+
+                <button>
+
+                    Düzenle
+
+                </button>
+
+                <button>
+
+                    Sil
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    const total =
+    document.getElementById(
+        "totalProducts"
+    );
+
+    if(total){
+
+        total.innerText =
+        data.length;
+
+    }
 
 }
