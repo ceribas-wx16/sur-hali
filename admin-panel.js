@@ -573,6 +573,15 @@ async function urunleriGetir(){
 // =========================
 
 function urunKaydetHazirla(){
+    function urunKaydetHazirla(){
+
+    alert("Fonksiyon çalıştı");
+
+    const button =
+    document.getElementById("saveProductButton");
+
+    ...
+}
 
     const button =
     document.getElementById("saveProductButton");
