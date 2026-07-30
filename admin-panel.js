@@ -568,3 +568,120 @@ async function urunleriGetir(){
     }
 
 }
+// =========================
+// ÜRÜN KAYDET
+// =========================
+
+function urunKaydetHazirla(){
+
+    const button =
+    document.getElementById("saveProductButton");
+
+    if(!button) return;
+
+    button.onclick = async()=>{
+
+        const name =
+        document.getElementById("productName").value.trim();
+
+        const category =
+        document.getElementById("productCategory").value.trim();
+
+        const size =
+        document.getElementById("productSize").value.trim();
+
+        const price =
+        Number(document.getElementById("productPrice").value);
+
+        const description =
+        document.getElementById("productDescription").value.trim();
+
+        const image =
+        document.getElementById("productImage").files[0];
+
+        if(name==="" || category===""){
+
+            alert("Ürün adı ve kategori zorunludur.");
+
+            return;
+
+        }
+
+        let imageUrl = "";
+
+        if(image){
+
+            const fileName =
+            Date.now() + "-" + image.name;
+
+            const { error:uploadError } =
+            await supabase
+            .storage
+            .from("halilar")
+            .upload(fileName,image);
+
+            if(uploadError){
+
+                alert(uploadError.message);
+
+                return;
+
+            }
+
+            imageUrl =
+            supabase
+            .storage
+            .from("halilar")
+            .getPublicUrl(fileName)
+            .data
+            .publicUrl;
+
+        }
+
+        const { error } =
+        await supabase
+        .from("products")
+        .insert({
+
+            name,
+
+            category,
+
+            size,
+
+            price,
+
+            description,
+
+            image_url:imageUrl,
+
+            active:true
+
+        });
+
+        if(error){
+
+            console.log(error);
+
+            alert(error.message);
+
+            return;
+
+        }
+
+        alert("Ürün başarıyla eklendi.");
+
+        document.getElementById("productModal").style.display="none";
+
+        document.getElementById("productName").value="";
+        document.getElementById("productCategory").value="";
+        document.getElementById("productSize").value="";
+        document.getElementById("productPrice").value="";
+        document.getElementById("productDescription").value="";
+        document.getElementById("productImage").value="";
+
+        urunleriGetir();
+
+    };
+
+}
