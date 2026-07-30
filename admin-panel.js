@@ -589,7 +589,7 @@ function urunKaydetHazirla(){
     if(!button) return;
 
     button.onclick = async()=>{
-
+alert("Kaydet butonu çalıştı");
         const name =
         document.getElementById("productName").value.trim();
 
