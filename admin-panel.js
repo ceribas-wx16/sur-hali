@@ -365,15 +365,24 @@ async function urunleriGetir(){
 // =========================
 // ÜRÜN KAYDET
 // =========================
-
 function urunKaydetHazirla(){
 
     const button =
     document.getElementById("saveProductButton");
 
-    if(!button) return;
+    console.log("Kaydet butonu:", button);
+
+    if(!button){
+
+        console.log("saveProductButton bulunamadı.");
+
+        return;
+
+    }
 
     button.onclick = async()=>{
+
+        console.log("Kaydet butonuna basıldı.");
 
         const name =
         document.getElementById("productName").value.trim();
@@ -401,22 +410,24 @@ function urunKaydetHazirla(){
 
         }
 
-        let imageUrl="";
+        let imageUrl = "";
 
         if(image){
 
             const fileName =
-            Date.now()+"-"+image.name;
+            Date.now() + "-" + image.name;
 
-            const upload =
+            const { error: uploadError } =
             await supabase
             .storage
             .from("halilar")
             .upload(fileName,image);
 
-            if(upload.error){
+            if(uploadError){
 
-                alert(upload.error.message);
+                alert(uploadError.message);
+
+                console.log(uploadError);
 
                 return;
 
@@ -435,29 +446,29 @@ function urunKaydetHazirla(){
         const { error } =
         await supabase
         .from("products")
-        .insert({
+        .insert([{
 
-            name,
+            name: name,
 
-            category,
+            category: category,
 
-            size,
+            size: size,
 
-            price,
+            price: price,
 
-            description,
+            description: description,
 
-            image_url:imageUrl,
+            image_url: imageUrl,
 
-            is_active:true
+            is_active: true
 
-        });
+        }]);
 
         if(error){
 
-            alert(error.message);
-
             console.log(error);
+
+            alert(error.message);
 
             return;
 
@@ -465,7 +476,14 @@ function urunKaydetHazirla(){
 
         alert("Ürün başarıyla eklendi.");
 
-        document.getElementById("productModal").style.display="none";
+        document.getElementById("productName").value = "";
+        document.getElementById("productCategory").value = "";
+        document.getElementById("productSize").value = "";
+        document.getElementById("productPrice").value = "";
+        document.getElementById("productDescription").value = "";
+        document.getElementById("productImage").value = "";
+
+        document.getElementById("productModal").style.display = "none";
 
         urunleriGetir();
 
