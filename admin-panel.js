@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resimleriGetir();
 
+    urunleriGetir();
+
+    urunKaydetHazirla();
+
 });
 
 
