@@ -1,3 +1,4 @@
+console.log("admin-panel.js yüklendi");
 document.addEventListener("DOMContentLoaded", () => {
 
     kontrolEt();
