@@ -327,6 +327,9 @@ async function urunleriGetir(){
     .select("*")
     .order("created_at",{ascending:false});
 
+    console.log("Products:", data);
+console.log("Product Error:", error);
+
     if(error){
 
         console.log(error);
