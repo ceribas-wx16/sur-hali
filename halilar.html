@@ -358,3 +358,84 @@ class="gallery">
 <script src="supabase.js"></script>
 
 <script>
+
+  const gallery = document.getElementById("gallery");
+
+async function loadProducts() {
+
+    gallery.innerHTML =
+    `<div class="loading">Ürünler yükleniyor...</div>`;
+
+    const { data, error } = await supabase
+        .from("products")
+        .select("*")
+        .eq("category","Halı")
+        .order("created_at",{ascending:false});
+
+    if(error){
+
+        gallery.innerHTML=`
+        <div class="empty">
+        Ürünler yüklenemedi.
+        </div>`;
+
+        console.error(error);
+
+        return;
+
+    }
+
+    if(data.length===0){
+
+        gallery.innerHTML=`
+        <div class="empty">
+        Henüz halı eklenmemiş.
+        </div>`;
+
+        return;
+
+    }
+
+    gallery.innerHTML="";
+
+    data.forEach(product=>{
+
+        gallery.innerHTML+=`
+
+        <div class="card">
+
+            <img src="${product.image_url}" alt="${product.name}">
+
+            <div class="card-content">
+
+                <h2>${product.name}</h2>
+
+                <div class="price">
+
+                    ${product.price ?? "-"} ₺
+
+                </div>
+
+                <div class="size">
+
+                    ${product.size ?? ""}
+
+                </div>
+
+                <div class="description">
+
+                    ${product.description ?? ""}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+loadProducts();
