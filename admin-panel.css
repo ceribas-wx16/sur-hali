@@ -559,3 +559,53 @@ body{
     }
 
 }
+/* =========================================
+   MODAL DÜZELTMESİ
+========================================= */
+
+.modal{
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.55);
+    z-index: 99999;
+}
+
+.modal-content{
+    width: min(900px,95%);
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close{
+    font-size:34px;
+    cursor:pointer;
+}
+
+.modal-footer{
+    margin-top:25px;
+    text-align:right;
+}
+
+.modal-footer button{
+    background:#198754;
+    color:#fff;
+    border:none;
+    padding:14px 30px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
