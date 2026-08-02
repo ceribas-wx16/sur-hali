@@ -7,167 +7,300 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sur Halı İznik | Halı Koleksiyonu</title>
+<title>Sur Halı İznik | Halılar</title>
 
 <meta
 name="description"
-content="Sur Halı İznik halı koleksiyonu. Farklı desen, renk ve ölçülerde halı modellerini inceleyin."
->
+content="Sur Halı İznik halı koleksiyonu">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
+margin:0;
+padding:0;
 box-sizing:border-box;
 }
 
 body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#fbf8f3;
-color:#40342d;
+
+font-family:'Poppins',sans-serif;
+
+background:#f5f3ef;
+
+color:#2b2b2b;
+
 }
 
-
-/* ÜST BAŞLIK */
+/*==========================
+HEADER
+==========================*/
 
 header{
-background:#8b6652;
-color:white;
-padding:35px 20px;
-text-align:center !important;
+
+background:#111;
+
+color:#D4AF37;
+
+padding:45px 20px;
+
+text-align:center;
+
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+
+}
+
+header img{
+
+width:120px;
+
+margin-bottom:20px;
+
 }
 
 header h1{
-display:block;
-width:100%;
-margin:0 auto;
-padding:0;
-font-family:Georgia,serif;
-font-size:38px;
-line-height:1.3;
-text-align:center !important;
+
+font-size:40px;
+
+font-weight:700;
+
+letter-spacing:2px;
+
+margin-bottom:10px;
+
 }
 
 header p{
-display:block;
-width:100%;
-margin:10px auto 0;
-padding:0;
-text-align:center !important;
-color:#f7eee8;
-font-size:16px;
+
+font-size:17px;
+
+color:#ddd;
+
 }
 
-
-/* ANA ALAN */
+/*==========================
+CONTAINER
+==========================*/
 
 .container{
+
 width:92%;
-max-width:1200px;
-margin:0 auto;
+
+max-width:1400px;
+
+margin:auto;
+
 padding:50px 0;
+
 }
 
-
-/* GALERİ */
+/*==========================
+GALERİ
+==========================*/
 
 .gallery{
+
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:30px;
+
 }
 
-
-/* KART */
+/*==========================
+ÜRÜN KARTI
+==========================*/
 
 .card{
-background:white;
-border:1px solid #eadfd5;
-border-radius:10px;
+
+background:#fff;
+
+border-radius:18px;
+
 overflow:hidden;
-box-shadow:0 8px 25px rgba(60,40,25,.08);
-transition:.3s;
+
+box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+transition:.35s;
+
 }
 
 .card:hover{
-transform:translateY(-5px);
-box-shadow:0 15px 35px rgba(60,40,25,.14);
+
+transform:translateY(-8px);
+
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
 }
-
-
-/* HALI RESMİ */
 
 .card img{
+
 width:100%;
+
 height:360px;
+
 object-fit:cover;
+
 display:block;
+
 }
-
-
-/* KART BAŞLIĞI */
 
 .card-content{
-padding:20px;
+
+padding:22px;
+
+}
+
+.card-content h2{
+
+font-size:24px;
+
+margin-bottom:12px;
+
+color:#222;
+
+}
+
+.price{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#D4AF37;
+
+margin-bottom:10px;
+
+}
+
+.size{
+
+display:inline-block;
+
+padding:6px 12px;
+
+background:#111;
+
+color:#fff;
+
+border-radius:8px;
+
+margin-bottom:15px;
+
+font-size:14px;
+
+}
+
+.description{
+
+line-height:1.7;
+
+color:#555;
+
+font-size:15px;
+
+}
+
+  .loading{
+
 text-align:center;
+
+font-size:22px;
+
+padding:80px;
+
+color:#777;
+
 }
 
-.card h3{
-font-family:Georgia,serif;
-font-size:23px;
-margin:0;
-color:#40342d;
+.empty{
+
+text-align:center;
+
+padding:80px;
+
+font-size:22px;
+
+color:#888;
+
 }
-
-
-/* ANA SAYFAYA DÖN */
 
 .back{
+
+margin-top:60px;
+
 text-align:center;
-margin-top:50px;
+
 }
 
 .back a{
+
 display:inline-block;
-background:#8b6652;
-color:white;
-padding:12px 28px;
+
+padding:15px 35px;
+
+background:#111;
+
+color:#D4AF37;
+
 text-decoration:none;
-border-radius:5px;
-font-weight:bold;
+
+border-radius:12px;
+
+font-weight:600;
+
 transition:.3s;
+
 }
 
 .back a:hover{
-background:#6f5040;
+
+background:#D4AF37;
+
+color:#111;
+
 }
-
-
-/* ALT BİLGİ */
 
 footer{
+
+margin-top:80px;
+
+padding:35px;
+
+background:#111;
+
+color:#aaa;
+
 text-align:center;
-border-top:1px solid #e8ddd3;
-padding:25px;
-color:#8a7d75;
-font-size:13px;
+
+font-size:14px;
+
 }
 
-
-/* MOBİL */
-
-@media(max-width:600px){
+@media(max-width:768px){
 
 header h1{
-font-size:30px;
-}
 
-.container{
-padding:35px 0;
+font-size:30px;
+
 }
 
 .card img{
-height:300px;
+
+height:270px;
+
+}
+
+.gallery{
+
+grid-template-columns:1fr;
+
 }
 
 }
@@ -176,109 +309,52 @@ height:300px;
 
 </head>
 
-
 <body>
-
-
-<!-- ÜST BAŞLIK -->
 
 <header>
 
-<h1>Halı Koleksiyonumuz</h1>
+<img src="logo.png" alt="Sur Halı">
 
-<p>Sur Halı İznik • Bursa</p>
+<h1>HALI KOLEKSİYONU</h1>
+
+<p>Sur Halı İznik • Premium Halı Modelleri</p>
 
 </header>
 
-
-<!-- ANA İÇERİK -->
-
 <div class="container">
 
+<div
+id="gallery"
+class="gallery">
 
-<div class="gallery">
+<div class="loading">
 
-
-<!-- HALI 1 -->
-
-<div class="card">
-
-<img
-src="https://ceribas-wx16.github.io/sur-hali/resimler/halilar/3c678b8b-af21-4dc8-b138-42a12e5909e6.jpg"
-alt="Sur Halı İznik halı modeli"
->
-
-<div class="card-content">
-
-<h3>Halı Modeli</h3>
+Ürünler yükleniyor...
 
 </div>
 
 </div>
-
-
-<!-- HALI 2 -->
-
-<div class="card">
-
-<img
-src="https://ceribas-wx16.github.io/sur-hali/resimler/halilar/3c678b8b-af21-4dc8-b138-42a12e5909e6.jpg"
-alt="Sur Halı İznik halı modeli"
->
-
-<div class="card-content">
-
-<h3>Halı Modeli</h3>
-
-</div>
-
-</div>
-
-
-<!-- HALI 3 -->
-
-<div class="card">
-
-<img
-src="https://ceribas-wx16.github.io/sur-hali/resimler/halilar/3c678b8b-af21-4dc8-b138-42a12e5909e6.jpg"
-alt="Sur Halı İznik halı modeli"
->
-
-<div class="card-content">
-
-<h3>Halı Modeli</h3>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<!-- ANA SAYFAYA DÖN -->
 
 <div class="back">
 
 <a href="index.html">
+
 ← Ana Sayfaya Dön
+
 </a>
 
 </div>
 
-
 </div>
-
-
-<!-- ALT BİLGİ -->
 
 <footer>
 
-© 2026 Sur Halı İznik • Tüm hakları saklıdır.
+© 2026 Sur Halı İznik • Tüm Hakları Saklıdır.
 
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-</body>
+<script src="supabase.js"></script>
 
-</html>
+<script>
