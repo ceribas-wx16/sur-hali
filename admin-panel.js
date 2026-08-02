@@ -1,286 +1,259 @@
 /* =========================================================
-   SUR HALI YÖNETİM PANELİ
-   admin-panel.css
+   SUR HALI İZNİK
+   ADMIN PANEL
+   admin-panel.js
+
    Bölüm 1 / 4
-   ========================================================= */
+
+   - Supabase Kontrolü
+   - Sayfa Başlatma
+   - Oturum Kontrolü
+   - Menü Yönetimi
+   - Çıkış İşlemi
+========================================================= */
+
+console.log("Sur Halı Admin Panel başlatılıyor...");
 
 
 /* =========================================================
-   RESET
-   ========================================================= */
+   SAYFA YÜKLENİNCE
+========================================================= */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+document.addEventListener("DOMContentLoaded", async () => {
 
-html{
+    console.log("DOM yüklendi.");
 
-    scroll-behavior:smooth;
+    await oturumKontrol();
 
-}
+    menuHazirla();
 
-body{
+    cikisHazirla();
 
-    font-family:Arial,Helvetica,sans-serif;
+    modalHazirla();
 
-    background:#f3f5f7;
+    dashboardYukle();
 
-    color:#333;
+    urunleriGetir();
 
-    overflow:hidden;
+    resimleriGetir();
 
-}
+    ayarlariGetir();
+
+});
 
 
 /* =========================================================
-   SCROLLBAR
-   ========================================================= */
+   OTURUM KONTROLÜ
+========================================================= */
 
-::-webkit-scrollbar{
+async function oturumKontrol(){
 
-    width:10px;
+    try{
 
-}
+        const { data, error } =
+        await supabase.auth.getSession();
 
-::-webkit-scrollbar-track{
+        if(error){
 
-    background:#ececec;
+            console.error(error);
 
-}
+            location.href="admin-giris.html";
 
-::-webkit-scrollbar-thumb{
+            return;
 
-    background:#198754;
+        }
 
-    border-radius:20px;
+        if(!data.session){
 
-}
+            location.href="admin-giris.html";
 
-::-webkit-scrollbar-thumb:hover{
+            return;
 
-    background:#146c43;
+        }
 
-}
+        console.log(
+            "Giriş yapan kullanıcı:",
+            data.session.user.email
+        );
 
+    }
 
-/* =========================================================
-   ANA YAPI
-   ========================================================= */
+    catch(err){
 
-.admin-layout{
+        console.error(err);
 
-    display:flex;
+        location.href="admin-giris.html";
 
-    width:100%;
-
-    height:100vh;
-
-    overflow:hidden;
+    }
 
 }
 
 
 /* =========================================================
    SOL MENÜ
-   ========================================================= */
+========================================================= */
 
-.sidebar{
+function menuHazirla(){
 
-    position:fixed;
+    const buttons =
+    document.querySelectorAll(".menu-item");
 
-    left:0;
+    const pages =
+    document.querySelectorAll(".page");
 
-    top:0;
+    buttons.forEach(button=>{
 
-    width:270px;
+        button.addEventListener("click",()=>{
 
-    height:100vh;
+            if(button.id==="logoutButton") return;
 
-    background:#0f5132;
+            buttons.forEach(item=>{
 
-    color:#fff;
+                item.classList.remove("active");
 
-    display:flex;
+            });
 
-    flex-direction:column;
+            pages.forEach(page=>{
 
-    box-shadow:5px 0 18px rgba(0,0,0,.15);
+                page.classList.remove("active-page");
 
-    z-index:1000;
+            });
 
-}
+            button.classList.add("active");
 
+            const target =
+            document.getElementById(
+                button.dataset.page
+            );
 
-.logo{
+            if(target){
 
-    padding:35px 25px;
+                target.classList.add(
+                    "active-page"
+                );
 
-    text-align:center;
+            }
 
-    border-bottom:1px solid rgba(255,255,255,.15);
+        });
 
-}
-
-
-.logo h2{
-
-    font-size:30px;
-
-    margin-bottom:10px;
-
-    font-weight:bold;
-
-}
-
-
-.logo span{
-
-    opacity:.8;
-
-    font-size:15px;
-
-    letter-spacing:.5px;
+    });
 
 }
 
 
 /* =========================================================
-   MENÜ
-   ========================================================= */
+   ÇIKIŞ
+========================================================= */
 
-.menu{
+function cikisHazirla(){
 
-    display:flex;
+    const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
 
-    flex-direction:column;
+    if(!logoutButton) return;
 
-    padding:20px;
+    logoutButton.onclick =
+    async()=>{
 
-    gap:10px;
+        if(
+            !confirm(
+                "Çıkış yapmak istiyor musunuz?"
+            )
+        ){
+            return;
+        }
 
-    flex:1;
+        await supabase.auth.signOut();
 
-}
+        location.href="admin-giris.html";
 
-
-.menu-item{
-
-    border:none;
-
-    background:transparent;
-
-    color:#fff;
-
-    font-size:16px;
-
-    text-align:left;
-
-    padding:16px 18px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    transition:.25s;
+    };
 
 }
+/* =========================================================
+   SUR HALI İZNİK
+   ADMIN PANEL
+   admin-panel.js
+
+   Bölüm 2 / 4
+
+   - Dashboard
+   - Ürün Sayısı
+   - Resim Sayısı
+   - Storage Bilgisi
+   - Site Ayarlarını Yükleme
+========================================================= */
 
 
-.menu-item:hover{
+/* =========================================================
+   DASHBOARD
+========================================================= */
 
-    background:rgba(255,255,255,.12);
+async function dashboardYukle(){
 
-    transform:translateX(5px);
+    console.log("Dashboard yükleniyor...");
 
-}
+    await toplamUrunSayisi();
 
+    await toplamResimSayisi();
 
-.menu-item.active{
-
-    background:#198754;
-
-    font-weight:bold;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.18);
-
-}
-
-
-.logout{
-
-    margin-top:auto;
-
-    background:#c62828;
-
-}
-
-
-.logout:hover{
-
-    background:#a91d1d;
+    await storageBilgisi();
 
 }
 
 
 /* =========================================================
-   SAĞ İÇERİK
-   ========================================================= */
+   TOPLAM ÜRÜN SAYISI
+========================================================= */
 
-.content{
+async function toplamUrunSayisi(){
 
-    margin-left:270px;
+    try{
 
-    width:calc(100% - 270px);
+        const {
 
-    height:100vh;
+            count,
 
-    overflow-y:auto;
+            error
 
-    overflow-x:hidden;
+        } = await supabase
 
-    padding:40px;
+        .from("products")
 
-    background:#f3f5f7;
+        .select("*",{
 
-}
+            count:"exact",
 
+            head:true
 
-/* =========================================================
-   SAYFALAR
-   ========================================================= */
+        });
 
-.page{
+        if(error){
 
-    display:none;
+            console.error(error);
 
-    animation:fade .25s ease;
+            return;
 
-}
+        }
 
-.active-page{
+        const alan =
+        document.getElementById(
+            "totalProducts"
+        );
 
-    display:block;
+        if(alan){
 
-}
+            alan.innerText = count ?? 0;
 
-
-@keyframes fade{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(10px);
+        }
 
     }
 
-    to{
+    catch(err){
 
-        opacity:1;
-
-        transform:translateY(0);
+        console.error(err);
 
     }
 
@@ -288,919 +261,802 @@ body{
 
 
 /* =========================================================
-   BAŞLIKLAR
-   ========================================================= */
+   TOPLAM RESİM SAYISI
+========================================================= */
 
-.page h1{
+async function toplamResimSayisi(){
 
-    font-size:34px;
+    try{
 
-    margin-bottom:30px;
+        const {
 
-    color:#222;
+            data,
 
-    font-weight:bold;
+            error
 
-}
+        } = await supabase
 
+        .storage
 
-/* =========================================================
-   BÖLÜM BAŞLIĞI
-   ========================================================= */
+        .from("halilar")
 
-.section-header{
+        .list();
 
-    display:flex;
+        if(error){
 
-    justify-content:space-between;
+            console.error(error);
 
-    align-items:center;
+            return;
 
-    margin-bottom:30px;
+        }
 
-}
+        const alan =
+        document.getElementById(
+            "totalImages"
+        );
 
+        if(alan){
 
-.section-header button{
+            alan.innerText =
+            data.length;
 
-    border:none;
+        }
 
-    background:#198754;
+    }
 
-    color:#fff;
+    catch(err){
 
-    padding:14px 24px;
+        console.error(err);
 
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-}
-
-
-.section-header button:hover{
-
-    background:#146c43;
-
-    transform:translateY(-2px);
-
-}
-/* =========================================================
-   DASHBOARD KARTLARI
-   ========================================================= */
-
-.cards{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-    gap:25px;
-
-    margin-bottom:35px;
-
-}
-
-.card{
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:28px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.25s;
-
-}
-
-.card:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
-
-}
-
-.card h3{
-
-    color:#777;
-
-    font-size:18px;
-
-    margin-bottom:18px;
-
-    font-weight:600;
-
-}
-
-.card p{
-
-    font-size:40px;
-
-    color:#198754;
-
-    font-weight:bold;
+    }
 
 }
 
 
 /* =========================================================
-   TABLOLAR
-   ========================================================= */
+   STORAGE BİLGİSİ
+========================================================= */
 
-.admin-table{
+async function storageBilgisi(){
 
-    width:100%;
+    try{
 
-    border-collapse:collapse;
+        const {
 
-    background:#fff;
+            data,
 
-    border-radius:16px;
+            error
 
-    overflow:hidden;
+        } = await supabase
 
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+        .storage
 
-}
+        .from("halilar")
 
-.admin-table thead{
+        .list();
 
-    background:#198754;
+        if(error){
 
-    color:#fff;
+            console.error(error);
 
-}
+            return;
 
-.admin-table th{
+        }
 
-    padding:18px;
+        let toplamByte = 0;
 
-    text-align:left;
+        data.forEach(file=>{
 
-    font-size:15px;
+            if(file.metadata){
 
-}
+                toplamByte +=
+                Number(
+                    file.metadata.size || 0
+                );
 
-.admin-table td{
+            }
 
-    padding:18px;
+        });
 
-    border-bottom:1px solid #ececec;
+        let sonuc = "";
 
-    vertical-align:middle;
+        if(toplamByte < 1024){
 
-}
+            sonuc =
+            toplamByte + " B";
 
-.admin-table tbody tr{
+        }
 
-    transition:.2s;
+        else if(toplamByte < 1024*1024){
 
-}
+            sonuc =
+            (
+                toplamByte/1024
+            ).toFixed(1) + " KB";
 
-.admin-table tbody tr:hover{
+        }
 
-    background:#f7f7f7;
+        else{
 
-}
+            sonuc =
+            (
+                toplamByte/
+                1024/
+                1024
+            ).toFixed(2) + " MB";
 
-.admin-table img{
+        }
 
-    width:70px;
+        const alan =
+        document.getElementById(
+            "storageUsage"
+        );
 
-    height:70px;
+        if(alan){
 
-    object-fit:cover;
+            alan.innerText =
+            sonuc;
 
-    border-radius:10px;
+        }
 
-}
+    }
 
-.admin-table button{
+    catch(err){
 
-    border:none;
+        console.error(err);
 
-    border-radius:8px;
-
-    padding:8px 14px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    margin-right:8px;
-
-    transition:.25s;
-
-}
-
-.admin-table button:first-child{
-
-    background:#0d6efd;
-
-    color:#fff;
-
-}
-
-.admin-table button:first-child:hover{
-
-    background:#0b5ed7;
-
-}
-
-.admin-table button:last-child{
-
-    background:#dc3545;
-
-    color:#fff;
-
-}
-
-.admin-table button:last-child:hover{
-
-    background:#bb2d3b;
+    }
 
 }
 
 
 /* =========================================================
-   FORM ELEMANLARI
-   ========================================================= */
+   SİTE AYARLARINI GETİR
+========================================================= */
 
-.form-group{
+async function ayarlariGetir(){
 
-    margin-bottom:22px;
+    try{
+
+        const {
+
+            data,
+
+            error
+
+        } = await supabase
+
+        .from("settings")
+
+        .select("*")
+
+        .limit(1)
+
+        .single();
+
+        if(error){
+
+            console.log(
+                "Settings tablosu henüz kullanılmıyor."
+            );
+
+            return;
+
+        }
+
+        if(!data){
+
+            return;
+
+        }
+
+        if(document.getElementById("siteTitle")){
+
+            document.getElementById("siteTitle").value =
+            data.site_title ?? "";
+
+        }
+
+        if(document.getElementById("sitePhone")){
+
+            document.getElementById("sitePhone").value =
+            data.phone ?? "";
+
+        }
+
+        if(document.getElementById("siteAddress")){
+
+            document.getElementById("siteAddress").value =
+            data.address ?? "";
+
+        }
+
+    }
+
+    catch(err){
+
+        console.error(err);
+
+    }
 
 }
-
-.form-group label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:bold;
-
-    color:#444;
-
-}
-
-.form-group input,
-
-.form-group textarea,
-
-.form-group select{
-
-    width:100%;
-
-    padding:14px 16px;
-
-    border:1px solid #dcdcdc;
-
-    border-radius:10px;
-
-    font-size:15px;
-
-    transition:.25s;
-
-    background:#fff;
-
-}
-
-.form-group textarea{
-
-    resize:vertical;
-
-    min-height:120px;
-
-}
-
-.form-group input:focus,
-
-.form-group textarea:focus,
-
-.form-group select:focus{
-
-    outline:none;
-
-    border-color:#198754;
-
-    box-shadow:0 0 0 4px rgba(25,135,84,.15);
-
-}
-
 
 /* =========================================================
-   NORMAL BUTONLAR
-   ========================================================= */
-
-button{
-
-    transition:.25s;
-
-}
-
-button:hover{
-
-    transform:translateY(-2px);
-
-}
-
-
-/* =========================================================
-   AYARLAR FORMU
-   ========================================================= */
-
-#settingsForm{
-
-    background:#fff;
-
-    padding:30px;
-
-    border-radius:18px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    max-width:800px;
-
-}
-
-#settingsForm button{
-
-    background:#198754;
-
-    color:#fff;
-
-    border:none;
-
-    padding:15px 28px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-}
-
-#settingsForm button:hover{
-
-    background:#146c43;
-
-}
-/* =========================================================
-   RESİM YÜKLEME
-   ========================================================= */
-
-.upload-box{
-
-    background:#ffffff;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-
-    margin-bottom:35px;
-
-}
-
-.upload-box input[type=file]{
-
-    flex:1;
-
-    min-width:250px;
-
-    border:2px dashed #198754;
-
-    padding:15px;
-
-    border-radius:10px;
-
-    background:#f8fff9;
-
-}
-
-.upload-box button{
-
-    background:#198754;
-
-    color:#fff;
-
-    border:none;
-
-    padding:14px 30px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-    font-size:15px;
-
-}
-
-.upload-box button:hover{
-
-    background:#146c43;
-
-}
-
-
-/* =========================================================
-   RESİM GALERİSİ
-   ========================================================= */
-
-.image-gallery{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-
-    gap:25px;
-
-}
-
-.image-card{
-
-    background:#fff;
-
-    border-radius:16px;
-
-    padding:15px;
-
-    text-align:center;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    transition:.25s;
-
-}
-
-.image-card:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
-
-}
-
-.image-card img{
-
-    width:100%;
-
-    height:180px;
-
-    object-fit:cover;
-
-    border-radius:12px;
-
-}
-
-.image-card p{
-
-    margin:15px 0;
-
-    font-size:14px;
-
-    word-break:break-word;
-
-}
-
-.delete-image{
-
-    width:100%;
-
-    border:none;
-
-    background:#dc3545;
-
-    color:#fff;
-
-    padding:12px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    font-weight:bold;
-
-}
-
-.delete-image:hover{
-
-    background:#bb2d3b;
-
-}
+   SUR HALI İZNİK
+   ADMIN PANEL
+   admin-panel.js
+
+   Bölüm 3 / 4
+
+   - Ürünleri Listele
+   - Yeni Ürün Penceresi
+   - Ürün Kaydet
+   - Ürün Sil
+========================================================= */
 
 
 /* =========================================================
    MODAL
-   ========================================================= */
+========================================================= */
 
-.modal{
+function modalHazirla(){
 
-    display:none;
+    const modal =
+    document.getElementById("productModal");
 
-    position:fixed;
+    const openButton =
+    document.getElementById("newProductButton");
 
-    inset:0;
+    const closeButton =
+    document.getElementById("closeModal");
 
-    background:rgba(0,0,0,.55);
+    if(!modal) return;
 
-    justify-content:center;
+    if(openButton){
 
-    align-items:center;
+        openButton.onclick=()=>{
 
-    padding:30px;
+            modal.style.display="flex";
 
-    z-index:9999;
-
-    overflow-y:auto;
-
-}
-
-.modal-content{
-
-    width:100%;
-
-    max-width:720px;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.25);
-
-    animation:modalAc .25s ease;
-
-}
-
-@keyframes modalAc{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(-30px);
+        };
 
     }
 
-    to{
+    if(closeButton){
 
-        opacity:1;
+        closeButton.onclick=()=>{
 
-        transform:translateY(0);
+            modal.style.display="none";
+
+        };
 
     }
+
+    window.onclick=(e)=>{
+
+        if(e.target===modal){
+
+            modal.style.display="none";
+
+        }
+
+    };
 
 }
 
 
 /* =========================================================
-   MODAL HEADER
-   ========================================================= */
+   ÜRÜNLERİ GETİR
+========================================================= */
 
-.modal-header{
+async function urunleriGetir(){
 
-    background:#198754;
+    const tbody =
+    document.getElementById(
+        "productTableBody"
+    );
 
-    color:#fff;
+    if(!tbody) return;
 
-    padding:22px 30px;
+    tbody.innerHTML="";
 
-    display:flex;
+    const {
 
-    justify-content:space-between;
+        data,
 
-    align-items:center;
+        error
 
-}
+    } = await supabase
 
-.modal-header h2{
+    .from("products")
 
-    font-size:24px;
+    .select("*")
 
-}
+    .order("created_at",{
 
-.close{
+        ascending:false
 
-    font-size:34px;
+    });
 
-    cursor:pointer;
+    if(error){
 
-    transition:.2s;
+        console.error(error);
 
-}
-
-.close:hover{
-
-    transform:scale(1.15);
-
-}
-
-
-/* =========================================================
-   MODAL BODY
-   ========================================================= */
-
-.modal-body{
-
-    padding:30px;
-
-    max-height:65vh;
-
-    overflow-y:auto;
-
-}
-
-
-/* =========================================================
-   MODAL FOOTER
-   ========================================================= */
-
-.modal-footer{
-
-    padding:25px 30px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    border-top:1px solid #eee;
-
-}
-
-.modal-footer button{
-
-    background:#198754;
-
-    color:#fff;
-
-    border:none;
-
-    padding:15px 35px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    font-size:16px;
-
-    font-weight:bold;
-
-}
-
-.modal-footer button:hover{
-
-    background:#146c43;
-
-}
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-
-@media (max-width:1200px){
-
-    .cards{
-
-        grid-template-columns:repeat(2,1fr);
+        return;
 
     }
 
-}
+    data.forEach(product=>{
 
-@media (max-width:992px){
+        tbody.innerHTML +=`
 
-    .sidebar{
+<tr>
 
-        width:220px;
+<td>${product.name}</td>
 
-    }
+<td>${product.category}</td>
 
-    .content{
+<td>${product.is_active ? "Aktif" : "Pasif"}</td>
 
-        margin-left:220px;
+<td>
 
-        width:calc(100% - 220px);
+<button
+onclick="urunSil('${product.id}')">
 
-        padding:30px;
+Sil
 
-    }
+</button>
 
-}
+</td>
 
-@media (max-width:768px){
+</tr>
 
-    body{
+`;
 
-        overflow:auto;
+    });
 
-    }
-
-    .admin-layout{
-
-        flex-direction:column;
-
-        height:auto;
-
-    }
-
-    .sidebar{
-
-        position:relative;
-
-        width:100%;
-
-        height:auto;
-
-    }
-
-    .content{
-
-        width:100%;
-
-        margin-left:0;
-
-        height:auto;
-
-        overflow:visible;
-
-        padding:20px;
-
-    }
-
-    .menu{
-
-        flex-direction:row;
-
-        flex-wrap:wrap;
-
-        justify-content:center;
-
-    }
-
-    .menu-item{
-
-        flex:1 1 45%;
-
-        text-align:center;
-
-    }
-
-    .cards{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .section-header{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-        gap:15px;
-
-    }
-
-    .upload-box{
-
-        flex-direction:column;
-
-        align-items:stretch;
-
-    }
-
-    .admin-table{
-
-        display:block;
-
-        overflow-x:auto;
-
-        white-space:nowrap;
-
-    }
-
-    .modal{
-
-        padding:15px;
-
-    }
-
-    .modal-content{
-
-        max-width:100%;
-
-    }
-
-}
-
-@media (max-width:480px){
-
-    .logo h2{
-
-        font-size:24px;
-
-    }
-
-    .page h1{
-
-        font-size:26px;
-
-    }
-
-    .card{
-
-        padding:20px;
-
-    }
-
-    .card p{
-
-        font-size:30px;
-
-    }
-
-    .modal-header{
-
-        padding:18px;
-
-    }
-
-    .modal-body{
-
-        padding:20px;
-
-    }
-
-    .modal-footer{
-
-        padding:20px;
-
-    }
-
-    .modal-footer button{
-
-        width:100%;
-
-    }
+    dashboardYukle();
 
 }
 
 
 /* =========================================================
-   YARDIMCI SINIFLAR
-   ========================================================= */
+   ÜRÜN KAYDET
+========================================================= */
 
-.hidden{
+async function urunKaydet(){
 
-    display:none !important;
+    const name =
+    document.getElementById("productName").value.trim();
+
+    const category =
+    document.getElementById("productCategory").value.trim();
+
+    const size =
+    document.getElementById("productSize").value.trim();
+
+    const price =
+    Number(
+    document.getElementById("productPrice").value
+    );
+
+    const description =
+    document.getElementById("productDescription").value.trim();
+
+    const imageFile =
+    document.getElementById("productImage").files[0];
+
+    if(name==="" || category===""){
+
+        alert("Ürün adı ve kategori zorunludur.");
+
+        return;
+
+    }
+
+    let imageUrl="";
+
+    if(imageFile){
+
+        const fileName=
+        Date.now()+"-"+imageFile.name;
+
+        const {
+
+            error
+
+        } = await supabase
+
+        .storage
+
+        .from("halilar")
+
+        .upload(fileName,imageFile);
+
+        if(error){
+
+            alert(error.message);
+
+            return;
+
+        }
+
+        imageUrl=
+
+        supabase
+
+        .storage
+
+        .from("halilar")
+
+        .getPublicUrl(fileName)
+
+        .data.publicUrl;
+
+    }
+
+    const {
+
+        error
+
+    } = await supabase
+
+    .from("products")
+
+    .insert([{
+
+        name,
+
+        category,
+
+        size,
+
+        price,
+
+        description,
+
+        image_url:imageUrl,
+
+        is_active:true
+
+    }]);
+
+    if(error){
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    alert("Ürün başarıyla eklendi.");
+
+    document.getElementById("productModal").style.display="none";
+
+    document.getElementById("productName").value="";
+    document.getElementById("productCategory").value="";
+    document.getElementById("productSize").value="";
+    document.getElementById("productPrice").value="";
+    document.getElementById("productDescription").value="";
+    document.getElementById("productImage").value="";
+
+    urunleriGetir();
 
 }
 
-.text-center{
 
-    text-align:center;
+/* =========================================================
+   KAYDET BUTONU
+========================================================= */
+
+const saveButton =
+document.getElementById(
+"saveProductButton"
+);
+
+if(saveButton){
+
+    saveButton.addEventListener(
+
+        "click",
+
+        urunKaydet
+
+    );
+
+}
+
+
+/* =========================================================
+   ÜRÜN SİL
+========================================================= */
+
+async function urunSil(id){
+
+    if(
+
+        !confirm("Bu ürün silinsin mi?")
+
+    ){
+
+        return;
+
+    }
+
+    const {
+
+        error
+
+    } = await supabase
+
+    .from("products")
+
+    .delete()
+
+    .eq("id",id);
+
+    if(error){
+
+        alert(error.message);
+
+        return;
+
+    }
+
+    urunleriGetir();
 
 }
 
-.mt-20{
+/* =========================================================
+   SUR HALI İZNİK
+   ADMIN PANEL
+   admin-panel.js
 
-    margin-top:20px;
+   Bölüm 4 / 4
+
+   - Resimleri Listele
+   - Resim Yükle
+   - Resim Sil
+   - Yardımcı Fonksiyonlar
+
+========================================================= */
+
+
+/* =========================================================
+   RESİMLERİ GETİR
+========================================================= */
+
+async function resimleriGetir(){
+
+    const gallery =
+    document.getElementById("imageGallery");
+
+    if(!gallery) return;
+
+    gallery.innerHTML="";
+
+    const { data, error } =
+    await supabase
+    .storage
+    .from("halilar")
+    .list();
+
+    if(error){
+
+        console.error(error);
+
+        return;
+
+    }
+
+    if(data.length===0){
+
+        gallery.innerHTML=
+        "<p>Henüz resim yüklenmemiş.</p>";
+
+        return;
+
+    }
+
+    data.forEach(file=>{
+
+        const publicUrl=
+        supabase
+        .storage
+        .from("halilar")
+        .getPublicUrl(file.name)
+        .data.publicUrl;
+
+        gallery.innerHTML +=`
+
+<div class="image-card">
+
+<img src="${publicUrl}" alt="">
+
+<p>${file.name}</p>
+
+<button
+class="delete-image"
+onclick="resimSil('${file.name}')">
+
+🗑 Resmi Sil
+
+</button>
+
+</div>
+
+`;
+
+    });
 
 }
 
-.mb-20{
 
-    margin-bottom:20px;
+/* =========================================================
+   RESİM YÜKLE
+========================================================= */
+
+const uploadButton=
+document.getElementById(
+"uploadImageButton"
+);
+
+if(uploadButton){
+
+uploadButton.onclick=
+async()=>{
+
+const file=
+document.getElementById("imageInput").files[0];
+
+if(!file){
+
+alert("Lütfen resim seçiniz.");
+
+return;
 
 }
 
-.w-100{
+const fileName=
+Date.now()+"-"+file.name;
 
-    width:100%;
+const { error }=
+await supabase
+.storage
+.from("halilar")
+.upload(fileName,file);
+
+if(error){
+
+alert(error.message);
+
+return;
 
 }
+
+alert("Resim başarıyla yüklendi.");
+
+document.getElementById("imageInput").value="";
+
+resimleriGetir();
+
+dashboardYukle();
+
+};
+
+}
+
+
+/* =========================================================
+   RESİM SİL
+========================================================= */
+
+async function resimSil(fileName){
+
+if(!confirm("Bu resim silinsin mi?")){
+
+return;
+
+}
+
+const { error }=
+await supabase
+.storage
+.from("halilar")
+.remove([fileName]);
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert("Resim silindi.");
+
+resimleriGetir();
+
+dashboardYukle();
+
+}
+
+
+/* =========================================================
+   YARDIMCI
+========================================================= */
+
+function paraFormati(fiyat){
+
+return Number(fiyat).toLocaleString(
+
+"tr-TR",
+
+{
+
+style:"currency",
+
+currency:"TRY"
+
+}
+
+);
+
+}
+
+
+/* =========================================================
+   TARİH FORMATI
+========================================================= */
+
+function tarihFormati(tarih){
+
+if(!tarih) return "";
+
+return new Date(tarih)
+.toLocaleDateString(
+
+"tr-TR",
+
+{
+
+day:"2-digit",
+
+month:"2-digit",
+
+year:"numeric"
+
+}
+
+);
+
+}
+
+
+/* =========================================================
+   GENEL HATA YAKALAMA
+========================================================= */
+
+window.addEventListener(
+
+"error",
+
+function(event){
+
+console.error(
+
+"Javascript Hatası:",
+
+event.error
+
+);
+
+}
+
+);
+
+console.log(
+
+"Sur Halı Yönetim Paneli başarıyla yüklendi."
+
+);
