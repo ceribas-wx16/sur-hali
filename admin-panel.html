@@ -5,14 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sur Halı | Yönetim Paneli</title>
 
     <link rel="stylesheet" href="style.css">
-
     <link rel="stylesheet" href="admin-panel.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -26,15 +29,17 @@
 
     <aside class="sidebar">
 
-       <div class="logo">
+        <div class="logo">
 
-    <img src="logo.png" alt="Sur Halı Logo" class="logo-image">
+            <img src="logo.png"
+                 alt="Sur Halı Logo"
+                 class="logo-image">
 
-    <h2>SUR HALI</h2>
+            <h2>SUR HALI</h2>
 
-    <span>YÖNETİM PANELİ</span>
+            <span>YÖNETİM PANELİ</span>
 
-</div>
+        </div>
 
         <nav class="menu">
 
@@ -42,7 +47,9 @@
                 class="menu-item active"
                 data-page="dashboard">
 
-                📊 Dashboard
+                <span class="icon">📊</span>
+
+                <span>Dashboard</span>
 
             </button>
 
@@ -50,7 +57,9 @@
                 class="menu-item"
                 data-page="urunler">
 
-                🛋️ Ürün Yönetimi
+                <span class="icon">🛋️</span>
+
+                <span>Ürün Yönetimi</span>
 
             </button>
 
@@ -58,7 +67,9 @@
                 class="menu-item"
                 data-page="resimler">
 
-                🖼️ Resim Yükleme
+                <span class="icon">🖼️</span>
+
+                <span>Resim Yükleme</span>
 
             </button>
 
@@ -66,27 +77,59 @@
                 class="menu-item"
                 data-page="ayarlar">
 
-                ⚙️ Site Ayarları
+                <span class="icon">⚙️</span>
+
+                <span>Site Ayarları</span>
 
             </button>
 
-            <button
-                id="logoutButton"
-                class="menu-item logout">
+            <div class="sidebar-bottom">
 
-                🚪 Çıkış
+                <button
+                    id="logoutButton"
+                    class="menu-item logout">
 
-            </button>
+                    <span class="icon">🚪</span>
+
+                    <span>Çıkış Yap</span>
+
+                </button>
+
+            </div>
 
         </nav>
 
     </aside>
 
-    <!-- ========================= -->
+        <!-- ========================= -->
     <!-- ANA İÇERİK -->
     <!-- ========================= -->
 
     <main class="content">
+
+        <!-- Sayfa Başlığı -->
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p>Sur Halı Yönetim Paneline hoş geldiniz.</p>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button class="header-button">
+
+                    📈 Sistem Aktif
+
+                </button>
+
+            </div>
+
+        </div>
 
         <!-- ========================= -->
         <!-- DASHBOARD -->
@@ -96,45 +139,79 @@
             id="dashboard"
             class="page active-page">
 
-            <h1>Dashboard</h1>
-
             <div class="cards">
 
                 <div class="card">
 
-                    <h3>Toplam Ürün</h3>
+                    <div class="card-icon">
 
-                    <p id="totalProducts">
+                        📦
 
-                        0
+                    </div>
 
-                    </p>
+                    <div class="card-info">
 
-                </div>
+                        <h3>Toplam Ürün</h3>
 
-                <div class="card">
+                        <p id="totalProducts">0</p>
 
-                    <h3>Toplam Resim</h3>
-
-                    <p id="totalImages">
-
-                        0
-
-                    </p>
+                    </div>
 
                 </div>
 
                 <div class="card">
 
-                    <h3>Storage Kullanımı</h3>
+                    <div class="card-icon">
 
-                    <p id="storageUsage">
+                        🖼️
 
-                        -
+                    </div>
 
-                    </p>
+                    <div class="card-info">
+
+                        <h3>Toplam Resim</h3>
+
+                        <p id="totalImages">0</p>
+
+                    </div>
 
                 </div>
+
+                <div class="card">
+
+                    <div class="card-icon">
+
+                        ☁️
+
+                    </div>
+
+                    <div class="card-info">
+
+                        <h3>Storage</h3>
+
+                        <p id="storageUsage">-</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-welcome">
+
+                <h2>
+
+                    Sur Halı Yönetim Merkezi
+
+                </h2>
+
+                <p>
+
+                    Bu panel üzerinden ürünlerinizi yönetebilir,
+                    resim yükleyebilir ve internet sitenizi
+                    tek noktadan kontrol edebilirsiniz.
+
+                </p>
 
             </div>
 
@@ -209,7 +286,7 @@
 
                 <button id="uploadImageButton">
 
-                    Resmi Yükle
+                    📤 Resmi Yükle
 
                 </button>
 
@@ -268,7 +345,7 @@
 
                 <button type="submit">
 
-                    Kaydet
+                    💾 Ayarları Kaydet
 
                 </button>
 
@@ -292,7 +369,11 @@
 
         <div class="modal-header">
 
-            <h2>Yeni Ürün Ekle</h2>
+            <h2>
+
+                Yeni Ürün Ekle
+
+            </h2>
 
             <span
                 id="closeModal"
@@ -382,10 +463,6 @@
     </div>
 
 </div>
-
-<!-- ========================= -->
-<!-- JAVASCRIPT -->
-<!-- ========================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
