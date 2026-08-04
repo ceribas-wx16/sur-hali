@@ -5,26 +5,36 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Sur Halı İznik | Halılar</title>
 
 <meta
 name="description"
-content="Sur Halı İznik halı koleksiyonu">
+content="Sur Halı İznik Premium Halı Koleksiyonu">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
 
 <style>
 
 *{
+
 margin:0;
+
 padding:0;
+
 box-sizing:border-box;
+
 }
 
 body{
@@ -36,10 +46,6 @@ background:#f5f3ef;
 color:#2b2b2b;
 
 }
-
-/*==========================
-HEADER
-==========================*/
 
 header{
 
@@ -83,10 +89,6 @@ color:#ddd;
 
 }
 
-/*==========================
-CONTAINER
-==========================*/
-
 .container{
 
 width:92%;
@@ -99,23 +101,16 @@ padding:50px 0;
 
 }
 
-/*==========================
-GALERİ
-==========================*/
-
 .gallery{
 
 display:grid;
 
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
 
 gap:30px;
 
 }
-
-/*==========================
-ÜRÜN KARTI
-==========================*/
 
 .card{
 
@@ -151,6 +146,7 @@ display:block;
 
 }
 
+
 .card-content{
 
 padding:22px;
@@ -165,6 +161,8 @@ margin-bottom:12px;
 
 color:#222;
 
+font-weight:600;
+
 }
 
 .price{
@@ -175,7 +173,7 @@ font-weight:700;
 
 color:#D4AF37;
 
-margin-bottom:10px;
+margin-bottom:12px;
 
 }
 
@@ -201,23 +199,23 @@ font-size:14px;
 
 line-height:1.7;
 
-
-  
 color:#555;
 
 font-size:15px;
 
 }
 
-  .loading{
+.loading{
 
 text-align:center;
 
-font-size:22px;
-
 padding:80px;
 
-color:#777;
+font-size:22px;
+
+color:#666;
+
+grid-column:1/-1;
 
 }
 
@@ -230,6 +228,22 @@ padding:80px;
 font-size:22px;
 
 color:#888;
+
+grid-column:1/-1;
+
+}
+
+.error{
+
+text-align:center;
+
+padding:80px;
+
+font-size:22px;
+
+color:#d32f2f;
+
+grid-column:1/-1;
 
 }
 
@@ -257,7 +271,7 @@ border-radius:12px;
 
 font-weight:600;
 
-transition:.3s;
+transition:.30s;
 
 }
 
@@ -315,11 +329,11 @@ grid-template-columns:1fr;
 
 <header>
 
-<img src="logo.png" alt="Sur Halı">
+<img src="logo.png" alt="Sur Halı İznik">
 
 <h1>HALI KOLEKSİYONU</h1>
 
-<p>Sur Halı İznik • Premium Halı Modelleri</p>
+<p>Sur Halı İznik • Premium Halılar</p>
 
 </header>
 
@@ -351,8 +365,6 @@ class="gallery">
 
 <footer>
 
-
-  
 © 2026 Sur Halı İznik • Tüm Hakları Saklıdır.
 
 </footer>
@@ -362,59 +374,348 @@ class="gallery">
 <script src="supabase.js"></script>
 
 <script>
-console.log("1- Script başladı");
 
 const gallery = document.getElementById("gallery");
 
-async function loadProducts(){
+  .card-content{
 
-    console.log("2- loadProducts çalıştı");
+padding:22px;
+
+}
+
+.card-content h2{
+
+font-size:24px;
+
+margin-bottom:12px;
+
+color:#222;
+
+font-weight:600;
+
+}
+
+.price{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#D4AF37;
+
+margin-bottom:12px;
+
+}
+
+.size{
+
+display:inline-block;
+
+padding:6px 12px;
+
+background:#111;
+
+color:#fff;
+
+border-radius:8px;
+
+margin-bottom:15px;
+
+font-size:14px;
+
+}
+
+.description{
+
+line-height:1.7;
+
+color:#555;
+
+font-size:15px;
+
+}
+
+.loading{
+
+text-align:center;
+
+padding:80px;
+
+font-size:22px;
+
+color:#666;
+
+grid-column:1/-1;
+
+}
+
+.empty{
+
+text-align:center;
+
+padding:80px;
+
+font-size:22px;
+
+color:#888;
+
+grid-column:1/-1;
+
+}
+
+.error{
+
+text-align:center;
+
+padding:80px;
+
+font-size:22px;
+
+color:#d32f2f;
+
+grid-column:1/-1;
+
+}
+
+.back{
+
+margin-top:60px;
+
+text-align:center;
+
+}
+
+.back a{
+
+display:inline-block;
+
+padding:15px 35px;
+
+background:#111;
+
+color:#D4AF37;
+
+text-decoration:none;
+
+border-radius:12px;
+
+font-weight:600;
+
+transition:.30s;
+
+}
+
+.back a:hover{
+
+background:#D4AF37;
+
+color:#111;
+
+}
+
+footer{
+
+margin-top:80px;
+
+padding:35px;
+
+background:#111;
+
+color:#aaa;
+
+text-align:center;
+
+font-size:14px;
+
+}
+
+@media(max-width:768px){
+
+header h1{
+
+font-size:30px;
+
+}
+
+.card img{
+
+height:270px;
+
+}
+
+.gallery{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<img src="logo.png" alt="Sur Halı İznik">
+
+<h1>HALI KOLEKSİYONU</h1>
+
+<p>Sur Halı İznik • Premium Halılar</p>
+
+</header>
+
+<div class="container">
+
+<div
+id="gallery"
+class="gallery">
+
+<div class="loading">
+
+Ürünler yükleniyor...
+
+</div>
+
+</div>
+
+<div class="back">
+
+<a href="index.html">
+
+← Ana Sayfaya Dön
+
+</a>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 Sur Halı İznik • Tüm Hakları Saklıdır.
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script>
+
+const gallery = document.getElementById("gallery");
+
+  async function loadProducts(){
+
+    gallery.innerHTML = `
+        <div class="loading">
+            Ürünler yükleniyor...
+        </div>
+    `;
 
     try{
 
-        console.log("3- Supabase sorgusu başlıyor");
-
-        const result = await supabase
+        const { data, error } = await supabase
             .from("products")
-            .select("*");
-      console.log(data);
-
-gallery.innerHTML =
-"<pre>" +
-JSON.stringify(data, null, 2) +
-"</pre>";
-
-return;
-
-        console.log("4- Sonuç:", result);
-
-        const { data, error } = result;
+            .select("*")
+            .eq("is_active", true)
+            .eq("category", "Halılar")
+            .order("created_at", { ascending:false });
 
         if(error){
-            console.error("5- HATA:", error);
-            gallery.innerHTML = "<h2>Hata oluştu.</h2>";
+
+            console.error(error);
+
+            gallery.innerHTML = `
+                <div class="error">
+                    Ürünler yüklenemedi.
+                </div>
+            `;
+
             return;
+
         }
 
-        console.log("6- Veri sayısı:", data.length);
+        if(!data || data.length===0){
 
-        gallery.innerHTML = "<h2>" + data.length + " ürün bulundu.</h2>";
+            gallery.innerHTML = `
+                <div class="empty">
+                    Bu kategoride henüz ürün bulunmuyor.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        gallery.innerHTML="";
+
+        data.forEach(product=>{
+
+            gallery.innerHTML += `
+
+            <div class="card">
+
+                <img
+                    src="${product.image_url}"
+                    alt="${product.name}"
+                    loading="lazy">
+
+                <div class="card-content">
+
+                    <h2>${product.name}</h2>
+
+                    <div class="price">
+
+                        ${Number(product.price).toLocaleString("tr-TR")} ₺
+
+                    </div>
+
+                    <div class="size">
+
+                        ${product.size || "-"}
+
+                    </div>
+
+                    <div class="description">
+
+                        ${product.description || ""}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        });
 
     }
-    catch(e){
 
-        console.error("7- CATCH:", e);
+    catch(err){
+
+        console.error(err);
+
+        gallery.innerHTML = `
+            <div class="error">
+                Beklenmeyen bir hata oluştu.
+            </div>
+        `;
 
     }
 
 }
 
 loadProducts();
-</script>
-
-  loadProducts();
 
 </script>
 
 </body>
+
 </html>
+
+
+  
