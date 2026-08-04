@@ -201,6 +201,8 @@ font-size:14px;
 
 line-height:1.7;
 
+
+  
 color:#555;
 
 font-size:15px;
@@ -349,6 +351,8 @@ class="gallery">
 
 <footer>
 
+
+  
 © 2026 Sur Halı İznik • Tüm Hakları Saklıdır.
 
 </footer>
@@ -359,9 +363,13 @@ class="gallery">
 
 <script>
 
+console.log("HALILAR SAYFASI YÜKLENDİ");
+
 const gallery = document.getElementById("gallery");
 
 async function loadProducts() {
+
+    console.log("loadProducts başladı");
 
     gallery.innerHTML = `
         <div class="loading">
@@ -371,66 +379,13 @@ async function loadProducts() {
 
     const { data, error } = await supabase
         .from("products")
-        .select("*")
-        .eq("is_active", true)
-        .order("created_at", { ascending: false });
-  console.log(data);
+        .select("*");
 
-    if (error) {
-        gallery.innerHTML = `
-            <div class="empty">
-                Ürünler yüklenemedi.
-            </div>
-        `;
-        console.error(error);
-        return;
-    }
-
-    if (!data || data.length === 0) {
-        gallery.innerHTML = `
-            <div class="empty">
-                Henüz halı eklenmemiş.
-            </div>
-        `;
-        return;
-    }
-
-    gallery.innerHTML = "";
-
-    data.forEach(product => {
-
-        const image = product.image_url
-            ? product.image_url
-            : "https://via.placeholder.com/600x600?text=Sur+Hali";
-
-        gallery.innerHTML += `
-            <div class="card">
-
-                <img src="${image}" alt="${product.name}">
-
-                <div class="card-content">
-
-                    <h2>${product.name}</h2>
-
-                    <div class="price">
-                        ${product.price ? product.price.toLocaleString("tr-TR") + " ₺" : "-"}
-                    </div>
-
-                    <div class="size">
-                        ${product.size || "Ölçü belirtilmedi"}
-                    </div>
-
-                    <div class="description">
-                        ${product.description || ""}
-                    </div>
-
-                </div>
-
-            </div>
-        `;
-
-    });
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
 
 }
 
 loadProducts();
+
+</script>
