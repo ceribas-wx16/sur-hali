@@ -372,9 +372,9 @@ async function loadProducts() {
     const { data, error } = await supabase
         .from("products")
         .select("*")
-        .eq("category", "Halılar")
         .eq("is_active", true)
         .order("created_at", { ascending: false });
+  console.log(data);
 
     if (error) {
         gallery.innerHTML = `
