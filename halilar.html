@@ -363,29 +363,45 @@ class="gallery">
 
 <script>
 
-console.log("HALILAR SAYFASI YÜKLENDİ");
+<script>
+console.log("1- Script başladı");
 
 const gallery = document.getElementById("gallery");
 
-async function loadProducts() {
+async function loadProducts(){
 
-    console.log("loadProducts başladı");
+    console.log("2- loadProducts çalıştı");
 
-    gallery.innerHTML = `
-        <div class="loading">
-            Ürünler yükleniyor...
-        </div>
-    `;
+    try{
 
-    const { data, error } = await supabase
-        .from("products")
-        .select("*");
+        console.log("3- Supabase sorgusu başlıyor");
 
-    console.log("DATA:", data);
-    console.log("ERROR:", error);
+        const result = await supabase
+            .from("products")
+            .select("*");
+
+        console.log("4- Sonuç:", result);
+
+        const { data, error } = result;
+
+        if(error){
+            console.error("5- HATA:", error);
+            gallery.innerHTML = "<h2>Hata oluştu.</h2>";
+            return;
+        }
+
+        console.log("6- Veri sayısı:", data.length);
+
+        gallery.innerHTML = "<h2>" + data.length + " ürün bulundu.</h2>";
+
+    }
+    catch(e){
+
+        console.error("7- CATCH:", e);
+
+    }
 
 }
 
 loadProducts();
-
 </script>
