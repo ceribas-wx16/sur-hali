@@ -1,553 +1,187 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Sur Halı İznik | Halılar</title>
 
-<meta
-name="description"
-content="Sur Halı İznik Premium Halı Koleksiyonu">
+<meta name="description" content="Sur Halı İznik Premium Halı Koleksiyonu">
 
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-
-font-family:'Poppins',sans-serif;
-
-background:#f5f3ef;
-
-color:#2b2b2b;
-
+    font-family:'Poppins',sans-serif;
+    background:#f5f3ef;
+    color:#2b2b2b;
 }
 
 header{
-
-background:#111;
-
-color:#D4AF37;
-
-padding:45px 20px;
-
-text-align:center;
-
-box-shadow:0 5px 20px rgba(0,0,0,.25);
-
+    background:#111;
+    color:#D4AF37;
+    padding:45px 20px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
 }
 
 header img{
-
-width:120px;
-
-margin-bottom:20px;
-
+    width:120px;
+    margin-bottom:20px;
 }
 
 header h1{
-
-font-size:40px;
-
-font-weight:700;
-
-letter-spacing:2px;
-
-margin-bottom:10px;
-
+    font-size:40px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:10px;
 }
 
 header p{
-
-font-size:17px;
-
-color:#ddd;
-
+    font-size:17px;
+    color:#ddd;
 }
 
 .container{
-
-width:92%;
-
-max-width:1400px;
-
-margin:auto;
-
-padding:50px 0;
-
+    width:92%;
+    max-width:1400px;
+    margin:auto;
+    padding:50px 0;
 }
 
 .gallery{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
-
-gap:30px;
-
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
 }
 
 .card{
-
-background:#fff;
-
-border-radius:18px;
-
-overflow:hidden;
-
-box-shadow:0 10px 35px rgba(0,0,0,.08);
-
-transition:.35s;
-
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+    transition:.35s;
 }
 
 .card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:0 20px 45px rgba(0,0,0,.18);
-
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(0,0,0,.18);
 }
 
 .card img{
-
-width:100%;
-
-height:360px;
-
-object-fit:cover;
-
-display:block;
-
+    width:100%;
+    height:360px;
+    object-fit:cover;
+    display:block;
 }
-
-
-.card-content{
-
-padding:22px;
-
-}
-
-.card-content h2{
-
-font-size:24px;
-
-margin-bottom:12px;
-
-color:#222;
-
-font-weight:600;
-
-}
-
-.price{
-
-font-size:26px;
-
-font-weight:700;
-
-color:#D4AF37;
-
-margin-bottom:12px;
-
-}
-
-.size{
-
-display:inline-block;
-
-padding:6px 12px;
-
-background:#111;
-
-color:#fff;
-
-border-radius:8px;
-
-margin-bottom:15px;
-
-font-size:14px;
-
-}
-
-.description{
-
-line-height:1.7;
-
-color:#555;
-
-font-size:15px;
-
-}
-
-.loading{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#666;
-
-grid-column:1/-1;
-
-}
-
-.empty{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#888;
-
-grid-column:1/-1;
-
-}
-
-.error{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#d32f2f;
-
-grid-column:1/-1;
-
-}
-
-.back{
-
-margin-top:60px;
-
-text-align:center;
-
-}
-
-.back a{
-
-display:inline-block;
-
-padding:15px 35px;
-
-background:#111;
-
-color:#D4AF37;
-
-text-decoration:none;
-
-border-radius:12px;
-
-font-weight:600;
-
-transition:.30s;
-
-}
-
-.back a:hover{
-
-background:#D4AF37;
-
-color:#111;
-
-}
-
-footer{
-
-margin-top:80px;
-
-padding:35px;
-
-background:#111;
-
-color:#aaa;
-
-text-align:center;
-
-font-size:14px;
-
-}
-
-@media(max-width:768px){
-
-header h1{
-
-font-size:30px;
-
-}
-
-.card img{
-
-height:270px;
-
-}
-
-.gallery{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-
-<img src="logo.png" alt="Sur Halı İznik">
-
-<h1>HALI KOLEKSİYONU</h1>
-
-<p>Sur Halı İznik • Premium Halılar</p>
-
-</header>
-
-<div class="container">
-
-<div
-id="gallery"
-class="gallery">
-
-<div class="loading">
-
-Ürünler yükleniyor...
-
-</div>
-
-</div>
-
-<div class="back">
-
-<a href="index.html">
-
-← Ana Sayfaya Dön
-
-</a>
-
-</div>
-
-</div>
-
-<footer>
-
-© 2026 Sur Halı İznik • Tüm Hakları Saklıdır.
-
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase.js"></script>
-
-<script>
-
-const gallery = document.getElementById("gallery");
 
   .card-content{
-
-padding:22px;
-
+    padding:22px;
 }
 
 .card-content h2{
-
-font-size:24px;
-
-margin-bottom:12px;
-
-color:#222;
-
-font-weight:600;
-
+    font-size:24px;
+    margin-bottom:12px;
+    color:#222;
+    font-weight:600;
 }
 
 .price{
-
-font-size:26px;
-
-font-weight:700;
-
-color:#D4AF37;
-
-margin-bottom:12px;
-
+    font-size:26px;
+    font-weight:700;
+    color:#D4AF37;
+    margin-bottom:12px;
 }
 
 .size{
-
-display:inline-block;
-
-padding:6px 12px;
-
-background:#111;
-
-color:#fff;
-
-border-radius:8px;
-
-margin-bottom:15px;
-
-font-size:14px;
-
+    display:inline-block;
+    padding:6px 12px;
+    background:#111;
+    color:#fff;
+    border-radius:8px;
+    margin-bottom:15px;
+    font-size:14px;
 }
 
 .description{
+    line-height:1.7;
+    color:#555;
+    font-size:15px;
+}
 
-line-height:1.7;
-
-color:#555;
-
-font-size:15px;
-
+.loading,
+.empty,
+.error{
+    text-align:center;
+    padding:80px;
+    font-size:22px;
+    grid-column:1/-1;
 }
 
 .loading{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#666;
-
-grid-column:1/-1;
-
+    color:#666;
 }
 
 .empty{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#888;
-
-grid-column:1/-1;
-
+    color:#888;
 }
 
 .error{
-
-text-align:center;
-
-padding:80px;
-
-font-size:22px;
-
-color:#d32f2f;
-
-grid-column:1/-1;
-
+    color:#d32f2f;
 }
 
 .back{
-
-margin-top:60px;
-
-text-align:center;
-
+    margin-top:60px;
+    text-align:center;
 }
 
 .back a{
-
-display:inline-block;
-
-padding:15px 35px;
-
-background:#111;
-
-color:#D4AF37;
-
-text-decoration:none;
-
-border-radius:12px;
-
-font-weight:600;
-
-transition:.30s;
-
+    display:inline-block;
+    padding:15px 35px;
+    background:#111;
+    color:#D4AF37;
+    text-decoration:none;
+    border-radius:12px;
+    font-weight:600;
+    transition:.3s;
 }
 
 .back a:hover{
-
-background:#D4AF37;
-
-color:#111;
-
+    background:#D4AF37;
+    color:#111;
 }
 
 footer{
-
-margin-top:80px;
-
-padding:35px;
-
-background:#111;
-
-color:#aaa;
-
-text-align:center;
-
-font-size:14px;
-
+    margin-top:80px;
+    padding:35px;
+    background:#111;
+    color:#aaa;
+    text-align:center;
+    font-size:14px;
 }
 
 @media(max-width:768px){
 
-header h1{
+    header h1{
+        font-size:30px;
+    }
 
-font-size:30px;
+    .card img{
+        height:270px;
+    }
 
-}
-
-.card img{
-
-height:270px;
-
-}
-
-.gallery{
-
-grid-template-columns:1fr;
-
-}
+    .gallery{
+        grid-template-columns:1fr;
+    }
 
 }
 
@@ -559,37 +193,27 @@ grid-template-columns:1fr;
 
 <header>
 
-<img src="logo.png" alt="Sur Halı İznik">
+    <img src="logo.png" alt="Sur Halı İznik">
 
-<h1>HALI KOLEKSİYONU</h1>
+    <h1>HALI KOLEKSİYONU</h1>
 
-<p>Sur Halı İznik • Premium Halılar</p>
+    <p>Sur Halı İznik • Premium Halılar</p>
 
 </header>
 
 <div class="container">
 
-<div
-id="gallery"
-class="gallery">
+    <div id="gallery" class="gallery">
 
-<div class="loading">
+        <div class="loading">
+            Ürünler yükleniyor...
+        </div>
 
-Ürünler yükleniyor...
+    </div>
 
-</div>
-
-</div>
-
-<div class="back">
-
-<a href="index.html">
-
-← Ana Sayfaya Dön
-
-</a>
-
-</div>
+    <div class="back">
+        <a href="index.html">← Ana Sayfaya Dön</a>
+    </div>
 
 </div>
 
@@ -599,15 +223,15 @@ class="gallery">
 
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase.js"></script>
 
 <script>
 
 const gallery = document.getElementById("gallery");
 
-  async function loadProducts(){
+async function loadProducts() {
 
     gallery.innerHTML = `
         <div class="loading">
@@ -615,19 +239,17 @@ const gallery = document.getElementById("gallery");
         </div>
     `;
 
-    try{
+    try {
 
         const { data, error } = await supabase
             .from("products")
             .select("*")
-            .eq("is_active", true)
-            .eq("category", "Halılar")
-            .order("created_at", { ascending:false });
-      console.log(data);
-console.log(error);
+            .order("created_at", { ascending: false });
 
-        if(error){
+        console.log("Ürünler:", data);
+        console.log("Hata:", error);
 
+        if (error) {
             console.error(error);
 
             gallery.innerHTML = `
@@ -637,10 +259,15 @@ console.log(error);
             `;
 
             return;
-
         }
 
-        if(!data || data.length===0){
+        /* Sadece HALILAR kategorisini göster */
+        const products = data.filter(product =>
+            product.category &&
+            product.category.toLowerCase() === "halılar"
+        );
+
+        if (products.length === 0) {
 
             gallery.innerHTML = `
                 <div class="empty">
@@ -649,12 +276,11 @@ console.log(error);
             `;
 
             return;
-
         }
 
-        gallery.innerHTML="";
+        gallery.innerHTML = "";
 
-        data.forEach(product=>{
+        products.forEach(product => {
 
             gallery.innerHTML += `
 
@@ -670,21 +296,15 @@ console.log(error);
                     <h2>${product.name}</h2>
 
                     <div class="price">
-
                         ${Number(product.price).toLocaleString("tr-TR")} ₺
-
                     </div>
 
                     <div class="size">
-
-                        ${product.size || "-"}
-
+                        ${product.size ?? "-"}
                     </div>
 
                     <div class="description">
-
-                        ${product.description || ""}
-
+                        ${product.description ?? ""}
                     </div>
 
                 </div>
@@ -696,8 +316,7 @@ console.log(error);
         });
 
     }
-
-    catch(err){
+    catch (err) {
 
         console.error(err);
 
@@ -716,8 +335,13 @@ loadProducts();
 </script>
 
 </body>
-
 </html>
+
+
+
+
+
+
 
 
   
