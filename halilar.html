@@ -377,6 +377,14 @@ async function loadProducts(){
         const result = await supabase
             .from("products")
             .select("*");
+      console.log(data);
+
+gallery.innerHTML =
+"<pre>" +
+JSON.stringify(data, null, 2) +
+"</pre>";
+
+return;
 
         console.log("4- Sonuç:", result);
 
