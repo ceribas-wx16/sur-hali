@@ -249,6 +249,8 @@ async function loadProducts() {
         console.log("Ürünler:", data);
         console.log("Hata:", error);
 
+        alert(JSON.stringify(data));
+
         if (error) {
             console.error(error);
 
