@@ -1,10 +1,15 @@
 /* ==========================================================
    SUR HALI İZNİK
    ADMIN PANEL
-   BÖLÜM 1
+   Bölüm 1
+   - Başlatma
+   - Oturum Kontrolü
+   - Menü
+   - Çıkış
 ========================================================== */
 
-console.log("Admin Panel Başlatılıyor...");
+console.clear();
+console.log("Sur Halı Admin Panel Başlatılıyor...");
 
 /* ==========================================================
    SAYFA YÜKLENDİ
@@ -12,23 +17,31 @@ console.log("Admin Panel Başlatılıyor...");
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    console.log("DOM Hazır");
+    try {
 
-    await oturumKontrol();
+        await oturumKontrol();
 
-    menuHazirla();
+        menuHazirla();
 
-    cikisHazirla();
+        cikisHazirla();
 
-    modalHazirla();
+        modalHazirla();
 
-    dashboardYukle();
+        await dashboardYukle();
 
-    urunleriGetir();
+        await urunleriGetir();
 
-    resimleriGetir();
+        await resimleriGetir();
 
-    ayarlariGetir();
+        await ayarlariGetir();
+
+        console.log("Admin Panel Hazır");
+
+    } catch (err) {
+
+        console.error("Başlatma hatası:", err);
+
+    }
 
 });
 
@@ -39,36 +52,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function oturumKontrol() {
 
-    try {
+    const { data, error } =
+        await supabase.auth.getSession();
 
-        const { data, error } =
-            await supabase.auth.getSession();
+    if (error) {
 
-        if (error) {
-            console.error(error);
-            window.location.href = "admin-giris.html";
-            return;
-        }
-
-        if (!data.session) {
-            window.location.href = "admin-giris.html";
-            return;
-        }
-
-        console.log(
-            "Giriş yapan:",
-            data.session.user.email
-        );
-
-    }
-
-    catch (err) {
-
-        console.error(err);
+        console.error(error);
 
         window.location.href = "admin-giris.html";
 
+        return;
+
     }
+
+    if (!data.session) {
+
+        window.location.href = "admin-giris.html";
+
+        return;
+
+    }
+
+    console.log(
+        "Giriş:",
+        data.session.user.email
+    );
 
 }
 
@@ -89,10 +97,11 @@ function menuHazirla() {
 
         item.addEventListener("click", () => {
 
-            if (item.id === "logoutButton") return;
+            if (item.id === "logoutButton")
+                return;
 
-            menuItems.forEach(i =>
-                i.classList.remove("active")
+            menuItems.forEach(button =>
+                button.classList.remove("active")
             );
 
             pages.forEach(page =>
@@ -122,6 +131,49 @@ function menuHazirla() {
 
 
 /* ==========================================================
+   MODAL
+========================================================== */
+
+function modalHazirla() {
+
+    const modal =
+        document.getElementById("productModal");
+
+    const openButton =
+        document.getElementById("newProductButton");
+
+    const closeButton =
+        document.getElementById("closeModal");
+
+    if (!modal)
+        return;
+
+    openButton?.addEventListener("click", () => {
+
+        modal.style.display = "flex";
+
+    });
+
+    closeButton?.addEventListener("click", () => {
+
+        modal.style.display = "none";
+
+    });
+
+    window.addEventListener("click", (e) => {
+
+        if (e.target === modal) {
+
+            modal.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ==========================================================
    ÇIKIŞ
 ========================================================== */
 
@@ -130,14 +182,16 @@ function cikisHazirla() {
     const logoutButton =
         document.getElementById("logoutButton");
 
-    if (!logoutButton) return;
+    if (!logoutButton)
+        return;
 
     logoutButton.addEventListener("click", async () => {
 
         const cevap =
             confirm("Çıkış yapmak istiyor musunuz?");
 
-        if (!cevap) return;
+        if (!cevap)
+            return;
 
         try {
 
@@ -146,9 +200,7 @@ function cikisHazirla() {
             window.location.href =
                 "admin-giris.html";
 
-        }
-
-        catch (err) {
+        } catch (err) {
 
             console.error(err);
 
@@ -163,64 +215,59 @@ function cikisHazirla() {
 /* ==========================================================
    SUR HALI İZNİK
    ADMIN PANEL
-   BÖLÜM 1
+   Bölüm 2
+   Dashboard
 ========================================================== */
-
-console.log("Admin Panel Başlatılıyor...");
-
-/* ==========================================================
-   SAYFA YÜKLENDİ
-========================================================== */
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-    console.log("DOM Hazır");
-
-    await oturumKontrol();
-
-    menuHazirla();
-
-    cikisHazirla();
-
-    modalHazirla();
-
-    dashboardYukle();
-
-    urunleriGetir();
-
-    resimleriGetir();
-
-    ayarlariGetir();
-
-});
 
 
 /* ==========================================================
-   OTURUM KONTROLÜ
+   DASHBOARD
 ========================================================== */
 
-async function oturumKontrol() {
+async function dashboardYukle() {
+
+    console.log("Dashboard yükleniyor...");
+
+    await toplamUrunSayisi();
+
+    await toplamResimSayisi();
+
+    await storageBilgisi();
+
+}
+
+
+/* ==========================================================
+   TOPLAM ÜRÜN SAYISI
+========================================================== */
+
+async function toplamUrunSayisi() {
 
     try {
 
-        const { data, error } =
-            await supabase.auth.getSession();
+        const { count, error } = await supabase
+            .from("products")
+            .select("*", {
+                count: "exact",
+                head: true
+            });
 
         if (error) {
+
             console.error(error);
-            window.location.href = "admin-giris.html";
+
             return;
+
         }
 
-        if (!data.session) {
-            window.location.href = "admin-giris.html";
-            return;
-        }
+        const alan =
+            document.getElementById("totalProducts");
 
-        console.log(
-            "Giriş yapan:",
-            data.session.user.email
-        );
+        if (alan) {
+
+            alan.textContent = count || 0;
+
+        }
 
     }
 
@@ -228,7 +275,47 @@ async function oturumKontrol() {
 
         console.error(err);
 
-        window.location.href = "admin-giris.html";
+    }
+
+}
+
+
+/* ==========================================================
+   TOPLAM RESİM SAYISI
+========================================================== */
+
+async function toplamResimSayisi() {
+
+    try {
+
+        const { data, error } =
+            await supabase.storage
+                .from("halilar")
+                .list();
+
+        if (error) {
+
+            console.error(error);
+
+            return;
+
+        }
+
+        const alan =
+            document.getElementById("totalImages");
+
+        if (alan) {
+
+            alan.textContent =
+                data ? data.length : 0;
+
+        }
+
+    }
+
+    catch (err) {
+
+        console.error(err);
 
     }
 
@@ -236,88 +323,125 @@ async function oturumKontrol() {
 
 
 /* ==========================================================
-   SOL MENÜ
+   STORAGE KULLANIMI
 ========================================================== */
 
-function menuHazirla() {
+async function storageBilgisi() {
 
-    const menuItems =
-        document.querySelectorAll(".menu-item");
+    try {
 
-    const pages =
-        document.querySelectorAll(".page");
+        const { data, error } =
+            await supabase.storage
+                .from("halilar")
+                .list();
 
-    menuItems.forEach(item => {
+        if (error) {
 
-        item.addEventListener("click", () => {
+            console.error(error);
 
-            if (item.id === "logoutButton") return;
+            return;
 
-            menuItems.forEach(i =>
-                i.classList.remove("active")
-            );
+        }
 
-            pages.forEach(page =>
-                page.classList.remove("active-page")
-            );
+        let toplam = 0;
 
-            item.classList.add("active");
+        data.forEach(file => {
 
-            const target =
-                document.getElementById(
-                    item.dataset.page
-                );
+            if (file.metadata?.size) {
 
-            if (target) {
-
-                target.classList.add(
-                    "active-page"
-                );
+                toplam += Number(file.metadata.size);
 
             }
 
         });
 
-    });
+        let sonuc = "0 B";
+
+        if (toplam >= 1024 && toplam < 1024 * 1024) {
+
+            sonuc =
+                (toplam / 1024).toFixed(1) + " KB";
+
+        }
+
+        if (toplam >= 1024 * 1024) {
+
+            sonuc =
+                (toplam / 1024 / 1024).toFixed(2) + " MB";
+
+        }
+
+        const alan =
+            document.getElementById("storageUsage");
+
+        if (alan) {
+
+            alan.textContent = sonuc;
+
+        }
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
 
 }
 
 
 /* ==========================================================
-   ÇIKIŞ
+   AYARLARI GETİR
 ========================================================== */
 
-function cikisHazirla() {
+async function ayarlariGetir() {
 
-    const logoutButton =
-        document.getElementById("logoutButton");
+    try {
 
-    if (!logoutButton) return;
+        const { data, error } =
+            await supabase
+                .from("settings")
+                .select("*")
+                .limit(1)
+                .maybeSingle();
 
-    logoutButton.addEventListener("click", async () => {
+        if (error) {
 
-        const cevap =
-            confirm("Çıkış yapmak istiyor musunuz?");
+            console.log("Settings tablosu kullanılmıyor.");
 
-        if (!cevap) return;
-
-        try {
-
-            await supabase.auth.signOut();
-
-            window.location.href =
-                "admin-giris.html";
+            return;
 
         }
 
-        catch (err) {
+        if (!data)
+            return;
 
-            console.error(err);
+        const title =
+            document.getElementById("siteTitle");
 
-            alert("Çıkış yapılamadı.");
+        const phone =
+            document.getElementById("sitePhone");
 
-        }
+        const address =
+            document.getElementById("siteAddress");
 
-    });
+        if (title)
+            title.value = data.site_title || "";
+
+        if (phone)
+            phone.value = data.phone || "";
+
+        if (address)
+            address.value = data.address || "";
+
+    }
+
+    catch (err) {
+
+        console.error(err);
+
+    }
 
 }
+
