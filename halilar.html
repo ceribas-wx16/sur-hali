@@ -241,10 +241,21 @@ async function loadProducts() {
 
     try {
 
-        const { data, error } = await supabase
-            .from("products")
-            .select("*")
-            .order("created_at", { ascending: false });
+     const { data, error, status } = await supabase
+    .from("products")
+    .select("*");
+
+console.log("STATUS:", status);
+console.log("ERROR:", error);
+console.log("DATA:", data);
+
+alert(
+JSON.stringify({
+status: status,
+error: error,
+count: data ? data.length : 0
+}, null, 2)
+);
 
         console.log("Ürünler:", data);
         console.log("Hata:", error);
