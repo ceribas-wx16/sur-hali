@@ -240,8 +240,9 @@ async function loadProducts() {
     `;
 
     try {
-
-     const { data, error, status } = await supabase
+alert("YENİ DOSYA ÇALIŞIYOR");
+     
+        const { data, error, status } = await supabase
     .from("products")
     .select("*");
 
