@@ -560,13 +560,28 @@ async function urunleriGetir(){
 
     tbody.innerHTML="";
 
-    const {
+    const { data, error } = await supabase
+.from("products")
+.insert([
+{
+    name,
+    category,
+    size,
+    price,
+    description,
+    image_url: imageUrl,
+    is_active: true
+}
+])
+.select();
 
-        data,
+console.log("INSERT DATA:", data);
+console.log("INSERT ERROR:", error);
 
-        error
-
-    } = await supabase
+alert(JSON.stringify({
+    data,
+    error
+}, null, 2));
 
     .from("products")
 
