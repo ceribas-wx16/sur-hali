@@ -1,479 +1,145 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sur Halı | Yönetim Paneli</title>
-
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="admin-panel.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <title>Sur Halı İznik - Admin Panel</title>
+    <!-- Stil dosyanızın adı farklıysa aşağıdaki linki güncelleyin -->
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        /* Sekme Gizleme/Gösterme Mantığı */
+        .page { display: none; }
+        .page.active-page { display: block; }
+        .menu-item.active { background-color: rgba(255, 255, 255, 0.2); font-weight: bold; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
+    </style>
 </head>
-
 <body>
 
-<div class="admin-layout">
-
-    <!-- ========================= -->
-    <!-- SOL MENÜ -->
-    <!-- ========================= -->
-
-    <aside class="sidebar">
-
-        <div class="logo">
-
-            <img src="logo.png"
-                 alt="Sur Halı Logo"
-                 class="logo-image">
-
-            <h2>SUR HALI</h2>
-
-            <span>YÖNETİM PANELİ</span>
-
-        </div>
-
-        <nav class="menu">
-
-            <button
-                class="menu-item active"
-                data-page="dashboard">
-
-                <span class="icon">📊</span>
-
-                <span>Dashboard</span>
-
-            </button>
-
-            <button
-                class="menu-item"
-                data-page="urunler">
-
-                <span class="icon">🛋️</span>
-
-                <span>Ürün Yönetimi</span>
-
-            </button>
-
-            <button
-                class="menu-item"
-                data-page="resimler">
-
-                <span class="icon">🖼️</span>
-
-                <span>Resim Yükleme</span>
-
-            </button>
-
-            <button
-                class="menu-item"
-                data-page="ayarlar">
-
-                <span class="icon">⚙️</span>
-
-                <span>Site Ayarları</span>
-
-            </button>
-
-            <div class="sidebar-bottom">
-
-                <button
-                    id="logoutButton"
-                    class="menu-item logout">
-
-                    <span class="icon">🚪</span>
-
-                    <span>Çıkış Yap</span>
-
-                </button>
-
+    <div class="admin-container">
+        <!-- SOL MENÜ -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <img src="logo.png" alt="Sur Halı Logo">
+                <h2>SUR HALI</h2>
+                <p>YÖNETİM PANELİ</p>
             </div>
+            <nav class="menu">
+                <button class="menu-item active" data-page="dashboard">📊 Dashboard</button>
+                <button class="menu-item" data-page="urun-yonetimi">📦 Ürün Yönetimi</button>
+                <button class="menu-item" data-page="resim-yukleme">🖼️ Resim Yükleme</button>
+                <button class="menu-item" data-page="site-ayarlari">⚙️ Site Ayarları</button>
+                <button class="menu-item logout" id="logoutButton">🚪 Çıkış Yap</button>
+            </nav>
+        </aside>
 
-        </nav>
+        <!-- SAĞ İÇERİK ALANI -->
+        <main class="content">
 
-    </aside>
-
-        <!-- ========================= -->
-    <!-- ANA İÇERİK -->
-    <!-- ========================= -->
-
-    <main class="content">
-
-        <!-- Sayfa Başlığı -->
-
-        <div class="page-header">
-
-            <div>
-
+            <!-- 1. DASHBOARD SAYFASI -->
+            <section id="dashboard" class="page active-page">
                 <h1>Dashboard</h1>
-
                 <p>Sur Halı Yönetim Paneline hoş geldiniz.</p>
+                <span class="badge">📈 Sistem Aktif</span>
 
-            </div>
-
-            <div class="header-actions">
-
-                <button class="header-button">
-
-                    📈 Sistem Aktif
-
-                </button>
-
-            </div>
-
-        </div>
-
-        <!-- ========================= -->
-        <!-- DASHBOARD -->
-        <!-- ========================= -->
-
-        <section
-            id="dashboard"
-            class="page active-page">
-
-            <div class="cards">
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        📦
-
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3>🎁 Toplam Ürün</h3>
+                        <p id="totalProducts" class="card-value">0</p>
                     </div>
-
-                    <div class="card-info">
-
-                        <h3>Toplam Ürün</h3>
-
-                        <p id="totalProducts">0</p>
-
+                    <div class="card">
+                        <h3>🖼️ Toplam Resim</h3>
+                        <p id="totalImages" class="card-value">0</p>
                     </div>
-
+                    <div class="card">
+                        <h3>☁️ Storage</h3>
+                        <p id="storageUsage" class="card-value">-</p>
+                    </div>
                 </div>
 
-                <div class="card">
+                <div class="welcome-box">
+                    <h2>Sur Halı Yönetim Merkezi</h2>
+                    <p>Bu panel üzerinden ürünlerinizi yönetebilir, resim yükleyebilir ve internet sitenizi tek noktadan kontrol edebilirsiniz.</p>
+                </div>
+            </section>
 
-                    <div class="card-icon">
+            <!-- 2. ÜRÜN YÖNETİMİ SAYFASI -->
+            <section id="urun-yonetimi" class="page">
+                <div class="page-header">
+                    <h1>Ürün Yönetimi</h1>
+                    <button id="newProductButton" class="btn btn-primary">+ Yeni Ürün Ekle</button>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Ürün Adı / Ebat</th>
+                            <th>Kategori</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productTableBody">
+                        <!-- JS burayı dolduracak -->
+                    </tbody>
+                </table>
+            </section>
 
-                        🖼️
+            <!-- 3. RESİM YÜKLEME SAYFASI -->
+            <section id="resim-yukleme" class="page">
+                <h1>Resim Galerisi & Yükleme</h1>
+                <div id="imageGallery" class="gallery-grid">
+                    <!-- Resimler JS ile yüklenecek -->
+                </div>
+            </section>
 
+            <!-- 4. SİTE AYARLARI SAYFASI -->
+            <section id="site-ayarlari" class="page">
+                <h1>Site Ayarları</h1>
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label>Site Başlığı:</label>
+                        <input type="text" id="siteTitle" placeholder="Sur Halı İznik">
                     </div>
-
-                    <div class="card-info">
-
-                        <h3>Toplam Resim</h3>
-
-                        <p id="totalImages">0</p>
-
+                    <div class="form-group">
+                        <label>Telefon:</label>
+                        <input type="text" id="sitePhone" placeholder="05xx xxx xx xx">
                     </div>
-
-                </div>
-
-                <div class="card">
-
-                    <div class="card-icon">
-
-                        ☁️
-
+                    <div class="form-group">
+                        <label>Adres:</label>
+                        <textarea id="siteAddress" rows="3"></textarea>
                     </div>
-
-                    <div class="card-info">
-
-                        <h3>Storage</h3>
-
-                        <p id="storageUsage">-</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="dashboard-welcome">
-
-                <h2>
-
-                    Sur Halı Yönetim Merkezi
-
-                </h2>
-
-                <p>
-
-                    Bu panel üzerinden ürünlerinizi yönetebilir,
-                    resim yükleyebilir ve internet sitenizi
-                    tek noktadan kontrol edebilirsiniz.
-
-                </p>
-
-            </div>
-
-        </section>
-
-        <!-- ========================= -->
-        <!-- ÜRÜNLER -->
-        <!-- ========================= -->
-
-        <section
-            id="urunler"
-            class="page">
-
-            <div class="section-header">
-
-                <h1>
-
-                    Ürün Yönetimi
-
-                </h1>
-
-                <button
-                    id="newProductButton">
-
-                    + Yeni Ürün
-
-                </button>
-
-            </div>
-
-            <table class="admin-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>Ürün</th>
-
-                        <th>Kategori</th>
-
-                        <th>Durum</th>
-
-                        <th>İşlemler</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="productTableBody">
-
-                </tbody>
-
-            </table>
-
-        </section>
-                <!-- ========================= -->
-        <!-- RESİM YÜKLEME -->
-        <!-- ========================= -->
-
-        <section
-            id="resimler"
-            class="page">
-
-            <h1>Resim Yükleme</h1>
-
-            <div class="upload-box">
-
-                <input
-                    type="file"
-                    id="imageInput"
-                    accept="image/*">
-
-                <button id="uploadImageButton">
-
-                    📤 Resmi Yükle
-
-                </button>
-
-            </div>
-
-            <div
-                id="imageGallery"
-                class="image-gallery">
-
-            </div>
-
-        </section>
-
-        <!-- ========================= -->
-        <!-- AYARLAR -->
-        <!-- ========================= -->
-
-        <section
-            id="ayarlar"
-            class="page">
-
-            <h1>Site Ayarları</h1>
-
-            <form id="settingsForm">
-
-                <div class="form-group">
-
-                    <label>Site Başlığı</label>
-
-                    <input
-                        type="text"
-                        id="siteTitle"
-                        placeholder="Sur Halı İznik">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Telefon</label>
-
-                    <input
-                        type="text"
-                        id="sitePhone">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Adres</label>
-
-                    <textarea
-                        id="siteAddress"
-                        rows="4"></textarea>
-
-                </div>
-
-                <button type="submit">
-
-                    💾 Ayarları Kaydet
-
-                </button>
-
-            </form>
-
-        </section>
-
-    </main>
-
-</div>
-
-<!-- ========================= -->
-<!-- YENİ ÜRÜN MODALI -->
-<!-- ========================= -->
-
-<div
-    id="productModal"
-    class="modal">
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>
-
-                Yeni Ürün Ekle
-
-            </h2>
-
-            <span
-                id="closeModal"
-                class="close">
-
-                &times;
-
-            </span>
-
-        </div>
-
-        <div class="modal-body">
-
-            <div class="form-group">
-
-                <label>Ürün Adı</label>
-
-                <input
-                    type="text"
-                    id="productName">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Kategori</label>
-
-               <select id="productCategory">
-    <option value="Halılar">Halılar</option>
-    <option value="Kaymaz Yolluklar">Kaymaz Yolluklar</option>
-    <option value="Klasik Yolluklar">Klasik Yolluklar</option>
-    <option value="Sisal Yolluklar">Sisal Yolluklar</option>
-    <option value="Özel Kesim Koleksiyonu">Özel Kesim Koleksiyonu</option>
-</select>
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Ölçü</label>
-
-                <input
-                    type="text"
-                    id="productSize">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Fiyat</label>
-
-                <input
-                    type="number"
-                    id="productPrice">
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Açıklama</label>
-
-                <textarea
-                    id="productDescription"
-                    rows="4"></textarea>
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Ürün Resmi</label>
-
-                <input
-                    type="file"
-                    id="productImage"
-                    accept="image/*">
-
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-
-            <button id="saveProductButton">
-
-                💾 Ürünü Kaydet
-
-            </button>
-
-        </div>
-
+                    <button type="submit" class="btn btn-success">Ayarları Kaydet</button>
+                </form>
+            </section>
+
+        </main>
     </div>
 
-</div>
+    <!-- ÜRÜN EKLEME / DÜZENLEME MODAL -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Ürün Kaydet</h2>
+            <form id="productForm" onsubmit="event.preventDefault();">
+                <input type="text" id="productName" placeholder="Ürün Adı (Örn: Minimal Desen Halı)" required>
+                <input type="text" id="productCategory" placeholder="Kategori (Örn: Halılar, Kaymaz Taban)" required>
+                <input type="text" id="productSize" placeholder="Ebat (Örn: 160x230)">
+                <input type="number" id="productPrice" placeholder="Fiyat (TL)">
+                <textarea id="productDescription" placeholder="Açıklama"></textarea>
+                <label>Ürün Görseli:</label>
+                <input type="file" id="productImage" accept="image/*">
+                
+                <div class="modal-buttons">
+                    <button type="button" id="saveProductButton" class="btn btn-success">Kaydet</button>
+                    <button type="button" id="closeModal" class="btn btn-secondary">Kapat</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script src="supabase.js"></script>
-
-<script src="admin-panel.js"></script>
-
+    <!-- SUPABASE VE UYGULAMA KODLARI -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase.js"></script> <!-- Supabase URL ve KEY bilgimizin olduğu dosya -->
+    <script src="admin.js"></script> <!-- Yukarıda temizlediğimiz JS kodları -->
 </body>
-
 </html>
