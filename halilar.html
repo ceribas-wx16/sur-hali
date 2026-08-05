@@ -262,10 +262,7 @@ async function loadProducts() {
         }
 
         /* Sadece HALILAR kategorisini göster */
-        const products = data.filter(product =>
-            product.category &&
-            product.category.toLowerCase() === "halılar"
-        );
+      const products = data;
 
         if (products.length === 0) {
 
